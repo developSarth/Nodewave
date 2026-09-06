@@ -99,21 +99,35 @@
     </section>
 
     <!-- CTA -->
-    <section>
+    
+    <!-- GLOBAL CAL.COM EMBED -->
+    <section style="background:var(--board-2);border-top:1px solid var(--panel-line);padding:100px 0;">
       <div class="wrap">
-        <div class="cta-banner reveal">
-          <h2 class="display">Find the bottlenecks slowing down your firm's operations.</h2>
-          <p>We'll map the workflow, identify repetitive work, and show you where automation can create the biggest operational impact.</p>
-          <a href="/contact" class="btn-primary magnetic">Get a Law Firm Operations Audit<span>→</span></a>
+        <div class="section-head reveal">
+          <div class="eyebrow">BOOK A DISCOVERY CALL</div>
+          <h2 class="display">Let's discuss your workflow.</h2>
+          <p class="sub">Select a time to speak directly with our team. We'll map your process and show you the potential impact.</p>
         </div>
+        <div class="reveal" style="width:100%;min-height:600px;overflow:hidden;border-radius:1.5rem;background:var(--panel);" id="my-cal-inline-30min"></div>
+        <script type="text/javascript">
+          (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+          Cal("init", "30min", {origin:"https://app.cal.com"});
+          Cal.ns["30min"]("inline", {
+            elementOrSelector:"#my-cal-inline-30min",
+            config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+            calLink: "nodewave/30min",
+          });
+          Cal.ns["30min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
+        </script>
       </div>
     </section>
+
   </main>
 
   <footer><div class="wrap"><div class="foot-row"><div class="foot-brand"><a href="/" class="logo"><b>Nodewave</b></a><p>Intelligent operational workflows that automate repetitive business processes.</p></div><div class="foot-links"><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a></div></div><svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none"><path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none"/></svg><div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave — Mumbai, India</div></div></footer>
 
   <script>
-    gsap.registerPlugin(ScrollTrigger);const prePath=document.getElementById('pre-path'),prePct=document.getElementById('pre-pct');let pct={v:0};gsap.to(pct,{v:100,duration:1.3,ease:'power2.inOut',onUpdate:()=>{prePct.textContent=Math.round(pct.v)+'%';const y=35+Math.sin(pct.v/6)*(18*(1-pct.v/100));prePath.setAttribute('d',`M0,35 Q55,${y} 110,35 T220,35`)},onComplete:()=>{gsap.to('#preloader',{opacity:0,duration:.6,delay:.15,onComplete:()=>{document.getElementById('preloader').style.display='none';playIntro()}})}});const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});gsap.ticker.add(()=>{rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;ring.style.left=rx+'px';ring.style.top=ry+'px'});document.querySelectorAll('a,button,.wf-card').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('active'));el.addEventListener('mouseleave',()=>ring.classList.remove('active'))});document.querySelectorAll('.magnetic').forEach(btn=>{const xTo=gsap.quickTo(btn,'x',{duration:.5,ease:'power3'}),yTo=gsap.quickTo(btn,'y',{duration:.5,ease:'power3'});btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();xTo((e.clientX-r.left-r.width/2)*.3);yTo((e.clientY-r.top-r.height/2)*.4)});btn.addEventListener('mouseleave',()=>{xTo(0);yTo(0)})});function playIntro(){gsap.to('.reveal',{opacity:1,y:0,duration:1,stagger:.09,ease:'back.out(1.2)'});gsap.to('header',{opacity:1,duration:.8})}gsap.set('header',{opacity:0});gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.9,ease:'back.out(1.2)',scrollTrigger:{trigger:el,start:'top 88%'}})});const footPath=document.getElementById('foot-path');let ft=0;function footAnim(){ft+=0.05;let d='M0,14 ';for(let x=0;x<=1200;x+=24){const y=14+Math.sin(x*0.02+ft)*10*Math.sin(x*0.002+ft*0.3);d+=`L${x},${y} `}footPath.setAttribute('d',d);requestAnimationFrame(footAnim)}footAnim();
+    gsap.registerPlugin(ScrollTrigger);const prePath=document.getElementById('pre-path'),prePct=document.getElementById('pre-pct');let pct={v:0};if(sessionStorage.getItem('preloaded')){document.getElementById('preloader').style.display='none';playIntro();}else{sessionStorage.setItem('preloaded','true');gsap.to(pct,{v:100,duration:1.3,ease:'power2.inOut',onUpdate:()=>{prePct.textContent=Math.round(pct.v)+'%';const y=35+Math.sin(pct.v/6)*(18*(1-pct.v/100));prePath.setAttribute('d',`M0,35 Q55,${y} 110,35 T220,35`)},onComplete:()=>{gsap.to('#preloader',{opacity:0,duration:.6,delay:.15,onComplete:()=>{document.getElementById('preloader').style.display='none';playIntro()}})}});}const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});gsap.ticker.add(()=>{rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;ring.style.left=rx+'px';ring.style.top=ry+'px'});document.querySelectorAll('a,button,.wf-card').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('active'));el.addEventListener('mouseleave',()=>ring.classList.remove('active'))});document.querySelectorAll('.magnetic').forEach(btn=>{const xTo=gsap.quickTo(btn,'x',{duration:.5,ease:'power3'}),yTo=gsap.quickTo(btn,'y',{duration:.5,ease:'power3'});btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();xTo((e.clientX-r.left-r.width/2)*.3);yTo((e.clientY-r.top-r.height/2)*.4)});btn.addEventListener('mouseleave',()=>{xTo(0);yTo(0)})});function playIntro(){gsap.to('.reveal',{opacity:1,y:0,duration:1,stagger:.09,ease:'back.out(1.2)'});gsap.to('header',{opacity:1,duration:.8})}gsap.set('header',{opacity:0});gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.9,ease:'back.out(1.2)',scrollTrigger:{trigger:el,start:'top 88%'}})});const footPath=document.getElementById('foot-path');let ft=0;function footAnim(){ft+=0.05;let d='M0,14 ';for(let x=0;x<=1200;x+=24){const y=14+Math.sin(x*0.02+ft)*10*Math.sin(x*0.002+ft*0.3);d+=`L${x},${y} `}footPath.setAttribute('d',d);requestAnimationFrame(footAnim)}footAnim();
   </script>
 </body>
 </html>
