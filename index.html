@@ -287,6 +287,7 @@
     }
 
     .navlinks a {
+      font-family: 'Cormorant Garamond', serif !important;
       position: relative;
       padding: 4px 0;
       transition: color .25s;
@@ -318,7 +319,7 @@
     }
 
     .nav-cta {
-      font-family: 'Manrope', serif;
+      font-family: 'Cormorant Garamond', serif !important;
       font-size: 13.4px;
       letter-spacing: .02em;
       padding: 9px 20px;
@@ -463,7 +464,7 @@
       color: #0E0E0E;
       font-weight: 320;
       font-size: 15.2px;
-      font-family: 'Manrope', serif;
+      font-family: 'Cormorant Garamond', serif !important;
       box-shadow: 0 10px 26px rgba(255, 67, 0, .28);
     }
 
@@ -1267,10 +1268,7 @@
       opacity: .7;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-    }
+    .reveal { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
 
     @media (prefers-reduced-motion: reduce) {
       html {
@@ -1932,6 +1930,9 @@
     /* ---------- HERO INTRO ---------- */
     function playIntro() {
       const tl = gsap.timeline({ defaults: { ease: 'back.out(1.2)' } });
+      tl.to('.hero-inner .reveal, .page-hero .reveal', { opacity: 1, y: 0, duration: 1, stagger: 0.09 });
+      gsap.to('header', { opacity: 1, duration: 0.8 });
+    } });
       tl.to('.hero-inner .reveal', { opacity: 1, y: 0, duration: 1, stagger: .09 });
       gsap.to('header', { opacity: 1, duration: .8 });
     }
