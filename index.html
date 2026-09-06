@@ -141,6 +141,7 @@
       opacity: .05;
       mix-blend-mode: overlay;
     }
+    .grain, .scanlines { will-change: transform; transform: translateZ(0); }
 
     .scanlines {
       position: fixed;
@@ -1918,11 +1919,12 @@
     /* ---------- CURSOR ---------- */
     const dot = document.querySelector('.cursor-dot');
     const ring = document.querySelector('.cursor-ring');
+    gsap.set([dot, ring], {xPercent: -50, yPercent: -50});
     let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; gsap.set(dot, {x: mx, y: my}); });
     gsap.ticker.add(() => {
       rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      gsap.set(ring, {x: rx, y: ry});
     });
     document.querySelectorAll('a,button,.bcard,.faq-q').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('active'));
@@ -2101,6 +2103,7 @@
     /* ---------- FOOTER SIGNAL LINE ---------- */
     const footPath = document.getElementById('foot-path');
     let ft = 0;
+    let footReq;
     function footAnim() {
       ft += 0.05;
       let d = 'M0,14 ';
@@ -2109,9 +2112,11 @@
         d += `L${x},${y} `;
       }
       footPath.setAttribute('d', d);
-      requestAnimationFrame(footAnim);
+      footReq = requestAnimationFrame(footAnim);
     }
-    footAnim();
+    new IntersectionObserver(e => {
+      e[0].isIntersecting ? footAnim() : cancelAnimationFrame(footReq);
+    }).observe(document.querySelector('footer'));
 
     /* ---------- BENTO LED ACTIVE ON SCROLL (mobile fallback) ---------- */
     ScrollTrigger.batch('.bcard', {
