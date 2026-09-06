@@ -324,15 +324,19 @@
       letter-spacing: .02em;
       padding: 9px 20px;
       border-radius: 999px;
-      background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor));
-      color: #0E0E0E;
-      font-weight: 320;
-      box-shadow: 0 4px 14px rgba(255, 67, 0, .3);
-      transition: transform .3s var(--ease-out);
+      background: rgba(255, 67, 0, 0.08);
+      color: var(--phosphor);
+      border: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-weight: 600;
+      transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out), box-shadow 0.3s;
     }
 
     .nav-cta:hover {
+      background: rgba(255, 67, 0, 0.15);
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 67, 0, 0.12);
     }
 
     /* ============ SECTION SHELL ============ */
@@ -1326,7 +1330,8 @@
       }
     }
 
-  </style>
+    .foot-links a { font-family: 'Cormorant Garamond', serif !important; }
+</style>
 </head>
 
 <body>

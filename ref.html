@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html class="light" lang="en" style="">
+<head>
+  <link rel="icon" type="image/svg+xml" href="ChatGPT Image Jun 5, 2026, 02_56_14 AM_2026-06-04_21_28_27.014155.png.svg">
+</head>
+
+<body class="font-body-md text-on-surface antialiased overflow-x-hidden relative">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Noa - Autonomous AI Agent Service</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "branding-orange": "#e85002",
+            "surface": "#fbf9f8",
+            "on-surface": "#1b1c1c",
+            "on-surface-variant": "#5b4138",
+            "primary": "#111111",
+            "surface-container-low": "#f5f3f3",
+            "surface-container": "#efeded",
+            "surface-container-high": "#e9e8e7",
+            "surface-container-highest": "#e4e2e2",
+            "surface-container-lowest": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-lg": "32px",
+            "stack-xl": "64px",
+            "margin-mobile": "24px",
+            "margin-desktop": "80px",
+            "section-gap": "120px",
+            "gutter": "32px"
+          },
+          fontFamily: {
+            "body-md": ["Poppins", "sans-serif"],
+            "headline-xl": ["Poppins", "sans-serif"],
+            "body-lg": ["Poppins", "sans-serif"],
+            "label-sm": ["Poppins", "sans-serif"],
+            "label-md": ["Poppins", "sans-serif"],
+            "display-lg-mobile": ["Poppins", "sans-serif"],
+            "headline-lg": ["Poppins", "sans-serif"],
+            "display-lg": ["Poppins", "sans-serif"]
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
+            'glass-orange': '0 8px 32px 0 rgba(232, 80, 2, 0.15)',
+            'float': '0 20px 40px -10px rgba(0,0,0,0.1)',
+            'float-orange': '0 20px 40px -10px rgba(232, 80, 2, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #fbf9f8;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+      scroll-behavior: smooth;
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .glass-panel-dark {
+      background: rgba(20, 20, 20, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glow-orange {
+      box-shadow: 0 0 60px rgba(232, 80, 2, 0.2);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #111111 0%, #444444 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-orange {
+      background: linear-gradient(135deg, #E85002 0%, #FF7A33 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+
+    .accordion-item.active .accordion-content {
+      max-height: 200px;
+      /* Adjust as needed */
+    }
+
+    .accordion-item.active .material-symbols-outlined.chevron {
+      transform: rotate(180deg);
+    }
+
+    .chevron {
+      transition: transform 0.3s ease;
+    }
+
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-marquee {
+      animation: marquee-scroll 25s linear infinite;
+    }
+
+    /* ── Hero floating cards ── */
+    .hero-float-card {
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    }
+
+    @keyframes hero-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .hero-float-card {
+      animation: hero-float 5s ease-in-out infinite;
+    }
+
+    .hero-float-card:nth-child(2) {
+      animation-delay: 0.8s;
+    }
+
+    .hero-float-card:nth-child(3) {
+      animation-delay: 1.6s;
+    }
+
+    .hero-float-card:nth-child(4) {
+      animation-delay: 2.4s;
+    }
+
+    /* ── Subtle glassmorphic card enhancement (site-wide) ── */
+    .glass-panel {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+    }
+
+    .glass-panel:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* Process section cards */
+    #process .bg-\[\#fbf9f8\] {
+      background: rgba(251, 249, 248, 0.6) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transition: all 0.35s ease;
+    }
+
+    #process .bg-\[\#fbf9f8\]:hover {
+      background: rgba(255, 255, 255, 0.75) !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    /* Testimonial cards */
+    #testimony [class*="rounded-2xl"][class*="backdrop-blur"] {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.4);
+      transition: all 0.35s ease;
+    }
+
+    #testimony [class*="rounded-2xl"][class*="backdrop-blur"]:hover {
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Scale / proof section cards */
+    #scale [class*="rounded-2xl"][class*="backdrop-blur"] {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transition: all 0.35s ease;
+    }
+
+    #scale [class*="rounded-2xl"][class*="backdrop-blur"]:hover {
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    /* Comparison table glass enhancement */
+    #compare [class*="rounded-3xl"][class*="backdrop-blur"] {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    /* Contact section inner card */
+    #contact [class*="backdrop-blur"] {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: all 0.35s ease;
+    }
+
+    #contact [class*="backdrop-blur"]:hover {
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    /* Zero Learning Curve section cards */
+    [class*="backdrop-blur-xl"][class*="rounded-3xl"][class*="shadow-glass"] {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
+      transition: all 0.35s ease;
+    }
+
+    [class*="backdrop-blur-xl"][class*="rounded-3xl"][class*="shadow-glass"]:hover {
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* ═══════════════════════════════════════════
+       VISUAL ENHANCEMENTS — CSS-ONLY
+       No content, structure, color or font changes
+       ═══════════════════════════════════════════ */
+
+    /* ── 1. Scroll-reveal fade-in for sections ── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    section {
+      animation: fadeSlideUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    /* ── 2. Staggered card entrance ── */
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .glass-panel[class*="rounded-[32px]"] {
+      animation: cardReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(1) { animation-delay: 0.05s; }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(2) { animation-delay: 0.12s; }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(3) { animation-delay: 0.19s; }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(4) { animation-delay: 0.26s; }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(5) { animation-delay: 0.33s; }
+    .glass-panel[class*="rounded-[32px]"]:nth-child(6) { animation-delay: 0.40s; }
+
+    /* ── 3. Shimmer light sweep on glass cards ── */
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .glass-panel[class*="rounded-[32px]"]::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.25) 45%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0.25) 55%,
+        transparent 60%
+      );
+      background-size: 200% 100%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glass-panel[class*="rounded-[32px]"]:hover::before {
+      opacity: 1;
+      animation: shimmer 1.2s ease-in-out;
+    }
+
+    /* ── 4. Ambient background glow pulse ── */
+    @keyframes ambientPulse {
+      0%, 100% { opacity: 0.10; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 0.16; transform: translate(-50%, -50%) scale(1.08); }
+    }
+    section.relative > div[class*="blur-[150px]"],
+    section.relative > div[class*="blur-[120px]"] {
+      animation: ambientPulse 6s ease-in-out infinite;
+    }
+    section.relative > div[class*="blur-[120px]"] {
+      animation-delay: 2s;
+    }
+
+    /* ── 5. Icon containers — hover bounce + glow ── */
+    [class*="rounded-full"][class*="bg-branding-orange/10"] {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    [class*="rounded-full"][class*="bg-branding-orange/10"]:hover {
+      transform: scale(1.12) translateY(-2px);
+      box-shadow: 0 8px 20px rgba(232, 80, 2, 0.15);
+    }
+
+    /* ── 6. CTA / Button micro-interactions ── */
+    a[class*="bg-branding-orange"][class*="rounded-full"] {
+      position: relative;
+      overflow: hidden;
+    }
+    a[class*="bg-branding-orange"][class*="rounded-full"]::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(255,255,255,0.2) 45%,
+        rgba(255,255,255,0.35) 50%,
+        rgba(255,255,255,0.2) 55%,
+        transparent 65%
+      );
+      background-size: 250% 100%;
+      background-position: -200% 0;
+      transition: background-position 0.6s ease;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    a[class*="bg-branding-orange"][class*="rounded-full"]:hover::after {
+      background-position: 200% 0;
+    }
+    a[class*="bg-branding-orange"][class*="rounded-full"]:active {
+      transform: scale(0.96) !important;
+    }
+
+    /* ── 7. Progress bars — animated fill on load ── */
+    @keyframes barGrow {
+      from { width: 0; }
+    }
+    [class*="bg-branding-orange"][class*="rounded-full"][style*="width:"] {
+      animation: barGrow 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    /* ── 8. Comparison table row hover glow ── */
+    #compare [class*="grid-cols-4"][class*="border-b"]:hover {
+      background: rgba(232, 80, 2, 0.04) !important;
+      box-shadow: inset 3px 0 0 #E85002;
+      transition: all 0.25s ease;
+    }
+
+    /* ── 9. Testimonial cards — subtle tilt on hover ── */
+    #testimony [class*="rounded-2xl"] {
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    #testimony [class*="rounded-2xl"]:hover {
+      transform: translateY(-6px) rotate(-0.5deg);
+    }
+
+    /* ── 10. Process step number — pop on hover ── */
+    #process [class*="rounded-xl"][class*="bg-orange-100"] {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    }
+    #process [class*="rounded-xl"][class*="bg-orange-100"]:hover {
+      transform: scale(1.15) rotate(-3deg);
+      box-shadow: 0 6px 16px rgba(232, 80, 2, 0.2);
+    }
+
+    /* ── 11. Navbar — enhanced scroll-aware shadow ── */
+    nav.glass-panel {
+      transition: box-shadow 0.4s ease, background 0.4s ease;
+    }
+    nav.glass-panel:hover {
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.06), inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── 12. Logo strip icons — bounce on hover ── */
+    img[class*="grayscale"] {
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    img[class*="grayscale"]:hover {
+      transform: scale(1.12) translateY(-2px);
+    }
+
+    /* ── 13. Video play button pulse ring ── */
+    @keyframes playPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(232, 80, 2, 0.4); }
+      70%  { box-shadow: 0 0 0 20px rgba(232, 80, 2, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(232, 80, 2, 0); }
+    }
+    button[class*="bg-branding-orange"][class*="rounded-full"][class*="w-20"] {
+      animation: playPulse 2.5s ease-out infinite;
+    }
+
+    /* ── 14. Star ratings — subtle glow on parent hover ── */
+    [class*="fill-current"][class*="text-branding-orange"],
+    [class*="fill-current"][class*="text-[#E85002]"] {
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    *:hover > [class*="fill-current"][class*="text-branding-orange"],
+    *:hover > [class*="fill-current"][class*="text-[#E85002]"] {
+      filter: drop-shadow(0 0 4px rgba(232, 80, 2, 0.4));
+    }
+
+    /* ── 15. Smooth scroll with momentum feel ── */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    /* ── 16. Selection color — brand-matched ── */
+    ::selection {
+      background: rgba(232, 80, 2, 0.15);
+      color: #111111;
+    }
+
+    /* ── 17. Focus-visible for accessibility + style ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid rgba(232, 80, 2, 0.5);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+  </style>
+  <!-- TopNavBar -->
+  <nav class="glass-panel w-full top-0 sticky z-50 transition-all duration-300">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-7xl mx-auto">
+      <a class="font-headline-lg text-2xl font-medium text-primary flex items-center gap-2 tracking-tight" href="#">
+        
+        Nodewave
+      </a>
+      <div class="hidden md:flex gap-8 items-center">
+        <a class="text-on-surface-variant font-medium hover:text-branding-orange transition-colors duration-300 text-sm"
+          href="#features">Features</a>
+        <a class="text-on-surface-variant font-medium hover:text-branding-orange transition-colors duration-300 text-sm"
+          href="#how-it-works">How it Works</a>
+        <a class="text-on-surface-variant font-medium hover:text-branding-orange transition-colors duration-300 text-sm"
+          href="#logic">The Logic</a>
+      </div>
+      <a class="hidden md:inline-flex bg-branding-orange text-white font-label-md px-6 py-3 rounded-full shadow-float-orange hover:shadow-[0_0_25px_rgba(232,80,2,0.6)] transition-all duration-300 scale-95 hover:scale-100 active:scale-90"
+        href="#contact">
+        Book a Strategy Call
+      </a>
+      <button class="md:hidden text-primary">
+        <span class="material-symbols-outlined text-[24px]">menu</span>
+      </button>
+    </div>
+  </nav>
+  <!-- Hero Section -->
+  <section
+    class="relative pt-24 pb-10 md:pb-16 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto min-h-[88vh] flex items-center">
+    <!-- Ambient Background Glows -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-branding-orange rounded-full blur-[150px] opacity-10 pointer-events-none z-0">
+    </div>
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] bg-branding-orange rounded-full blur-[120px] opacity-15 pointer-events-none z-0 translate-x-1/3 -translate-y-1/4">
+    </div>
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center w-full">
+      <div class="lg:col-span-6 flex flex-col items-start gap-stack-lg">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-branding-orange/20 mb-4">
+          <span class="w-2 h-2 rounded-full bg-branding-orange animate-pulse"></span>
+          <span class="text-sm font-medium text-branding-orange">Noa is now live</span>
+        </div>
+        <h1 class="font-display-lg-mobile md:text-6xl font-extrabold text-primary leading-tight tracking-tight">
+          Stop Deflecting Tickets. <br>
+          <span class="text-gradient-orange">Start Closing Them.</span>
+        </h1>
+        <p class="font-body-lg text-lg text-on-surface-variant max-w-xl leading-relaxed">
+          Your brand’s 24/7 autonomous shopping assistant. We build custom AI agents that don’t just answer FAQs—they
+          navigate your catalog, upsell your visitors, and handle 80% of your support volume with zero monthly overhead.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center gap-6 mt-4 w-full sm:w-auto">
+          <a class="w-full sm:w-auto inline-flex justify-center items-center bg-branding-orange text-white font-label-md px-8 py-4 rounded-full shadow-float-orange hover:shadow-[0_0_30px_rgba(232,80,2,0.6)] transition-all duration-300 hover:-translate-y-1 text-base font-semibold"
+            href="#contact">
+            Secure Your Digital Employee
+          </a>
+
+        </div>
+      </div>
+      <div class="lg:col-span-6 relative mt-16 lg:mt-0 flex justify-center lg:justify-end h-[620px] w-full"
+        style="perspective:1200px">
+        <div class="relative w-full max-w-[520px] h-full flex items-center justify-center">
+          <!-- Main Chat Frame -->
+          <div
+            class="hero-float-card relative z-20 w-[290px] bg-white/65 backdrop-blur-2xl shadow-2xl rounded-[32px] p-5 border border-white/50 flex flex-col h-[490px]"
+            style="box-shadow:0 25px 60px -12px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.9)">
+            <div class="flex justify-between items-center mb-5">
+              <div
+                class="w-9 h-9 rounded-full bg-white/80 flex items-center justify-center shadow-sm border border-black/5 hover:scale-110 transition-transform cursor-pointer">
+                <span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_back</span></div>
+              <span class="font-bold text-primary text-sm">Overview</span>
+              <div
+                class="w-9 h-9 rounded-full bg-white/80 flex items-center justify-center shadow-sm border border-black/5 hover:scale-110 transition-transform cursor-pointer">
+                <span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span></div>
+            </div>
+            <div class="flex-grow flex flex-col gap-3 overflow-hidden">
+              <div class="flex items-start gap-2">
+                <div class="w-7 h-7 rounded-full bg-surface-container-high shrink-0 mt-0.5 border border-black/5"></div>
+                <div>
+                  <p class="text-[10px] text-on-surface-variant font-medium mb-1">Customer</p>
+                  <div
+                    class="bg-white/90 rounded-2xl rounded-tl-sm px-3 py-2 text-[11px] text-on-surface border border-black/5 shadow-sm">
+                    Hi! What should I buy for dry skin?</div>
+                  <p class="text-[8px] text-on-surface-variant mt-1 opacity-60">10:30 AM</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2">
+                <div class="w-7 h-7 rounded-full bg-branding-orange shrink-0 mt-0.5 flex items-center justify-center">
+                  <span class="text-white text-[8px] font-bold">noa</span></div>
+                <div>
+                  <p class="text-[10px] text-branding-orange font-semibold mb-1">Noa</p>
+                  <div
+                    class="bg-white/90 rounded-2xl rounded-tl-sm px-3 py-2 text-[11px] text-on-surface border border-black/5 shadow-sm mb-2">
+                    Great question! 👋 Our bestseller is...</div>
+                  <div
+                    class="hero-float-card bg-white/80 backdrop-blur-md rounded-xl p-2.5 border border-black/5 flex gap-2.5 items-center hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    style="box-shadow:0 4px 16px rgba(0,0,0,0.04)">
+                    <div
+                      class="w-14 h-14 rounded-lg bg-gradient-to-br from-orange-100 to-orange-200 shrink-0 flex items-center justify-center">
+                      <div class="w-10 h-10 rounded-lg bg-branding-orange/30"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-[10px] font-bold text-primary leading-tight">Hydra Glow Moisturizer</p>
+                      <div class="flex items-center gap-1 my-0.5"><span
+                          class="text-branding-orange text-[8px]">★</span><span
+                          class="text-[8px] font-medium text-on-surface">4.8</span><span
+                          class="text-[8px] text-on-surface-variant">(128)</span></div>
+                      <p class="text-xs font-bold text-primary">$32.00</p>
+                      <button
+                        class="mt-1 bg-branding-orange text-white text-[8px] font-semibold px-2.5 py-1 rounded-md flex items-center gap-1 hover:shadow-md hover:scale-105 transition-all"><span
+                          class="material-symbols-outlined text-[10px]">shopping_cart</span>Add to cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="mt-3 flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-full px-3 py-2 border border-black/5 shadow-sm">
+              <span class="text-[10px] text-on-surface-variant flex-grow">Ask Noa anything...</span>
+              <div
+                class="w-7 h-7 rounded-full bg-branding-orange flex items-center justify-center shrink-0 hover:scale-110 transition-transform cursor-pointer shadow-sm">
+                <span class="material-symbols-outlined text-white text-[14px]">send</span></div>
+            </div>
+          </div>
+          <!-- Customer Service Card -->
+          <div
+            class="hero-float-card absolute -right-6 top-6 bg-gradient-to-br from-branding-orange to-[#cc4602] text-white p-4 rounded-2xl z-30 w-[175px] border border-white/20 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            style="box-shadow:0 20px 40px -10px rgba(232,80,2,0.35)">
+            <div class="flex justify-between items-start mb-3">
+              <p class="text-[9px] font-semibold tracking-widest uppercase opacity-90">Customer Service</p><span
+                class="material-symbols-outlined text-[16px] opacity-70">headset_mic</span>
+            </div>
+            <p class="text-2xl font-bold leading-none">2.4m</p>
+            <p class="text-[9px] opacity-80 mb-1 font-medium">Conversations handled</p>
+            <span
+              class="inline-block bg-green-400/30 text-green-200 text-[8px] font-semibold px-1.5 py-0.5 rounded-full mb-2">+18.3%</span>
+            <div class="border-t border-white/20 pt-2 mt-1">
+              <p class="text-[8px] opacity-70 mb-0.5">Avg. response time</p>
+              <div class="flex items-center gap-1.5">
+                <p class="text-lg font-bold leading-none">23s</p><span
+                  class="bg-green-400/30 text-green-200 text-[8px] font-semibold px-1.5 py-0.5 rounded-full">-32%</span>
+              </div>
+            </div>
+            <div class="border-t border-white/20 pt-2 mt-2">
+              <p class="text-[8px] opacity-70 mb-0.5">Support team size</p>
+              <div class="flex items-baseline gap-1">
+                <p class="text-lg font-bold leading-none">-28%</p><span class="text-[8px] opacity-60 font-medium">in 6
+                  months</span>
+              </div>
+            </div>
+          </div>
+          <!-- Savings Card -->
+          <div
+            class="hero-float-card absolute -left-10 bottom-12 bg-gradient-to-br from-branding-orange to-[#cc4602] text-white p-4 rounded-2xl z-30 w-[165px] border border-white/20 hover:scale-105 hover:translate-y-[-4px] transition-all duration-300 cursor-pointer"
+            style="box-shadow:0 20px 40px -10px rgba(232,80,2,0.35)">
+            <div class="flex justify-between items-start mb-2">
+              <p class="text-[9px] font-semibold tracking-widest uppercase opacity-90">Savings</p><span
+                class="material-symbols-outlined text-[16px] opacity-70">monitoring</span>
+            </div>
+            <div class="flex items-baseline gap-1 mb-4">
+              <p class="text-3xl font-bold">$45k</p>
+              <p class="text-sm opacity-80 font-medium">/mo</p>
+            </div>
+            <div class="flex items-end justify-between gap-1.5 h-12 w-full">
+              <div class="w-full bg-white/20 rounded-t-md h-[30%] hover:bg-white/40 transition-colors"></div>
+              <div class="w-full bg-white/30 rounded-t-md h-[50%] hover:bg-white/50 transition-colors"></div>
+              <div class="w-full bg-white/40 rounded-t-md h-[70%] hover:bg-white/60 transition-colors"></div>
+              <div class="w-full bg-white/60 rounded-t-md h-[85%] hover:bg-white/80 transition-colors"></div>
+              <div class="w-full bg-white rounded-t-md h-[100%]" style="box-shadow:0 0 8px rgba(255,255,255,0.4)"></div>
+            </div>
+          </div>
+          <!-- Tasks Automated Card -->
+          <div
+            class="hero-float-card absolute right-2 bottom-4 bg-white/70 backdrop-blur-xl p-4 rounded-2xl z-30 w-[155px] border border-white/30 hover:scale-105 hover:translate-y-[-4px] transition-all duration-300 cursor-pointer"
+            style="box-shadow:0 15px 35px -8px rgba(0,0,0,0.08),inset 0 1px 0 rgba(255,255,255,0.8)">
+            <div class="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center mb-2"><span
+                class="material-symbols-outlined text-blue-500 text-[14px]">task_alt</span></div>
+            <p class="text-[9px] text-on-surface-variant font-medium">Tasks automated</p>
+            <p class="text-xl font-bold text-primary">24,592</p>
+            <span
+              class="inline-block bg-green-50 text-green-600 text-[8px] font-semibold px-1.5 py-0.5 rounded-full mt-1">+8.1%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll hint — fade + chevron -->
+    <div class="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#fbf9f8]/80 to-transparent pointer-events-none z-20"></div>
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 opacity-60 animate-bounce">
+      <span class="text-[10px] font-mono tracking-widest uppercase text-on-surface-variant">Scroll</span>
+      <span class="material-symbols-outlined text-on-surface-variant text-[18px]">keyboard_arrow_down</span>
+    </div>
+  </section>
+  
+  <!-- PROBLEM SECTION: The Old Way vs New Way -->
+  <section class="py-section-gap px-margin-mobile md:px-margin-desktop relative" id="features">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4 tracking-tight">The Customer Support Dilemma</h2>
+        <p class="text-lg text-on-surface-variant max-w-2xl mx-auto">Traditional models are breaking under pressure. The
+          choice has always been between high costs or poor experiences. Until now.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
+        <!-- The Old Way -->
+        <div
+          class="glass-panel p-10 rounded-[32px] border border-black/5 bg-surface-container-low shadow-sm transition-transform hover:-translate-y-1 duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center mb-8">
+            <span class="material-symbols-outlined text-red-500 text-3xl">history</span>
+          </div>
+          <h3 class="text-2xl font-bold text-primary mb-6">The Old Way</h3>
+          <ul class="space-y-5">
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-red-500 mt-0.5">close</span>
+              <span class="text-on-surface-variant">Human agents overwhelmed by repetitive FAQs.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-red-500 mt-0.5">close</span>
+              <span class="text-on-surface-variant">Support costs scale linearly with revenue.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-red-500 mt-0.5">close</span>
+              <span class="text-on-surface-variant">Customers wait hours or days for simple answers.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-red-500 mt-0.5">close</span>
+              <span class="text-on-surface-variant">Chatbots that frustrate users with dead ends.</span>
+            </li>
+          </ul>
+        </div>
+        <!-- The Noa Way -->
+        <div
+          class="glass-panel p-10 rounded-[32px] border border-branding-orange/20 bg-gradient-to-b from-orange-50/80 to-white shadow-glass-orange relative overflow-hidden transition-transform hover:-translate-y-1 duration-300">
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-branding-orange/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none">
+          </div>
+          <div
+            class="w-14 h-14 rounded-2xl bg-branding-orange flex items-center justify-center mb-8 shadow-md relative z-10">
+            <span class="material-symbols-outlined text-white text-3xl">auto_awesome</span>
+          </div>
+          <h3 class="text-2xl font-bold text-primary mb-6 relative z-10">The Noa Way</h3>
+          <ul class="space-y-5 relative z-10">
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-branding-orange mt-0.5">check_circle</span>
+              <span class="text-on-surface-variant font-medium">Instantly resolves 80% of customer inquiries.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-branding-orange mt-0.5">check_circle</span>
+              <span class="text-on-surface-variant font-medium">Flat, one-time investment. Infinite scale.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-branding-orange mt-0.5">check_circle</span>
+              <span class="text-on-surface-variant font-medium">24/7 instant responses, zero wait times.</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-branding-orange mt-0.5">check_circle</span>
+              <span class="text-on-surface-variant font-medium">Context-aware AI that actually solves problems.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- NOA AGENT SECTION -->
+  <section class="py-section-gap px-margin-mobile md:px-margin-desktop relative" id="how-it-works">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1 relative">
+          <!-- Dashboard Visual Stack -->
+          <div
+            class="relative w-full aspect-square md:aspect-[4/3] rounded-[40px] bg-surface-container-lowest border border-black/5 shadow-2xl p-8 flex flex-col overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-branding-orange/5 to-transparent"></div>
+            <!-- Header -->
+            <div class="flex items-center gap-4 mb-8 relative z-10">
+              <div class="w-12 h-12 rounded-full bg-branding-orange flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-white">smart_toy</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-primary text-lg">Noa</h4>
+                <p class="text-sm text-green-500 flex items-center gap-1.5 font-medium"><span
+                    class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Online</p>
+              </div>
+            </div>
+            <!-- Chat Interface Mockup -->
+            <div class="flex-grow flex flex-col gap-4 relative z-10">
+              <div
+                class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm self-start max-w-[85%] border border-black/5">
+                <p class="text-sm text-on-surface">I ordered a pair of shoes last Tuesday but need to change the
+                  shipping address. Is it too late?</p>
+              </div>
+              <div class="bg-branding-orange p-4 rounded-2xl rounded-tr-sm self-end max-w-[85%] shadow-md text-white">
+                <p class="text-sm mb-3">Hi! I found your order #8923. It hasn't shipped yet.</p>
+                <div class="bg-white/20 p-3 rounded-xl backdrop-blur-sm border border-white/20">
+                  <p class="text-xs font-medium mb-1 opacity-80 uppercase tracking-wider">Action required</p>
+                  <p class="text-sm font-semibold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">local_shipping</span>
+                    Update Shipping Address
+                  </p>
+                </div>
+                <p class="text-sm mt-3">Please provide the new address, and I'll update it right now.</p>
+              </div>
+              <div
+                class="bg-surface-container-low p-4 rounded-2xl rounded-tl-sm self-start max-w-[80%] border border-black/5 mt-auto">
+                <div class="flex gap-2 items-center text-on-surface-variant">
+                  <div class="flex gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-current animate-bounce"
+                      style="animation-delay: 0ms"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-current animate-bounce"
+                      style="animation-delay: 150ms"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-current animate-bounce"
+                      style="animation-delay: 300ms"></span>
+                  </div>
+                  <span class="text-xs font-medium">Customer is typing...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating Card -->
+          <div
+            class="absolute -right-8 top-1/2 -translate-y-1/2 glass-panel p-5 rounded-2xl shadow-float z-20 w-52 border border-white/50 hidden md:block bg-white/80">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                <span class="material-symbols-outlined text-green-600 text-[18px]">bolt</span>
+              </div>
+              <span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wide">Resolution Time</span>
+            </div>
+            <p class="text-3xl font-bold text-primary mb-1">12s</p>
+            <p class="text-xs text-green-600 font-medium bg-green-50 px-2 py-1 rounded-md inline-block">-98% vs human
+              avg</p>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2 flex flex-col gap-6">
+          <span class="text-branding-orange font-bold tracking-widest text-sm uppercase">Meet Noa</span>
+          <h2 class="text-4xl md:text-5xl font-bold text-primary leading-tight tracking-tight">Intelligence that lives
+            inside your brand.</h2>
+          <p class="text-lg text-on-surface-variant leading-relaxed">
+            Noa doesn't just read scripts. It integrates with your entire tech stack—Shopify, Zendesk, Gorgias,
+            Stripe—to take real actions on behalf of your customers.
+          </p>
+          <div class="space-y-6 mt-6">
+            <div class="flex gap-5">
+              <div
+                class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center shrink-0 shadow-sm border border-black/5 text-branding-orange">
+                <span class="material-symbols-outlined text-2xl">account_tree</span>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-primary mb-2">Complex Workflows</h4>
+                <p class="text-base text-on-surface-variant leading-relaxed">Handles returns, exchanges, subscriptions,
+                  and order tracking end-to-end without human intervention.</p>
+              </div>
+            </div>
+            <div class="flex gap-5">
+              <div
+                class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center shrink-0 shadow-sm border border-black/5 text-branding-orange">
+                <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-primary mb-2">Proactive Upselling</h4>
+                <p class="text-base text-on-surface-variant leading-relaxed">Recommends products intelligently based on
+                  current cart contents and browsing history.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- INTERACTIVE ACCORDION -->
+  <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface relative overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- WISMO Loop -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">headset_mic</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Automate the "Where is my order?" (WISMO) Loop:
+          </h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Our agent connects to your shipping provider
+            and Shopify backend. It doesn't just give a tracking link; it explains the status in plain English and
+            provides delivery ETAs, resolving the #1 source of ticket volume instantly.</p>
+          <div class="mt-auto space-y-3">
+            <div class="flex items-start gap-2">
+              <div class="w-7 h-7 rounded-full bg-surface-container-high shrink-0 mt-0.5"></div>
+              <div class="bg-surface-container-low rounded-2xl rounded-tl-sm px-3 py-2 text-xs text-on-surface">Where is
+                my order?</div>
+            </div>
+            <div class="flex items-start gap-2">
+              <div class="w-7 h-7 rounded-full bg-branding-orange shrink-0 mt-0.5 flex items-center justify-center">
+                <span class="text-white text-[10px] font-bold">noa</span></div>
+              <div class="bg-branding-orange/10 rounded-2xl rounded-tl-sm px-3 py-2 text-xs text-on-surface">Your order
+                #12345 is on the way! 📦 Arriving May 17.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Inbox -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">move_to_inbox</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Filter and Prioritize Your Support Inbox</h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">The agent scans every incoming email. It
+            replies to the routine, ignores the spam, and flags high-priority VIP customers or urgent complaints for
+            your human team to handle immediately.</p>
+          <div class="mt-auto">
+            <div class="flex items-center gap-3 mb-3 text-xs text-on-surface-variant"><span
+                class="material-symbols-outlined text-sm">arrow_forward</span> Incoming emails</div>
+            <div class="flex flex-col gap-2 mb-3">
+              <div class="flex justify-between items-center bg-green-50 p-2.5 rounded-lg"><span
+                  class="text-xs font-semibold text-green-700 flex items-center gap-1"><span
+                    class="w-2 h-2 rounded-full bg-green-500"></span> Replied</span><span
+                  class="text-xs font-bold text-green-700">312</span></div>
+              <div class="flex justify-between items-center bg-red-50 p-2.5 rounded-lg"><span
+                  class="text-xs font-semibold text-red-600 flex items-center gap-1"><span
+                    class="w-2 h-2 rounded-full bg-red-500"></span> Flagged</span><span
+                  class="text-xs font-bold text-red-600">18</span></div>
+              <div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-lg"><span
+                  class="text-xs font-semibold text-gray-500 flex items-center gap-1"><span
+                    class="w-2 h-2 rounded-full bg-gray-400"></span> Spam</span><span
+                  class="text-xs font-bold text-gray-500">202</span></div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-on-surface-variant"><span
+                class="material-symbols-outlined text-sm">arrow_forward</span> <span
+                class="material-symbols-outlined text-branding-orange text-sm">person</span> Human team focuses on what
+              matters</div>
+          </div>
+        </div>
+
+        <!-- Conversational Commerce -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">shopping_cart_checkout</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Conversational Commerce</h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Guide users to the right products with
+            personalized recommendations based on their specific needs and browsing history.</p>
+          <div class="mt-auto space-y-3">
+            <div class="flex items-start gap-2">
+              <div class="w-7 h-7 rounded-full bg-surface-container-high shrink-0 mt-0.5"></div>
+              <div class="bg-surface-container-low rounded-2xl rounded-tl-sm px-3 py-2 text-xs text-on-surface">I need a
+                moisturizer for dry, sensitive skin.</div>
+            </div>
+            <div class="flex items-start gap-2">
+              <div class="w-7 h-7 rounded-full bg-branding-orange shrink-0 mt-0.5 flex items-center justify-center">
+                <span class="text-white text-[10px] font-bold">noa</span></div>
+              <div class="bg-branding-orange/10 rounded-2xl rounded-tl-sm px-3 py-2 text-xs text-on-surface">We
+                recommend this for you!</div>
+            </div>
+            <div class="bg-white border border-black/5 rounded-xl p-3 flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg bg-surface-container-low shrink-0"></div>
+              <div class="flex-1">
+                <p class="text-xs font-bold text-primary">Hydra Glow Moisturizer</p>
+                <div class="flex items-center gap-0.5 my-1"><span
+                    class="text-branding-orange text-[10px]">★★★★★</span><span
+                    class="text-[10px] text-on-surface-variant ml-1">4.8</span></div>
+                <button class="bg-branding-orange text-white text-[10px] font-semibold px-3 py-1 rounded-md">Add to
+                  cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multilingual Support -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">language</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Multilingual Support</h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Fluently converse with customers in over 50
+            languages, expanding your global reach effortlessly.</p>
+          <div class="mt-auto relative h-36 bg-surface-container-low/30 rounded-2xl overflow-hidden p-4">
+            <div class="absolute inset-0 opacity-10"
+              style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22><ellipse cx=%22400%22 cy=%22200%22 rx=%22350%22 ry=%22150%22 fill=%22none%22 stroke=%22%23e85002%22 stroke-width=%221%22/><ellipse cx=%22400%22 cy=%22200%22 rx=%22250%22 ry=%22100%22 fill=%22none%22 stroke=%22%23e85002%22 stroke-width=%220.5%22/></svg>'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+            </div>
+            <div
+              class="relative z-10 flex flex-wrap justify-around items-center h-full text-xs font-medium text-on-surface-variant">
+              <span class="absolute top-1 left-4">Hello</span>
+              <span class="absolute top-1 right-4">Hello</span>
+              <span class="absolute bottom-8 left-2">Hola</span>
+              <span class="absolute bottom-2 left-1/4">Bonjour</span>
+              <span class="absolute top-1/3 right-2">こんにちは</span>
+              <span class="absolute bottom-2 right-4">안녕하세요</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Escalate Sensitive Conversations -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">notification_important</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Escalate sensitive conversations to human agents
+          </h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Automatically detect sensitive or high-risk
+            conversations, tag them, and instantly notify your team on Slack (or your preferred tool) so nothing slips
+            through the cracks.</p>
+          <div class="mt-auto flex items-center justify-between gap-2">
+            <div class="flex flex-col items-center gap-1 text-center">
+              <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center"><span
+                  class="material-symbols-outlined text-red-500 text-lg">warning</span></div>
+              <span
+                class="text-[9px] text-on-surface-variant leading-tight">Sensitive<br>conversation<br>detected</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant/40 text-sm">arrow_forward</span>
+            <div class="flex flex-col items-center gap-1 text-center">
+              <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center"><span
+                  class="material-symbols-outlined text-purple-500 text-lg">tag</span></div>
+              <span class="text-[9px] text-on-surface-variant leading-tight">Tagged &<br>categorized</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant/40 text-sm">arrow_forward</span>
+            <div class="flex flex-col items-center gap-1 text-center">
+              <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center"><span
+                  class="material-symbols-outlined text-green-600 text-lg">notifications_active</span></div>
+              <span class="text-[9px] text-on-surface-variant leading-tight">Notified on your<br>team channel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actionable Analytics -->
+        <div
+          class="glass-panel p-8 rounded-[32px] border border-black/5 flex flex-col h-full hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-full bg-branding-orange/10 flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">monitoring</span>
+          </div>
+          <h3 class="text-xl font-bold text-primary mb-3 leading-tight">Actionable Analytics</h3>
+          <p class="text-sm text-on-surface-variant mb-6 leading-relaxed">Gain deep insights into customer pain points
+            and popular requests through a Conversations report sent each month.</p>
+          <div class="mt-auto grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-[10px] font-bold text-on-surface-variant mb-2 uppercase tracking-wider">Top topics</p>
+              <div class="space-y-2">
+                <div class="flex justify-between text-[10px]"><span>Order status</span><span
+                    class="font-bold">34%</span></div>
+                <div class="w-full h-1.5 bg-branding-orange/10 rounded-full">
+                  <div class="h-full bg-branding-orange rounded-full" style="width:34%"></div>
+                </div>
+                <div class="flex justify-between text-[10px]"><span>Returns</span><span class="font-bold">24%</span>
+                </div>
+                <div class="w-full h-1.5 bg-branding-orange/10 rounded-full">
+                  <div class="h-full bg-branding-orange rounded-full" style="width:24%"></div>
+                </div>
+                <div class="flex justify-between text-[10px]"><span>Shipping</span><span class="font-bold">18%</span>
+                </div>
+                <div class="w-full h-1.5 bg-branding-orange/10 rounded-full">
+                  <div class="h-full bg-branding-orange rounded-full" style="width:18%"></div>
+                </div>
+                <div class="flex justify-between text-[10px]"><span>Product info</span><span
+                    class="font-bold">12%</span></div>
+                <div class="w-full h-1.5 bg-branding-orange/10 rounded-full">
+                  <div class="h-full bg-branding-orange rounded-full" style="width:12%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-[10px] font-bold text-on-surface-variant mb-2 uppercase tracking-wider">Conversations
+                report</p>
+              <p class="text-3xl font-bold text-branding-orange">2.4m</p>
+              <p class="text-[10px] text-green-600 font-semibold">+18.3%</p>
+              <p class="text-[9px] text-on-surface-variant">vs last month</p>
+              <svg class="w-full h-10 mt-2" viewBox="0 0 100 30">
+                <path d="M0,25 Q15,22 25,20 T50,15 T75,8 T100,5" fill="none" stroke="#E85002" stroke-width="1.5" />
+                </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Integration Conveyor Belt -->
+      
+
+    </div>
+  </section>
+
+  <!-- BRAND DNA SECTION -->
+  <!-- ZERO LEARNING CURVE -->
+  <section class="py-24 px-margin-mobile md:px-margin-desktop relative"
+    style="background: linear-gradient(to bottom, #fbf9f8, #fdf0e8);">
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="font-headline-xl text-5xl md:text-6xl font-bold text-primary mb-4 tracking-tight">Zero Learning
+          Curve.</h2>
+        <p class="text-2xl font-bold text-branding-orange mb-8">A Digital Employee, Not a New Dashboard.</p>
+        <p class="font-body-lg text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">The biggest hidden
+          cost of new software is the time it takes your team to learn it. Our system requires 0 training.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div
+          class="bg-white/80 backdrop-blur-xl p-10 rounded-3xl border border-black/5 shadow-glass flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-8">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">build</span>
+          </div>
+          <h4 class="text-xl font-bold text-primary mb-4">Stay in Your Current Tools</h4>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Your team stays in Intercom, Zendesk, or Shopify.
+            They don't need to log into a new AI Platform.</p>
+        </div>
+        <div
+          class="bg-white/80 backdrop-blur-xl p-10 rounded-3xl border border-black/5 shadow-glass flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-8">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">extension</span>
+          </div>
+          <h4 class="text-xl font-bold text-primary mb-4">Seamless Co-existence</h4>
+          <p class="text-on-surface-variant leading-relaxed text-sm">The AI works directly inside your existing
+            helpdesk. It drafts replies, tags tickets, and updates orders exactly where you already work.</p>
+        </div>
+        <div
+          class="bg-white/80 backdrop-blur-xl p-10 rounded-3xl border border-black/5 shadow-glass flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
+          <div class="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-8">
+            <span class="material-symbols-outlined text-branding-orange text-3xl">bolt</span>
+          </div>
+          <h4 class="text-xl font-bold text-primary mb-4">Invisible Operation</h4>
+          <p class="text-on-surface-variant leading-relaxed text-sm">Everything looks the same, but functions at 10x
+            speed. Your team simply notices their 'Pending' folder stays at zero.</p>
+        </div>
+      </div>
+      <div
+        class="mt-16 text-center">
+        <p class="text-sm font-semibold text-on-surface-variant">Works where you already work</p>
+        <br>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <div class="flex items-center gap-2"><svg role="img" aria-label="Shopify" class="h-8 grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" viewBox="0 0 109 124" xmlns="http://www.w3.org/2000/svg"><path d="M74.7 14.8s-1.4.4-3.7 1.1c-.4-1.3-1-2.8-1.8-4.4-2.6-5-6.5-7.7-11.2-7.7-.3 0-.6 0-1 .1-.1-.2-.3-.3-.4-.5-2-2.2-4.6-3.2-7.7-3.1-6 .2-12 4.5-16.8 12.2-3.4 5.4-6 12.2-6.7 17.4-6.9 2.1-11.7 3.6-11.8 3.7-3.5 1.1-3.6 1.2-4 4.5C9.2 41.4 0 111 0 111l75.6 13.1V14.6c-.3 0-.6.1-.9.2zm-17 5.2c-4 1.2-8.4 2.6-12.7 3.9 1.2-4.7 3.6-9.4 6.4-12.5 1.1-1.1 2.6-2.4 4.3-3.2 1.7 3.6 2 8.6 2 11.8zm-8.5-16c1.4 0 2.6.3 3.6.9-1.6.8-3.2 2.1-4.7 3.6-3.8 4.1-6.7 10.5-7.9 16.6-3.6 1.1-7.2 2.2-10.5 3.2 1.9-10.2 9.7-24 19.5-24.3zm-8 64.9c.4 6.4 17.3 7.8 18.3 22.9.7 11.9-6.3 20-16.4 20.6-12.2.8-18.9-6.4-18.9-6.4l2.6-10.9s6.7 5.1 12.1 4.7c3.5-.2 4.8-3.1 4.7-5.1-.5-8.4-14.3-7.9-15.2-21.7-.8-11.6 6.9-23.4 23.7-24.5 6.5-.4 9.8 1.2 9.8 1.2L57 60.2s-4.3-2-9.4-1.7c-7.5.5-7.6 5.2-7.4 6.4zm31.5-51.5c0-2.9-.4-7.1-1.8-10.6 4.6.9 6.8 6 7.8 9.1-1.8.5-3.8 1-6 1.5z" fill="#96BF48"/><path d="M79.3 123.1L109 116s-13.1-88.6-13.2-89.2c-.1-.6-.6-1-1.1-1-.5 0-9.4-.2-9.4-.2s-5.5-5.3-7-6.8v100.3z" fill="#5E8E3E"/></svg></div>
+          <div class="w-px h-8 bg-black/10 hidden md:block"></div>
+          <div class="flex items-center gap-2"><svg role="img" aria-label="WooCommerce" class="h-6 grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" viewBox="0 0 256 153" xmlns="http://www.w3.org/2000/svg"><path d="M23.759 0h208.378C245.325 0 256 10.675 256 23.863v79.541c0 13.188-10.675 23.863-23.863 23.863H157.41l10.257 25.118-45.109-25.118H23.863C10.675 127.267 0 116.592 0 103.404V23.863C-.104 10.675 10.57 0 23.759 0z" fill="#9B5C8F"/><path d="M14.578 21.75c1.457-1.978 3.642-3.018 6.556-3.226 5.308-.416 8.326 2.082 9.054 7.39 3.226 21.75 6.764 40.17 10.51 55.3l22.79-43.37c2.082-3.955 4.683-6.036 7.806-6.244 4.579-.312 7.39 2.601 8.43 8.741 2.601 13.84 5.932 25.6 9.886 35.59 2.706-26.432 7.285-45.476 13.737-57.236 1.561-2.914 3.851-4.371 6.868-4.579 2.394-.208 4.579.52 6.556 2.082 1.978 1.561 3.018 3.538 3.226 5.932.104 1.873-.208 3.434-1.04 4.995-4.059 7.493-7.39 20.085-9.99 37.567-2.498 16.963-3.434 30.18-2.914 39.65.208 2.706-.208 5.1-1.353 7.078-1.353 2.29-3.33 3.538-5.828 3.746-2.81.208-5.62-1.04-8.013-3.85-8.742-9.99-15.714-24.87-20.917-44.54-6.14 12.072-10.718 21.126-13.736 27.162-5.62 10.718-10.406 16.234-14.465 16.546-2.602.208-4.892-1.977-6.764-6.556C36.536 97.266 31.54 72.5 27.69 33.822c-.312-2.914.208-5.308 1.665-7.286zm175.928 8.117c-4.267-7.493-10.614-11.968-19.148-13.529-2.29-.416-4.475-.624-6.556-.624-11.655 0-21.126 6.14-28.514 18.524-6.245 10.51-9.367 22.27-9.367 35.278 0 9.679 2.082 17.99 6.244 24.87 4.267 7.493 10.614 11.968 19.148 13.529 2.29.416 4.475.624 6.556.624 11.759 0 21.23-6.14 28.514-18.524 6.245-10.51 9.367-22.374 9.367-35.382.104-9.783-2.082-18.004-6.244-24.766zm-14.985 38.4c-1.665 7.806-4.787 13.633-9.47 17.48-3.642 2.914-7.078 4.163-10.303 3.538-3.122-.624-5.724-3.122-7.702-7.702-1.561-3.642-2.29-7.39-2.29-11.135 0-3.226.312-6.452 1.04-9.575 1.249-5.2 3.538-10.094 7.077-14.569 4.371-5.62 8.95-7.91 13.737-6.972 3.122.624 5.724 3.122 7.702 7.702 1.561 3.642 2.29 7.39 2.29 11.135-.104 3.434-.416 6.66-1.08 10.098zm-47.351-38.4c-4.267-7.493-10.718-11.968-19.252-13.529-2.29-.416-4.475-.624-6.556-.624-11.655 0-21.126 6.14-28.41 18.524-6.245 10.51-9.367 22.27-9.367 35.278 0 9.679 2.082 17.99 6.244 24.87 4.267 7.493 10.614 11.968 19.148 13.529 2.29.416 4.475.624 6.556.624 11.759 0 21.23-6.14 28.514-18.524 6.245-10.51 9.367-22.374 9.367-35.382 0-9.783-2.082-18.004-6.244-24.766zm-15.09 38.4c-1.665 7.91-4.787 13.737-9.47 17.48-3.642 2.914-7.078 4.163-10.303 3.538-3.122-.624-5.724-3.122-7.702-7.702-1.561-3.642-2.29-7.39-2.29-11.135 0-3.226.312-6.452 1.04-9.575 1.249-5.2 3.538-10.094 7.078-14.569 4.371-5.62 8.95-7.91 13.737-6.972 3.122.624 5.724 3.122 7.701 7.702 1.562 3.642 2.29 7.39 2.29 11.135 0 3.434-.416 6.66-1.08 10.098z" fill="#fff"/></svg></div>
+          <div class="w-px h-8 bg-black/10 hidden md:block"></div>
+          <div class="flex items-center gap-2"><svg role="img" aria-label="Intercom" class="h-6 grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 0H3C1.346 0 0 1.346 0 3v18c0 1.654 1.346 3 3 3h18c1.654 0 3-1.346 3-3V3c0-1.654-1.346-3-3-3zm-1 14.355c0 .07-.01.14-.012.21a5.39 5.39 0 0 1-.109.853c-.242 1.013-.78 1.664-1.458 1.909a2.374 2.374 0 0 1-.775.131c-.45 0-.915-.12-1.389-.36l-.189-.098-.145-.085-.107-.065a8.875 8.875 0 0 1-.36-.232 11.44 11.44 0 0 1-3.478 0 8.875 8.875 0 0 1-.36.232l-.108.065-.144.085-.19.098c-.473.24-.938.36-1.388.36a2.374 2.374 0 0 1-.775-.131c-.678-.245-1.216-.896-1.458-1.909a5.39 5.39 0 0 1-.11-.853c-.001-.07-.011-.14-.011-.21V8.645c0-.07.01-.14.012-.21.021-.3.059-.58.109-.854.242-1.012.78-1.663 1.458-1.908a2.374 2.374 0 0 1 .775-.131c.45 0 .915.12 1.389.36l.189.098.145.085.107.065c.115.071.237.15.36.232a11.44 11.44 0 0 1 3.478 0c.123-.082.245-.161.36-.232l.108-.065.144-.085.19-.098c.473-.24.938-.36 1.388-.36.271 0 .531.044.775.131.678.245 1.216.896 1.458 1.908.05.275.088.554.11.854.001.07.011.14.011.21v5.71z" fill="#1F8DED"/><path d="M12 13.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="#fff"/></svg></div>
+          <div class="w-px h-8 bg-black/10 hidden md:block"></div>
+          <div class="flex items-center gap-2"><svg role="img" aria-label="Zendesk" class="h-6 grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.155 14.4H0l11.155-9.903zm0 5.477C11.155 21.595 9.75 23 8.025 23a3.123 3.123 0 0 1-3.13-3.123V11.4zm1.69-15.754C12.845 2.405 14.25 1 15.975 1a3.123 3.123 0 0 1 3.13 3.123V12.6zM12.845 14.4L24 4.497v9.903z" fill="#03363D"/></svg></div>
+          <div class="w-px h-8 bg-black/10 hidden md:block"></div>
+          <div class="flex items-center gap-2"><svg role="img" aria-label="Slack" class="h-6 grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.122 2.521a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zm-1.268 0a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zm-2.523 10.122a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zm0-1.268a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#4A154B"/></svg></div>
+          <div class="w-px h-8 bg-black/10 hidden md:block"></div>
+          <div class="text-on-surface-variant font-medium text-sm">&amp; More</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Logic: Asset vs Expense Section -->
+ 
+  <!-- â•â•â• MERGED FROM SUBSET â•â•â• -->
+  <section class="py-24 relative overflow-hidden" id="compare"
+    style="background: linear-gradient(to bottom, var(--bg) 0%, #f5eee8 100%);">
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+
+      <h2 class="text-4xl lg:text-5xl font-bold text-[#111111] mb-12 tracking-tight">
+        Why a $15/hr VA is actually<br /><span class="text-[#E85002]">costing you far more.</span>
+      </h2>
+      <div
+        class="bg-white/90 backdrop-blur-md border border-gray-200 rounded-3xl overflow-hidden shadow-xl shadow-black/5">
+        <div
+          class="grid grid-cols-4 p-4 bg-gray-50/80 border-b border-gray-200 font-mono text-xs uppercase tracking-widest text-gray-500">
+          <div class="col-span-1 pl-4">Capability</div>
+          <div class="text-center">Traditional VA</div>
+          <div class="text-center">Nodewave Agent</div>
+          <div class="text-center">Impact</div>
+        </div>
+        <div class="grid grid-cols-4 p-5 border-b border-gray-100 items-center hover:bg-orange-50/50 transition-colors">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Availability</div>
+          <div class="text-center font-semibold text-[#5b4138]">8-hour shifts</div>
+          <div class="text-center font-bold text-[#111111]">24 / 7 / 365</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="arrow-up"></i>Always On</span></div>
+        </div>
+        <div class="grid grid-cols-4 p-5 border-b border-gray-100 items-center bg-orange-50/30">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Response Time</div>
+          <div class="text-center font-semibold text-[#5b4138]">Minutes / Hours</div>
+          <div class="text-center font-bold text-[#111111]">Seconds</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-[#E85002] text-white text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="zap"></i>Core Win</span></div>
+        </div>
+        <div class="grid grid-cols-4 p-5 border-b border-gray-100 items-center hover:bg-orange-50/50 transition-colors">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Product Memory</div>
+          <div class="text-center font-semibold text-[#5b4138]">Forgets nuances</div>
+          <div class="text-center font-bold text-[#111111]">Perfect — every SKU</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="arrow-up"></i>Consistently Better</span></div>
+        </div>
+        <div class="grid grid-cols-4 p-5 border-b border-gray-100 items-center bg-orange-50/30">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Cost Model</div>
+          <div class="text-center font-semibold text-[#5b4138]">Recurring salary</div>
+          <div class="text-center font-bold text-[#111111]">One-time build</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-[#E85002] text-white text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="zap"></i>Core Win</span></div>
+        </div>
+        <div class="grid grid-cols-4 p-5 border-b border-gray-100 items-center hover:bg-orange-50/50 transition-colors">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Upselling</div>
+          <div class="text-center font-semibold text-[#5b4138]">Inconsistent</div>
+          <div class="text-center font-bold text-[#111111]">Automatic, real-time</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="arrow-up"></i>New Revenue</span></div>
+        </div>
+        <div class="grid grid-cols-4 p-5 items-center hover:bg-orange-50/50 transition-colors">
+          <div class="font-semibold text-gray-800 text-sm pl-4">Scalability</div>
+          <div class="text-center font-semibold text-[#5b4138]">+1 customer = +payroll</div>
+          <div class="text-center font-bold text-[#111111]">Zero extra cost</div>
+          <div class="text-center"><span
+              class="inline-flex items-center gap-1 bg-[#E85002] text-white text-[10px] font-mono px-2 py-1 rounded-full"><i
+                class="w-3 h-3" data-lucide="zap"></i>Core Win</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── SCALE / PROOF ─── -->
+  <section class="pb-24 px-6" id="scale">
+    <div
+      class="max-w-6xl mx-auto bg-gradient-to-br from-blue-50 to-orange-50 border border-gray-200 rounded-[2rem] p-12 lg:p-20 grid lg:grid-cols-2 gap-12 items-center relative overflow-hidden">
+      <div class="relative z-10">
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#111111] mb-4 leading-tight">
+          <em class="not-italic text-[#E85002]">80% of tickets</em><br />
+          handled.<br />
+          Zero headcount added.
+        </h2>
+        <p class="text-[#5b4138] leading-relaxed mb-8">
+          We helped a brand reduce their active CS headcount by 60% — while increasing conversion through real-time
+          product recommendations. By automating the repetitive, their team only touches what truly matters.
+        </p>
+        <a class="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-full font-semibold transition-colors inline-flex items-center gap-2 mag"
+          href="#contact">
+          Get Your Implementation Quote <i class="w-4 h-4" data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="relative z-10 flex flex-col gap-4 items-end">
+        <div class="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-2xl p-5 shadow-lg w-full max-w-[340px]">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-semibold text-gray-800">Autonomous Agent Pipeline</span>
+            <span
+              class="bg-orange-100 text-[#E85002] text-[10px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1"><span
+                class="w-1.5 h-1.5 rounded-full bg-[#E85002]"></span> Running</span>
+          </div>
+          <div class="h-1 bg-gray-100 rounded-full mt-3 overflow-hidden">
+            <div class="h-full bg-[#E85002] w-4/5 rounded-full"></div>
+          </div>
+          <div class="mt-4 space-y-2">
+            <div class="flex justify-between text-xs border-b border-gray-100 pb-1">
+              <span class="text-gray-500">Tickets resolved today</span>
+              <span class="font-bold text-[#111111]">247</span>
+            </div>
+            <div class="flex justify-between text-xs border-b border-gray-100 pb-1">
+              <span class="text-gray-500">Avg response time</span>
+              <span class="font-bold text-[#111111]">3.1s</span>
+            </div>
+            <div class="flex justify-between text-xs pb-1">
+              <span class="text-gray-500">Upsells closed</span>
+              <span class="font-bold text-[#E85002]">$1,840</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-2xl p-5 shadow-lg w-full max-w-[300px]">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-sm font-semibold text-gray-800">Overhead Reduction</span>
+            <span
+              class="bg-green-100 text-green-700 text-[10px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1"><i
+                class="w-3 h-3" data-lucide="check"></i> Achieved</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs border-b border-gray-100 pb-1">
+              <span class="text-gray-500">CS headcount before</span>
+              <span class="font-bold text-[#111111]">5 reps</span>
+            </div>
+            <div class="flex justify-between text-xs border-b border-gray-100 pb-1">
+              <span class="text-gray-500">CS headcount after</span>
+              <span class="font-bold text-[#E85002]">2 reps</span>
+            </div>
+            <div class="flex justify-between text-xs pb-1">
+              <span class="text-gray-500">Monthly saving</span>
+              <span class="font-bold text-green-600">$7,200</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ─── PROCESS ─── -->
+  <section class="py-24 bg-[#fbf9f8]" id="process">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 mb-16">
+        <div>
+          <h2 class="text-5xl lg:text-6xl font-bold text-[#111111] leading-none tracking-tight">
+            Days,<br />not<br />months.</h2>
+        </div>
+        <div class="pt-4">
+          <p class="text-lg text-[#5b4138] leading-relaxed max-w-md">
+            We don't give you a login and a manual. We give you a finished result — a trained, installed, live Digital
+            Employee. Your first working agent is always within two weeks.
+          </p>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-[2px] bg-gray-200 border border-gray-200 rounded-3xl overflow-hidden">
+        <div class="bg-[#fbf9f8] p-10 hover:bg-white transition-colors relative overflow-hidden group">
+          <div
+            class="w-10 h-10 rounded-xl bg-orange-100 text-[#E85002] font-mono font-bold flex items-center justify-center mb-6">
+            01</div>
+          <h3 class="text-xl font-bold text-[#111111] mb-3">The Audit</h3>
+          <p class="text-sm text-[#5b4138] leading-relaxed">We map your current ticket flow and identify the 80% we can
+            automate immediately. You'll see exactly where time and revenue are leaking before we build anything.</p>
+          <div
+            class="absolute -bottom-4 right-4 text-8xl font-bold text-[#111111]/5 opacity-0 group-hover:opacity-100 transition-opacity select-none">
+            01</div>
+        </div>
+        <div class="bg-[#fbf9f8] p-10 hover:bg-white transition-colors relative overflow-hidden group">
+          <div
+            class="w-10 h-10 rounded-xl bg-orange-100 text-[#E85002] font-mono font-bold flex items-center justify-center mb-6">
+            02</div>
+          <h3 class="text-xl font-bold text-[#111111] mb-3">The Training</h3>
+          <p class="text-sm text-[#5b4138] leading-relaxed">We brain-dump your brand voice, product data, and custom FAQ
+            database into the agent. It learns to sound exactly like your best sales and support rep — not a robot.</p>
+          <div
+            class="absolute -bottom-4 right-4 text-8xl font-bold text-[#111111]/5 opacity-0 group-hover:opacity-100 transition-opacity select-none">
+            02</div>
+        </div>
+        <div class="bg-[#fbf9f8] p-10 hover:bg-white transition-colors relative overflow-hidden group">
+          <div
+            class="w-10 h-10 rounded-xl bg-orange-100 text-[#E85002] font-mono font-bold flex items-center justify-center mb-6">
+            03</div>
+          <h3 class="text-xl font-bold text-[#111111] mb-3">The Install</h3>
+          <p class="text-sm text-[#5b4138] leading-relaxed">We plug directly into your existing Shopify and Helpdesk.
+            Your team stays in Intercom or Zendesk — nothing changes except everything works at 10x speed.</p>
+          <div
+            class="absolute -bottom-4 right-4 text-8xl font-bold text-[#111111]/5 opacity-0 group-hover:opacity-100 transition-opacity select-none">
+            03</div>
+        </div>
+        <div class="bg-[#fbf9f8] p-10 hover:bg-white transition-colors relative overflow-hidden group">
+          <div
+            class="w-10 h-10 rounded-xl bg-orange-100 text-[#E85002] font-mono font-bold flex items-center justify-center mb-6">
+            04</div>
+          <h3 class="text-xl font-bold text-[#111111] mb-3">The Handoff</h3>
+          <p class="text-sm text-[#5b4138] leading-relaxed">You stop paying for VAs and start watching retention grow.
+            The Digital Employee is yours — a permanent infrastructure asset, not a monthly subscription.</p>
+          <div
+            class="absolute -bottom-4 right-4 text-8xl font-bold text-[#111111]/5 opacity-0 group-hover:opacity-100 transition-opacity select-none">
+            04</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ─── TESTIMONIALS ─── -->
+  <section class="py-24" id="testimony" style="background: linear-gradient(to bottom, #f5eee8 0%, var(--bg) 100%);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-16">
+        <h2 class="text-5xl lg:text-6xl font-bold text-[#111111] leading-none tracking-tight">
+          What<br />clients<br />say.</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">  
+        <div
+          class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+          <div class="text-[#E85002] text-sm tracking-widest mb-4 flex gap-1">
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+          </div>
+          <p class="text-sm text-gray-700 leading-relaxed mb-6">“They really took the time to understand how our support actually works before building anything.
+                    The whole thing felt collaborative, not like we were just handed a generic system.
+                    What they built fits our workflow really well and has made things a lot easier for us.
+                    On top of that, the pricing felt very fair for the value delivered.
+                    Would definitely recommend.”</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center font-bold text-[#E85002] text-xs font-mono">
+              JM</div>
+            <div>
+              <div class="font-bold text-sm text-[#111111]">Head of Growth.</div>
+              <div class="text-xs text-gray-500">North Notion Smokes</div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+          <div class="text-[#E85002] text-sm tracking-widest mb-4 flex gap-1">
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+            <i class="w-4 h-4 fill-current" data-lucide="star"></i>
+          </div>
+          <p class="text-sm text-gray-700 leading-relaxed mb-6">The system they built fits naturally into how we already work.
+                  Our CS reps have gone from handling 300+ tickets a day to roughly 10 each.
+                  Super solid experience overall, would recommend Nodewave”</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center font-bold text-[#E85002] text-xs font-mono">
+              ST</div>
+            <div>
+              <div class="font-bold text-sm text-[#111111]">Native Smokes 4 Less</div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br />
+  <!-- ─── CONTACT ─── -->
+  <section class="pb-24 px-6" id="contact">
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-black rounded-[2rem] overflow-hidden grid lg:grid-cols-2">
+        <div class="p-12 lg:p-20 relative">
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_30%_60%,rgba(232,80,2,0.15),transparent_60%)] pointer-events-none">
+          </div>
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#E85002] text-xs font-mono font-semibold uppercase tracking-wider mb-8">
+            <i class="w-3 h-3" data-lucide="zap"></i> Turn Your Inbox Into a Profit Centre
+          </div>
+          <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight tracking-tight">Let's build<br />your
+            digital<br />employee.</h2>
+          <p class="text-white/60 leading-relaxed mb-10">The most successful brands don't just solve problems — they
+            create experiences. Tell us what you're working on. We'll respond within two hours with a diagnostic of
+            exactly where automation makes a measurable difference.</p>
+          <a class="text-white/80 font-semibold text-lg border-b border-white/20 pb-1 hover:text-[#E85002] hover:border-[#E85002] transition-colors"
+            href="mailto:sreehari@nodewave.co">hello@nodewave.co</a>
+        </div>
+        <div
+          class="p-4 lg:p-6 flex items-stretch bg-white/5 border-t lg:border-t-0 lg:border-l border-white/10">
+          <!-- Cal.com inline embed -->
+          <div style="width:100%;min-height:600px;overflow:scroll;border-radius:1.5rem;" id="my-cal-inline-30min"></div>
+          <script type="text/javascript">
+            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+            Cal("init", "30min", {origin:"https://app.cal.com"});
+            Cal.ns["30min"]("inline", {
+              elementOrSelector:"#my-cal-inline-30min",
+              config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+              calLink: "nodewave/30min",
+            });
+            Cal.ns["30min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ─── FOOTER ─── -->
+  <footer class="bg-black text-white/40 py-10 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="font-bold tracking-widest uppercase text-sm text-white/80 flex items-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E85002] inline-block"></span> Nodewave
+      </div>
+      <div class="flex flex-wrap justify-center gap-8 text-xs font-mono tracking-wider uppercase">
+        <a class="hover:text-[#E85002] transition-colors" href="#core">Features</a>
+        <a class="hover:text-[#E85002] transition-colors" href="#process">Process</a>
+        <a class="hover:text-[#E85002] transition-colors" href="#testimony">Results</a>
+        <a class="hover:text-[#E85002] transition-colors" href="#pricing">Pricing</a>
+        <a class="hover:text-[#E85002] transition-colors" href="#contact">Contact</a>
+      </div>
+      <div class="text-xs">
+        © 2025 Nodewave · Mumbai, India
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHY US: Built Different -->
+
+
+</body>
+
+</html>
