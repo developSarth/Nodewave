@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -28,11 +28,38 @@
     footer{padding:60px 0 40px;border-top:1px solid var(--panel-line)}.foot-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px}.foot-brand .logo{margin-bottom:10px}.foot-brand p{color:var(--muted);font-size:17.5px;max-width:280px}.foot-links{display:flex;gap:28px;font-family:'Cormorant Garamond',serif;font-size:18.8px;color:var(--fog-dim)}.foot-links a:hover{color:var(--phosphor)}#foot-signal{width:100%;height:36px;margin-top:26px;opacity:.7}.reveal{opacity:0;transform:translateY(28px);will-change:transform,opacity}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}@media(max-width:768px){.navlinks{display:none!important}.navbar{justify-content:space-between}}
     .foot-links a { font-family: 'Cormorant Garamond', serif !important; }
 </style>
+
+<style id="agy-enhancements">
+  /* Roadmap glow and mobile menu */
+  .glow-card { transition: all 0.4s cubic-bezier(.16, 1, .3, 1); position: relative; }
+  .glow-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,67,0,0.15), inset 0 0 20px rgba(255,255,255,0.05); border-color: rgba(255,67,0,0.3); }
+
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; transition: 0.3s; }
+  .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-active span:nth-child(2) { opacity: 0; }
+  .hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21,10,13,0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+  .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
+  .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.3s; }
+  .mobile-menu-overlay.is-active a { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px) {
+    .navlinks { display: none !important; }
+    .hamburger { display: block; }
+  }
+</style>
+
+<style id="agy-left-align">
+  .page-hero .wrap { text-align: left !important; align-items: flex-start; }
+  .page-hero { justify-content: flex-start !important; }
+</style>
 </head>
 <body>
 
   <div class="grain"></div><div class="scanlines"></div><div class="cursor-dot"></div><div class="cursor-ring"></div>
-  <header><div class="navbar"><a href="/" class="logo"><b>Nodewave</b></a><nav class="navlinks"><a href="/solutions" class="active">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a></nav><a href="/contact" class="nav-cta">Let's Start →</a></div></header>
+  <header><div class="navbar"><a href="/" class="logo"><img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><nav class="navlinks"><a href="/solutions" class="active">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a></nav><a href="/contact" class="nav-cta">Let's Start →</a></div></header>
 
   <main>
     <section class="page-hero">
@@ -140,10 +167,45 @@
     </section>
   </main>
 
-  <footer><div class="wrap"><div class="foot-row"><div class="foot-brand"><a href="/" class="logo"><b>Nodewave</b></a><p>Intelligent operational workflows that automate repetitive business processes.</p></div><div class="foot-links"><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a></div></div><svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none"><path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none"/></svg><div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave — Mumbai, India</div></div></footer>
+  <footer><div class="wrap"><div class="foot-row"><div class="foot-brand"><a href="/" class="logo"><img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><p>Intelligent operational workflows that automate repetitive business processes.</p></div><div class="foot-links"><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a></div></div><svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none"><path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none"/></svg><div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave — Mumbai, India</div></div></footer>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);const prePath=document.getElementById('pre-path'),prePct=document.getElementById('pre-pct');let pct={v:0};if(sessionStorage.getItem('preloaded')){document.getElementById('preloader').style.display='none';playIntro();}else{sessionStorage.setItem('preloaded','true');gsap.to(pct,{v:100,duration:1.3,ease:'power2.inOut',onUpdate:()=>{prePct.textContent=Math.round(pct.v)+'%';const y=35+Math.sin(pct.v/6)*(18*(1-pct.v/100));prePath.setAttribute('d',`M0,35 Q55,${y} 110,35 T220,35`)},onComplete:()=>{gsap.to('#preloader',{opacity:0,duration:.6,delay:.15,onComplete:()=>{document.getElementById('preloader').style.display='none';playIntro()}})}});}const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');gsap.set([dot,ring],{xPercent:-50,yPercent:-50});let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.set(dot,{x:mx,y:my})});gsap.ticker.add(()=>{rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;gsap.set(ring,{x:rx,y:ry})});document.querySelectorAll('a,button,.related-card,.question-card').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('active'));el.addEventListener('mouseleave',()=>ring.classList.remove('active'))});document.querySelectorAll('.magnetic').forEach(btn=>{const xTo=gsap.quickTo(btn,'x',{duration:.5,ease:'power3'}),yTo=gsap.quickTo(btn,'y',{duration:.5,ease:'power3'});btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();xTo((e.clientX-r.left-r.width/2)*.3);yTo((e.clientY-r.top-r.height/2)*.4)});btn.addEventListener('mouseleave',()=>{xTo(0);yTo(0)})});function playIntro(){gsap.to('.reveal',{opacity:1,y:0,duration:1,stagger:.09,ease:'back.out(1.2)'});gsap.to('header',{opacity:1,duration:.8})}gsap.set('header',{opacity:0});gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.9,ease:'back.out(1.2)',scrollTrigger:{trigger:el,start:'top 88%'}})});const footPath=document.getElementById('foot-path');let ft=0,footReq;function footAnim(){ft+=0.05;let d='M0,14 ';for(let x=0;x<=1200;x+=24){const y=14+Math.sin(x*0.02+ft)*10*Math.sin(x*0.002+ft*0.3);d+=`L${x},${y} `}footPath.setAttribute('d',d);footReq=requestAnimationFrame(footAnim)}new IntersectionObserver(e=>{e[0].isIntersecting?footAnim():cancelAnimationFrame(footReq)}).observe(document.querySelector('footer'));
   </script>
+
+<script id="agy-js">
+  document.addEventListener('DOMContentLoaded', () => {
+    if(!document.querySelector('.hamburger')) {
+      const nav = document.querySelector('.navbar');
+      if(nav) {
+        const btn = document.createElement('button');
+        btn.className = 'hamburger';
+        btn.innerHTML = '<span></span><span></span><span></span>';
+        nav.appendChild(btn);
+
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-menu-overlay';
+        overlay.innerHTML = '<a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a>';
+        document.body.appendChild(overlay);
+
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('is-active');
+          overlay.classList.toggle('is-active');
+          if(overlay.classList.contains('is-active')) {
+            gsap.fromTo(overlay.querySelectorAll('a'), {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.1, duration: 0.5});
+          }
+        });
+      }
+    }
+
+    gsap.utils.toArray('.related-card, .industry-card, .wf-card, .zigzag-row').forEach(card => {
+      card.classList.add('glow-card');
+      const dot = card.querySelector('.dot');
+      if(dot) {
+        gsap.fromTo(dot, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, scrollTrigger: {trigger: card, start: 'top 80%'}});
+      }
+    });
+  });
+</script>
 </body>
 </html>

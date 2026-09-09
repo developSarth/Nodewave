@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1333,6 +1333,28 @@
 
     .foot-links a { font-family: 'Cormorant Garamond', serif !important; }
 </style>
+
+<style id="agy-enhancements">
+  /* Roadmap glow and mobile menu */
+  .glow-card { transition: all 0.4s cubic-bezier(.16, 1, .3, 1); position: relative; }
+  .glow-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,67,0,0.15), inset 0 0 20px rgba(255,255,255,0.05); border-color: rgba(255,67,0,0.3); }
+
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; transition: 0.3s; }
+  .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.is-active span:nth-child(2) { opacity: 0; }
+  .hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21,10,13,0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+  .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
+  .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.3s; }
+  .mobile-menu-overlay.is-active a { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px) {
+    .navlinks { display: none !important; }
+    .hamburger { display: block; }
+  }
+</style>
 </head>
 
 <body>
@@ -1348,7 +1370,7 @@
   <header>
     <div class="navbar">
       <a href="#top" class="logo">
-        <b>Nodewave</b>
+        <img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b>
       </a>
       <nav class="navlinks">
         <a href="/solutions">Solutions</a>
@@ -1708,15 +1730,11 @@
       </div>
     </section>
 
-    <section class="pb-24 px-6" id="contact" style="margin-top: 100px; margin-bottom: 60px;">
+        <section class="pb-24 px-6" id="contact" style="margin-top: 100px; margin-bottom: 60px;">
       <div class="max-w-6xl mx-auto reveal">
         <div class="bg-black rounded-[2rem] overflow-hidden grid lg:grid-cols-2" style="box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05);">
           <div class="p-12 lg:p-20 relative">
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_30%_60%,rgba(232,80,2,0.15),transparent_60%)] pointer-events-none">
-            </div>
-            <div
-              class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[#E85002] text-xs font-mono font-semibold uppercase tracking-wider mb-8">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_60%,rgba(232,80,2,0.15),transparent_60%)] pointer-events-none">
             </div>
             <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight tracking-tight" style="font-family: 'Cormorant Garamond', serif;">Let's build<br />your
               digital<br />employee.</h2>
@@ -1727,30 +1745,20 @@
               href="mailto:hello@nodewave.co">hello@nodewave.co</a>
           </div>
           
+          <div class="relative p-6 lg:p-12" style="background: rgba(20,20,20,0.8); border-left: 1px solid rgba(255,255,255,0.05);">
+            <div style="width:100%;min-height:480px;overflow:hidden;border-radius:1rem;background:transparent;" id="my-cal-inline-30min"></div>
+            <script type="text/javascript">
+              (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+              Cal("init", "30min", {origin:"https://app.cal.com"});
+              Cal.ns["30min"]("inline", {
+                elementOrSelector:"#my-cal-inline-30min",
+                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+                calLink: "nodewave/30min",
+              });
+              Cal.ns["30min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
+            </script>
+          </div>
         </div>
-      </div>
-    </section>
-
-  
-    <!-- GLOBAL CAL.COM EMBED -->
-    <section style="background:var(--board-2);border-top:1px solid var(--panel-line);padding:100px 0;">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">BOOK A DISCOVERY CALL</div>
-          <h2 class="display">Let's discuss your workflow.</h2>
-          <p class="sub">Select a time to speak directly with our team. We'll map your process and show you the potential impact.</p>
-        </div>
-        <div class="reveal" style="width:100%;min-height:600px;overflow:hidden;border-radius:1.5rem;background:var(--panel);" id="my-cal-inline-30min"></div>
-        <script type="text/javascript">
-          (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-          Cal("init", "30min", {origin:"https://app.cal.com"});
-          Cal.ns["30min"]("inline", {
-            elementOrSelector:"#my-cal-inline-30min",
-            config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
-            calLink: "nodewave/30min",
-          });
-          Cal.ns["30min"]("ui", {"theme":"dark","hideEventTypeDetails":false,"layout":"month_view"});
-        </script>
       </div>
     </section>
 
@@ -1760,7 +1768,7 @@
     <div class="wrap">
       <div class="foot-row">
         <div class="foot-brand">
-          <a href="#top" class="logo"><b>Nodewave</b></a>
+          <a href="#top" class="logo"><img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b></a>
           <p>Custom software for ambitious B2B teams. Discovery to live in 1–3 weeks — your codebase, your database.</p>
         </div>
         <div class="foot-links">
@@ -1869,26 +1877,10 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    /* ---------- PRELOADER ---------- */
-    const prePath = document.getElementById('pre-path');
-    const prePct = document.getElementById('pre-pct');
-    let pct = { v: 0 };
-    gsap.to(pct, {
-      v: 100, duration: 1.3, ease: 'power2.inOut', onUpdate: () => {
-        prePct.textContent = Math.round(pct.v) + '%';
-        const y = 35 + Math.sin(pct.v / 6) * (18 * (1 - pct.v / 100));
-        prePath.setAttribute('d', `M0,35 Q55,${y} 110,35 T220,35`);
-      }, onComplete: () => {
-        gsap.to('#preloader', {
-          opacity: 0, duration: .6, delay: .15, onComplete: () => {
-            document.getElementById('preloader').style.display = 'none';
-            playIntro();
-          }
-        });
-      }
-    });
+    /* ---------- PRELOADER REMOVED ---------- */
+      setTimeout(() => { if(typeof playIntro === 'function') playIntro(); }, 100);
 
-    /* ---------- CURSOR ---------- */
+      /* ---------- CURSOR ---------- */
     const dot = document.querySelector('.cursor-dot');
     const ring = document.querySelector('.cursor-ring');
     gsap.set([dot, ring], {xPercent: -50, yPercent: -50});
@@ -2118,6 +2110,41 @@
       }
     });
   </script>
+
+<script id="agy-js">
+  document.addEventListener('DOMContentLoaded', () => {
+    if(!document.querySelector('.hamburger')) {
+      const nav = document.querySelector('.navbar');
+      if(nav) {
+        const btn = document.createElement('button');
+        btn.className = 'hamburger';
+        btn.innerHTML = '<span></span><span></span><span></span>';
+        nav.appendChild(btn);
+
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-menu-overlay';
+        overlay.innerHTML = '<a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a>';
+        document.body.appendChild(overlay);
+
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('is-active');
+          overlay.classList.toggle('is-active');
+          if(overlay.classList.contains('is-active')) {
+            gsap.fromTo(overlay.querySelectorAll('a'), {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.1, duration: 0.5});
+          }
+        });
+      }
+    }
+
+    gsap.utils.toArray('.related-card, .industry-card, .wf-card, .zigzag-row').forEach(card => {
+      card.classList.add('glow-card');
+      const dot = card.querySelector('.dot');
+      if(dot) {
+        gsap.fromTo(dot, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, scrollTrigger: {trigger: card, start: 'top 80%'}});
+      }
+    });
+  });
+</script>
 </body>
 
 </html>
