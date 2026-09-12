@@ -343,42 +343,58 @@
     /* ============ SECTION SHELL ============ */
     section {
       position: relative;
-      padding: 150px 0;
+      padding: 85px 0;
     }
 
     @media (max-width:860px) {
       section {
-        padding: 100px 0;
+        padding: 55px 0;
       }
     }
 
     .section-head {
-      max-width: 640px;
-      margin-bottom: 56px;
+      max-width: 680px;
+      margin-bottom: 44px;
+    }
+
+    @media (max-width:860px) {
+      .section-head {
+        margin-bottom: 30px;
+      }
     }
 
     .section-head h2 {
-      font-size: clamp(31.5px, 4.48vw, 47px);
+      font-size: clamp(32px, 4.4vw, 48px);
+      line-height: 1.15;
       margin-top: 14px;
       letter-spacing: -.01em;
     }
 
     .section-head .sub {
-      margin-top: 16px;
+      margin-top: 18px;
       color: var(--fog-dim);
       font-size: 18px;
-      max-width: 520px;
+      line-height: 1.7;
+      max-width: 620px;
     }
 
     /* ============ HERO ============ */
     #hero {
-      min-height: 100vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
-      padding-top: 140px;
+      padding-top: 150px;
       padding-bottom: 60px;
       position: relative;
       overflow: hidden;
+    }
+
+    @media (max-width:860px) {
+      #hero {
+        padding-top: 125px;
+        padding-bottom: 40px;
+        min-height: auto;
+      }
     }
 
     #hero-canvas {
@@ -576,6 +592,7 @@
     .pcard p {
       font-family: 'Manrope', sans-serif;
       font-size: 16px;
+      line-height: 1.6;
       color: rgba(255, 255, 255, .65);
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -604,7 +621,13 @@
 
     /* ============ STATS DIALS ============ */
     #stats {
-      padding: 110px 0;
+      padding: 85px 0;
+    }
+
+    @media (max-width:860px) {
+      #stats {
+        padding: 55px 0;
+      }
     }
 
     .dial-grid {
@@ -620,7 +643,7 @@
     }
 
     .dial {
-      padding: 30px 20px;
+      padding: 36px 24px;
       border-radius: var(--radius-lg);
       text-align: center;
       background: linear-gradient(145deg, rgba(42, 28, 22, 0.9), rgba(18, 10, 8, 0.95));
@@ -678,18 +701,19 @@
     .bento {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 20px;
+      gap: 24px;
     }
 
     @media (max-width:860px) {
       .bento {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
 
     .bcard {
       border-radius: var(--radius-lg);
-      padding: 32px;
+      padding: 40px 36px;
       background: linear-gradient(145deg, rgba(42, 28, 22, 0.9), rgba(18, 10, 8, 0.95));
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -699,6 +723,12 @@
       overflow: hidden;
       transition: transform .45s var(--ease-out), border-color .3s, box-shadow .3s;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width:860px) {
+      .bcard {
+        padding: 28px 24px;
+      }
     }
 
     .bcard:hover {
@@ -835,6 +865,7 @@
       .why-row.reverse {
         grid-template-columns: 1fr;
         gap: 30px;
+        padding: 40px 0;
       }
     }
 
@@ -851,12 +882,14 @@
       font-size: 33.5px;
       font-weight: 500;
       margin-top: 12px;
+      line-height: 1.2;
     }
 
     .why-copy p {
       color: var(--fog-dim);
       margin-top: 14px;
-      max-width: 440px;
+      max-width: 480px;
+      line-height: 1.7;
     }
 
     .why-list-items {
@@ -1071,7 +1104,7 @@
     .modal-content li {
       margin-bottom: 8px;
     }
-    
+
     .modal-content li::marker {
       color: var(--phosphor);
     }
@@ -1090,7 +1123,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 26px 4px;
+      padding: 24px 4px;
       text-align: left;
       gap: 24px;
     }
@@ -1111,6 +1144,7 @@
       padding: 0 4px 26px;
       color: var(--fog-dim);
       font-size: 16px;
+      line-height: 1.7;
       max-width: 600px;
     }
 
@@ -1128,24 +1162,31 @@
 
     /* ============ CONTACT ============ */
     #contact {
-      padding-bottom: 70px;
+      padding-bottom: 85px;
+    }
+
+    @media (max-width:860px) {
+      #contact {
+        padding-bottom: 55px;
+      }
     }
 
     .contact-shell {
       border-radius: 28px;
-      padding: 56px;
+      padding: 52px;
       background: var(--panel);
       border: 1.5px solid var(--copper);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px;
+      gap: 52px;
       box-shadow: 0 10px 26px rgba(122, 17, 40, .06);
     }
 
     @media (max-width:860px) {
       .contact-shell {
         grid-template-columns: 1fr;
-        padding: 34px 24px;
+        padding: 32px 20px;
+        gap: 32px;
       }
     }
 
@@ -1159,7 +1200,8 @@
       font-family: 'Manrope', sans-serif;
       color: rgba(255, 255, 255, .78);
       margin-top: 16px;
-      max-width: 380px;
+      max-width: 440px;
+      line-height: 1.7;
     }
 
     .contact-left .reply {
