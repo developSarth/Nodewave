@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -80,7 +80,7 @@
 
   <div class="grain"></div><div class="scanlines"></div><div class="cursor-dot"></div><div class="cursor-ring"></div>
 
-  <header><div class="navbar"><a href="/" class="logo"><img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><nav class="navlinks"><a href="/solutions" class="active">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a></nav><a href="/contact" class="nav-cta">Let's Start →</a></div></header>
+  <header><div class="navbar"><a href="/" class="logo"><img src="/newlogo.svg" alt="Nodewave Logo" style="height: 28px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><nav class="navlinks"><a href="/solutions" class="active">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a></nav><a href="/contact" class="nav-cta">Let's Start →</a></div></header>
 
   <main>
     <section class="page-hero">
@@ -214,14 +214,22 @@
     </section>
   </main>
 
-  <footer><div class="wrap"><div class="foot-row"><div class="foot-brand"><a href="/" class="logo"><img src="/oglogo.svg" alt="Nodewave Logo" style="height: 24px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><p>Intelligent operational workflows that automate repetitive business processes.</p></div><div class="foot-links"><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a></div></div><svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none"><path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none"/></svg><div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave — Mumbai, India</div></div></footer>
+  <footer><div class="wrap"><div class="foot-row"><div class="foot-brand"><a href="/" class="logo"><img src="/newlogo.svg" alt="Nodewave Logo" style="height: 28px; width: auto; margin-right: 8px;"><b>Nodewave</b></a><p>Intelligent operational workflows that automate repetitive business processes.</p></div><div class="foot-links"><a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a></div></div><svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none"><path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none"/></svg><div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave — Mumbai, India</div></div></footer>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
-    const prePath=document.getElementById('pre-path'),prePct=document.getElementById('pre-pct');let pct={v:0};if(sessionStorage.getItem('preloaded')){document.getElementById('preloader').style.display='none';playIntro();}else{sessionStorage.setItem('preloaded','true');gsap.to(pct,{v:100,duration:1.3,ease:'power2.inOut',onUpdate:()=>{prePct.textContent=Math.round(pct.v)+'%';const y=35+Math.sin(pct.v/6)*(18*(1-pct.v/100));prePath.setAttribute('d',`M0,35 Q55,${y} 110,35 T220,35`)},onComplete:()=>{gsap.to('#preloader',{opacity:0,duration:.6,delay:.15,onComplete:()=>{document.getElementById('preloader').style.display='none';playIntro()}})}});}
+    function playIntro(){gsap.to('.reveal',{opacity:1,y:0,duration:1,stagger:.09,ease:'back.out(1.2)'});gsap.to('header',{opacity:1,duration:.8})}
+    const preloaderEl=document.getElementById('preloader'),prePath=document.getElementById('pre-path'),prePct=document.getElementById('pre-pct');
+    if(preloaderEl && prePath && prePct){
+      gsap.set('header',{opacity:0});
+      let pct={v:0};
+      gsap.to(pct,{v:100,duration:1.3,ease:'power2.inOut',onUpdate:()=>{prePct.textContent=Math.round(pct.v)+'%';const y=35+Math.sin(pct.v/6)*(18*(1-pct.v/100));prePath.setAttribute('d',`M0,35 Q55,${y} 110,35 T220,35`)},onComplete:()=>{gsap.to(preloaderEl,{opacity:0,duration:.6,delay:.15,onComplete:()=>{preloaderEl.style.display='none';playIntro()}})}});
+    }else{
+      if(preloaderEl)preloaderEl.style.display='none';
+      playIntro();
+    }
     const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');gsap.set([dot,ring],{xPercent:-50,yPercent:-50});let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;gsap.set(dot,{x:mx,y:my})});gsap.ticker.add(()=>{rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;gsap.set(ring,{x:rx,y:ry})});document.querySelectorAll('a,button,.related-card').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('active'));el.addEventListener('mouseleave',()=>ring.classList.remove('active'))});
     document.querySelectorAll('.magnetic').forEach(btn=>{const xTo=gsap.quickTo(btn,'x',{duration:.5,ease:'power3'}),yTo=gsap.quickTo(btn,'y',{duration:.5,ease:'power3'});btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();xTo((e.clientX-r.left-r.width/2)*.3);yTo((e.clientY-r.top-r.height/2)*.4)});btn.addEventListener('mouseleave',()=>{xTo(0);yTo(0)})});
-    function playIntro(){gsap.to('.reveal',{opacity:1,y:0,duration:1,stagger:.09,ease:'back.out(1.2)'});gsap.to('header',{opacity:1,duration:.8})}gsap.set('header',{opacity:0});
     gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.9,ease:'back.out(1.2)',scrollTrigger:{trigger:el,start:'top 88%'}})});
     const footPath=document.getElementById('foot-path');let ft=0,footReq;function footAnim(){ft+=0.05;let d='M0,14 ';for(let x=0;x<=1200;x+=24){const y=14+Math.sin(x*0.02+ft)*10*Math.sin(x*0.002+ft*0.3);d+=`L${x},${y} `}footPath.setAttribute('d',d);footReq=requestAnimationFrame(footAnim)}new IntersectionObserver(e=>{e[0].isIntersecting?footAnim():cancelAnimationFrame(footReq)}).observe(document.querySelector('footer'));
   </script>
