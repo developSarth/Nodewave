@@ -132,25 +132,7 @@
       font-family: 'Cormorant Garamond', serif;
     }
 
-    /* ============ GRAIN + SCANLINES ============ */
-    .grain {
-      position: fixed;
-      inset: 0;
-      z-index: 9990;
-      pointer-events: none;
-      opacity: .05;
-      mix-blend-mode: overlay;
-    }
-    .grain.scanlines { will-change: transform; transform: translateZ(0); }
 
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      z-index: 9989;
-      pointer-events: none;
-      background: repeating-linear-gradient(180deg, rgba(255, 255, 255.025) 0px, rgba(255, 255, 255.025) 1px, transparent 1px, transparent 3px);
-      opacity: .5;
-    }
 
     /* ============ CURSOR ============ */
     .cursor-dot.cursor-ring {
@@ -405,15 +387,7 @@
       opacity: .9;
     }
 
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(10, 10, 10.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(10, 10, 10.045) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, black 40%, transparent 100%);
-    }
+    
 
     .hero-inner {
       position: relative;
@@ -1397,8 +1371,8 @@
 
 
 
-  <div class="grain"></div>
-  <div class="scanlines"></div>
+  
+  
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
@@ -1420,7 +1394,7 @@
   <main id="top">
 
     <section id="hero">
-      <div class="hero-grid"></div>
+      
       <canvas id="hero-canvas"></canvas>
       <div class="wrap hero-inner">
         <h1 class="hero-head display">
