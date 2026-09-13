@@ -4,15 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Workflow &amp; Operations Automation Solutions | Nodewave</title>
+  <title>Solutions | Nodewave</title>
   <meta name="description"
-    content="Explore Nodewave's workflow automation solutions for intake, follow-ups, referrals, reporting, and repetitive operational processes.">
+    content="Intelligent operational workflows designed to automate the repetitive parts of running a business. Explore our core solutions.">
   <link rel="canonical" href="https://nodewave.co/solutions">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Workflow & Operations Automation Solutions | Nodewave">
+  <meta property="og:title" content="Solutions | Nodewave">
   <meta property="og:description"
-    content="Explore Nodewave's workflow automation solutions for intake, follow-ups, referrals, reporting, and repetitive operational processes.">
+    content="Intelligent operational workflows designed to automate the repetitive parts of running a business. Explore our core solutions.">
   <meta property="og:url" content="https://nodewave.co/solutions">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nodewave">
@@ -22,7 +21,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Geist:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -40,12 +38,11 @@
       --fog: #0E0E0E;
       --fog-dim: #2E2E2C;
       --muted: #6B6B66;
-      --success: #7A1128;
       --radius-lg: 22px;
       --radius-md: 14px;
       --radius-sm: 8px;
-      --ease-out: cubic-bezier(.16, 1, .3, 1);
-      --ease-soft: cubic-bezier(.4, 0, .2, 1);
+      --ease-out: cubic-bezier(.16, 1.3, 1);
+      --ease-soft: cubic-bezier(.4, 0.2, 1);
     }
 
     * { box-sizing: border-box; }
@@ -65,25 +62,15 @@
     }
 
     p, li { font-family: 'Manrope', sans-serif !important; }
-
-    @media (max-width:860px) {
-      body { cursor: auto; }
-    }
+    @media (max-width: 860px) { body { cursor: auto; } }
 
     a { color: inherit; text-decoration: none; }
     h1, h2, h3 { margin: 0; font-weight: 450; }
     p { margin: 0; }
-
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: inherit;
-    }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
     .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width:640px) { .wrap { padding: 0 22px; } }
+    @media (max-width: 640px) { .wrap { padding: 0 22px; } }
 
     .eyebrow {
       font-family: 'Cormorant Garamond', serif;
@@ -98,133 +85,488 @@
     }
 
     .display { font-family: 'Cormorant Garamond', serif; }
-    .mono { font-family: 'Cormorant Garamond', serif; }
 
-    /* GRAIN + SCANLINES */
-    .grain { position: fixed; inset: 0; z-index: 9990; pointer-events: none; opacity: .05; mix-blend-mode: overlay; }
-    .scanlines { position: fixed; inset: 0; z-index: 9989; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 3px); opacity: .5; }
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 9990;
+      pointer-events: none;
+      opacity: .05;
+      mix-blend-mode: overlay;
+      will-change: transform;
+      transform: translateZ(0);
+    }
 
-    /* CURSOR */
-    .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999999; border-radius: 50%; transform: translate(-50%, -50%); }
-    .cursor-dot { width: 5px; height: 5px; background: var(--phosphor); box-shadow: 0 0 8px 2px rgba(255,67,0,.6); }
-    .cursor-ring { width: 34px; height: 34px; border: 1px solid rgba(10,10,10,.35); transition: width .25s var(--ease-out), height .25s var(--ease-out), border-color .25s; }
-    .cursor-ring.active { width: 56px; height: 56px; border-color: var(--phosphor); }
-    @media (max-width:860px) { .cursor-dot, .cursor-ring { display: none; } }
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 9989;
+      pointer-events: none;
+      background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .025) 0px, rgba(255, 255, 255, .025) 1px, transparent 1px, transparent 3px);
+      opacity: .5;
+      will-change: transform;
+      transform: translateZ(0);
+    }
 
-    /* PRELOADER */
-    #preloader { position: fixed; inset: 0; z-index: 99999; background: var(--board); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 18px; }
-    #preloader .scope { width: 220px; height: 70px; }
-    #preloader .label { font-family: 'Cormorant Garamond', serif; font-size: 12.5px; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
-    #preloader .label span { color: var(--phosphor); }
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-    /* NAV */
+    .cursor-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--phosphor);
+      box-shadow: 0 0 8px 2px rgba(255, 67, 0, .6);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(10, 10, 10, .35);
+      transition: width .25s var(--ease-out), height .25s var(--ease-out), border-color .25s;
+    }
+
+    .cursor-ring.active {
+      width: 56px;
+      height: 56px;
+      border-color: var(--phosphor);
+    }
+
+    @media (max-width: 860px) {
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+
+    /* HEADER */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 18px 0; }
-    .navbar { max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px; border-radius: 999px; background: rgba(251,250,247,.78); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(10,10,10,.1); box-shadow: 0 8px 30px rgba(0,0,0,.08); }
-    @media (max-width:640px) { .navbar { padding: 0 16px; border-radius: 20px; } }
-    .logo { display: flex; align-items: center; gap: 4px; font-family: 'Manrope', sans-serif; font-size: 21.5px; letter-spacing: .01em; }
-    .logo svg { display: block; }
+    .navbar {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      border-radius: 999px;
+      background: rgba(251, 250, 247, .78);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(10, 10, 10, .1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
+    }
+    @media (max-width: 640px) { .navbar { padding: 0 16px; border-radius: 20px; } }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 21.5px;
+      letter-spacing: .01em;
+    }
     .logo b { font-weight: 500; color: var(--fog); }
-    .navlinks { display: flex; gap: 34px; font-family: 'Cormorant Garamond', serif; font-size: 18.5px; letter-spacing: .04em; color: var(--fog-dim); }
+
+    .navlinks {
+      display: flex;
+      gap: 34px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18.5px;
+      letter-spacing: .04em;
+      color: var(--fog-dim);
+    }
     .navlinks a {
-      font-family: 'Cormorant Garamond', serif !important; position: relative; padding: 4px 0; transition: color .25s; }
-    .navlinks a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--phosphor); transition: width .3s var(--ease-out); }
+      font-family: 'Cormorant Garamond', serif !important;
+      position: relative;
+      padding: 4px 0;
+      transition: color .25s;
+    }
+    .navlinks a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--phosphor);
+      transition: width .3s var(--ease-out);
+    }
     .navlinks a:hover { color: var(--fog); }
     .navlinks a:hover::after { width: 100%; }
     .navlinks a.active { color: var(--phosphor); }
     .navlinks a.active::after { width: 100%; }
-    @media (max-width:860px) { .navlinks { display: none; } }
-    .nav-cta { font-family: 'Manrope', serif; font-size: 13.4px; letter-spacing: .02em; padding: 9px 20px; border-radius: 999px; background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor)); color: #0E0E0E; font-weight: 320; box-shadow: 0 4px 14px rgba(255,67,0,.3); transition: transform .3s var(--ease-out); }
-    .nav-cta:hover { transform: translateY(-2px); }
+
+    @media (max-width: 860px) { .navlinks { display: none; } }
+
+    .nav-cta {
+      font-family: 'Manrope', serif;
+      font-size: 13.4px;
+      letter-spacing: .02em;
+      padding: 9px 20px;
+      border-radius: 999px;
+      background: rgba(255, 67, 0, 0.08);
+      color: var(--phosphor);
+      border: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-weight: 600;
+      transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out), box-shadow 0.3s;
+    }
+    .nav-cta:hover {
+      background: rgba(255, 67, 0, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 67, 0, 0.12);
+    }
 
     /* SECTIONS */
     section { position: relative; padding: 85px 0; }
-    @media (max-width:860px) { section { padding: 55px 0; } }
+    @media (max-width: 860px) { section { padding: 55px 0; } }
+
     .section-head { text-align: left; max-width: 680px; margin-bottom: 44px; }
-    @media (max-width:860px) { .section-head { margin-bottom: 30px; } }
+    @media (max-width: 860px) { .section-head { margin-bottom: 30px; } }
     .section-head h2 { font-size: clamp(32px, 4.4vw, 48px); line-height: 1.15; margin-top: 14px; letter-spacing: -.01em; }
     .section-head .sub { margin-top: 18px; color: var(--fog-dim); font-size: 18px; line-height: 1.7; max-width: 620px; }
 
     /* PAGE HERO */
     .page-hero { min-height: 50vh; display: flex; align-items: center; padding-top: 150px; padding-bottom: 50px; position: relative; overflow: hidden; }
-    @media (max-width:860px) { .page-hero { padding-top: 125px; padding-bottom: 35px; } }
-    .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(10,10,10,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,.045) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, black 40%, transparent 100%); }
+    @media (max-width: 860px) { .page-hero { padding-top: 125px; padding-bottom: 35px; } }
+    .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(10,10,10.045) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10.045) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, black 40%, transparent 100%); }
     .page-hero h1 { font-size: clamp(38px, 5.8vw, 74px); line-height: 1.08; letter-spacing: -.01em; max-width: 840px; margin-top: 16px; }
     .page-hero .hero-sub { margin-top: 28px; max-width: 620px; color: var(--fog-dim); font-size: 18px; line-height: 1.75; }
     .page-hero .hero-cta-row { display: flex; align-items: center; gap: 22px; margin-top: 42px; flex-wrap: wrap; }
 
-    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 999px; background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor)); color: #0E0E0E; font-weight: 320; font-size: 15.2px; font-family: 'Manrope', serif; box-shadow: 0 10px 26px rgba(255,67,0,.28); transition: transform .3s var(--ease-out); }
+    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 999px; background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor)); color: #0E0E0E; font-weight: 700; font-size: 15.2px; font-family: 'Manrope', serif; box-shadow: 0 10px 26px rgba(255,67,0.28); transition: transform .3s var(--ease-out); }
     .btn-primary:hover { transform: translateY(-3px); }
 
-    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 15px 8px; font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: .01em; color: var(--fog-dim); border-bottom: 1px solid rgba(10,10,10,.25); transition: color .25s, border-color .25s; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 15px 8px; font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: .01em; color: var(--fog-dim); border-bottom: 1px solid rgba(10,10,10.25); transition: color .25s, border-color .25s; }
     .btn-ghost:hover { color: var(--phosphor); border-color: var(--phosphor); }
 
     /* SOLUTION CARDS */
-    .solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-    @media (max-width:860px) { .solutions-grid { grid-template-columns: 1fr; gap: 20px; } }
+    .solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 52px; }
+    @media (max-width:860px) { .solutions-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; } }
 
     .sol-card {
       border-radius: var(--radius-lg);
       padding: 44px 38px;
-      background: linear-gradient(145deg, rgba(42,28,22,0.9), rgba(18,10,8,0.95));
+      background: linear-gradient(150deg, #1F0F14 0%, #190B13 50%, #0F050A 100%);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-top: 1px solid rgba(255,255,255,0.12);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(122, 17, 40, 0.5);
       position: relative;
       overflow: hidden;
-      transition: transform .45s var(--ease-out), border-color .3s, box-shadow .3s;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: transform .4s cubic-bezier(.16, 1.3, 1), border-color .3s, box-shadow .35s;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.35);
       display: flex;
       flex-direction: column;
     }
 
     @media (max-width:860px) {
-      .sol-card { padding: 28px 24px; }
+      .sol-card { padding: 32px 26px; }
     }
 
-    .sol-card::before {
+    .sol-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 67, 0, 0.35);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 45px rgba(255, 67, 0, 0.14), inset 0 0 30px rgba(255, 67, 0, 0.04);
+    }
+
+    .sol-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-top: 0;
+    }
+    .sol-card p {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-top: 14px;
+      flex-grow: 1;
+    }
+    .sol-card .card-link {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--phosphor);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      transition: color 0.25s, transform 0.25s;
+    }
+    .sol-card:hover .card-link {
+      color: var(--phosphor-2);
+      transform: translateX(4px);
+    }
+
+    /* PROBLEM SECTION ENHANCEMENT */
+    .problem-section { background: var(--panel); padding: 90px 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    @media (max-width:860px) { .problem-section { padding: 60px 0; } }
+    
+    .problem-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 52px; align-items: center; }
+    @media (max-width: 960px) { .problem-layout { grid-template-columns: 1fr; gap: 40px; } }
+    
+    .problem-left h2 { color: #FFFFFF; font-size: clamp(32px, 4.2vw, 46px); line-height: 1.15; }
+    .problem-left p.sub { color: rgba(255,255,255,0.85); margin-top: 16px; font-size: 17.5px; line-height: 1.7; }
+    
+    .problem-breakdown { display: flex; flex-direction: column; gap: 14px; margin-top: 26px; }
+    .problem-item { display: flex; gap: 16px; align-items: flex-start; padding: 14px 18px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: border-color 0.25s, transform 0.25s; }
+    .problem-item:hover { border-color: rgba(255,67,0,0.3); transform: translateX(4px); }
+    .problem-num { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 700; color: var(--phosphor); background: rgba(255,67,0,0.12); padding: 2px 8px; border-radius: 6px; }
+    .problem-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #FFFFFF; margin: 0; line-height: 1.25; }
+    .problem-text p { font-size: 14.5px; color: rgba(255,255,255,0.68); margin-top: 4px; line-height: 1.5; }
+    
+    /* FUNNEL CARD */
+    .funnel-card {
+      background: linear-gradient(165deg, rgba(28, 14, 18, 0.98), rgba(14, 7, 9, 0.99));
+      border: 1px solid rgba(255, 67, 0, 0.22);
+      border-top: 2px solid var(--phosphor);
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 35px rgba(122,17,40,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .funnel-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(255,122,64,0.9), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
+      top: -100px;
+      right: -100px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255,67,0,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .funnel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px; margin-bottom: 22px; }
+    .funnel-header .tag { font-family: 'Manrope', sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .funnel-header .status { display: inline-flex; align-items: center; gap: 6px; font-family: 'Manrope', sans-serif; font-size: 11.5px; font-weight: 600; color: var(--phosphor); background: rgba(255,67,0,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,67,0,0.25); }
+    .funnel-header .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--phosphor); box-shadow: 0 0 8px var(--phosphor); animation: pulseWarn 1.8s infinite; }
+    
+    @keyframes pulseWarn {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    
+    .funnel-body { display: flex; flex-direction: column; gap: 10px; position: relative; }
+    
+    .funnel-stage {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      position: relative;
+    }
+    @media (max-width: 600px) {
+      .funnel-stage { grid-template-columns: 1fr; gap: 6px; }
+    }
+    
+    .funnel-box {
+      border-radius: 10px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      position: relative;
+      transition: all 0.3s;
+    }
+    .funnel-box.tier-1 { width: 100%; border-left: 3px solid #D2964F; }
+    .funnel-box.tier-2 { width: 88%; margin: 0 auto 0 0; border-left: 3px solid #FF7A40; background: rgba(255,122,64,0.04); }
+    .funnel-box.tier-3 { width: 72%; margin: 0 auto 0 0; border-left: 3px solid #FF4300; background: rgba(255,67,0,0.06); }
+    .funnel-box.tier-4 { width: 58%; margin: 0 auto 0 0; border-left: 3px solid #9C1B37; background: rgba(156,27,55,0.12); border-color: rgba(255,67,0,0.25); }
+    @media (max-width: 600px) {
+      .funnel-box.tier-2, .funnel-box.tier-3, .funnel-box.tier-4 { width: 100%; }
+    }
+    
+    .funnel-box .stage-title { font-family: 'Manrope', sans-serif; font-size: 13.5px; font-weight: 600; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; }
+    .funnel-box .stage-sub { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    
+    .leak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #FF7A40;
+      background: rgba(255,67,0,0.08);
+      border: 1px dashed rgba(255,67,0,0.35);
+      white-space: nowrap;
+    }
+    .leak-pill.alert { color: #FF4300; background: rgba(255,67,0,0.14); border-color: rgba(255,67,0,0.5); }
+    
+    .connector-flow {
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      height: 12px;
+    }
+    .connector-line {
+      width: 2px;
+      height: 12px;
+      background: repeating-linear-gradient(to bottom, rgba(255,67,0,0.6), rgba(255,67,0,0.6) 2px, transparent 2px, transparent 5px);
+    }
+    
+    .funnel-footer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .metric-chip {
+      background: rgba(0,0,0,0.3);
+      padding: 10px 8px;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .metric-chip .val { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; color: var(--phosphor); }
+    .metric-chip .lbl { font-family: 'Manrope', sans-serif; font-size: 10.5px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+    /* WHY NODEWAVE DYNAMIC PROCESS */
+    #why-nodewave-section { padding: 95px 0; position: relative; }
+    
+    .why-progress-container {
+      position: relative;
+      margin: 44px 0 28px;
+      width: 100%;
+    }
+    .why-progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(10, 10, 10, 0.1);
+      border-radius: 999px;
+      position: relative;
+      overflow: visible;
+    }
+    .why-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 16%;
+      background: linear-gradient(90deg, #D2964F, #FF4300);
+      border-radius: 999px;
+      box-shadow: 0 0 16px rgba(255, 67, 0, 0.7);
+      transition: width 0.15s cubic-bezier(0.2, 0.8, 0.4, 1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .why-arrow-tip {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #FF4300;
+      box-shadow: 0 0 22px rgba(255, 67, 0, 0.9), 0 0 8px #FF7A40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(50%);
+      flex-shrink: 0;
+      border: 2.5px solid #FFFFFF;
+    }
+    .why-arrow-tip svg {
+      width: 14px;
+      height: 14px;
     }
 
-    .sol-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,100,50,0.15); border-top-color: rgba(255,122,64,0.4); }
-    .sol-card:hover::before { opacity: 1; }
-
-    .sol-card .num { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 13.5px; color: var(--phosphor); letter-spacing: .1em; }
-    .sol-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 31.5px; font-weight: 500; margin-top: 16px; color: #FFFFFF; }
-    .sol-card p { color: rgba(255,255,255,.72); font-size: 16px; line-height: 1.65; margin-top: 12px; flex-grow: 1; }
-    .sol-card .card-link { font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 15px; color: var(--phosphor); display: inline-flex; align-items: center; gap: 6px; margin-top: 24px; transition: color 0.2s, transform 0.2s; }
-    .sol-card:hover .card-link { color: var(--phosphor-2); transform: translateX(4px); }
-
-    /* PROBLEM SECTION */
-    .problem-section { background: var(--panel); padding: 85px 0; }
-    @media (max-width:860px) { .problem-section { padding: 55px 0; } }
-    .problem-section h2 { color: #FFFFFF; }
-    .problem-section .eyebrow { color: var(--phosphor); }
-    .problem-section p { color: rgba(255,255,255,.72); }
-
-    .flow-chain { display: flex; flex-direction: column; align-items: center; gap: 12px; justify-content: center; margin-top: 48px; position: relative; z-index: 2; }
-    .flow-step { padding: 16px 28px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #FFFFFF; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 500; white-space: nowrap; box-shadow: 0 8px 32px rgba(0,0,0,0.2); transition: all 0.3s ease; }
-    .flow-step:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,67,0,0.5); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,67,0,0.15); }
-    .flow-arrow { color: var(--phosphor); font-size: 20px; opacity: 0.6; display: flex; align-items: center; justify-content: center; }
-    @media (min-width: 860px) { .flow-chain { flex-direction: row; flex-wrap: wrap; gap: 16px; max-width: 900px; margin-left: auto; margin-right: auto; } }
-    @media (max-width:859px) { .flow-arrow { transform: rotate(90deg); padding: 4px 0; } }
-
-    /* WHY STRIP */
-    .why-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    @media (max-width:860px) { .why-strip { grid-template-columns: 1fr; } }
-    .why-strip-card { padding: 36px 0; border-top: 2px solid var(--phosphor); }
-    .why-strip-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; margin-top: 14px; line-height: 1.2; }
-    .why-strip-card p { color: var(--fog-dim); margin-top: 12px; font-size: 16px; line-height: 1.65; }
+    .why-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 16px;
+    }
+    @media (max-width:860px) {
+      .why-strip { grid-template-columns: 1fr; gap: 24px; }
+      .why-progress-container { display: none; }
+      .why-strip-card { opacity: 1 !important; }
+    }
+    
+    .why-strip-card {
+      padding: 32px 28px;
+      border-radius: 18px;
+      background: rgba(21, 10, 13, 0.02);
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      position: relative;
+      opacity: 0.45;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    }
+    .why-strip-card.active {
+      opacity: 1;
+      transform: translateY(-4px);
+      border-color: rgba(255, 67, 0, 0.4);
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 14px 35px rgba(255, 67, 0, 0.09), 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    
+    .why-step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .why-step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: all 0.3s ease;
+    }
+    .why-strip-card.active .why-step-dot {
+      background: var(--phosphor);
+      box-shadow: 0 0 12px var(--phosphor);
+      transform: scale(1.3);
+    }
+    .why-step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      transition: color 0.3s ease;
+    }
+    .why-strip-card.active .why-step-num {
+      color: var(--phosphor);
+    }
+    .why-strip-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
+      font-weight: 600;
+      color: var(--fog);
+      line-height: 1.25;
+      margin-top: 0;
+      transition: color 0.3s ease;
+    }
+    .why-strip-card.active h3 {
+      color: var(--fog);
+    }
+    .why-strip-card p {
+      color: var(--fog-dim);
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.65;
+      transition: color 0.3s ease;
+    }
 
     /* CTA BANNER */
-    .cta-banner { border-radius: 28px; padding: 56px; background: var(--panel); border: 1.5px solid var(--copper); text-align: center; box-shadow: 0 10px 26px rgba(122,17,40,.06); }
-    .cta-banner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 42px); color: #FFFFFF; }
-    .cta-banner p { color: rgba(255,255,255,.72); margin-top: 16px; max-width: 500px; margin-left: auto; margin-right: auto; }
-    .cta-banner .btn-primary { margin-top: 28px; }
+    .cta-banner { border-radius: 28px; padding: 64px 48px; background: linear-gradient(145deg, rgba(38, 20, 24, 0.98), rgba(21, 10, 13, 0.98)); border: 1.5px solid var(--copper); text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 30px rgba(122,17,40,0.12); }
+    @media (max-width: 640px) { .cta-banner { padding: 40px 24px; border-radius: 20px; } }
+    .cta-banner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4.4vw, 48px); color: #FFFFFF; font-weight: 500; line-height: 1.15; }
+    .cta-banner p { color: #F4F2ED; font-size: clamp(18px, 2.1vw, 21px); font-weight: 600; margin-top: 18px; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.65; }
+    .cta-banner .btn-primary { margin-top: 36px; padding: 20px 48px; font-size: 17px; font-weight: 800; letter-spacing: 0.025em; border-radius: 999px; background: linear-gradient(135deg, #FF4300, #FF5A1F); color: #0E0E0E; box-shadow: 0 0 35px rgba(255, 67, 0, 0.6), 0 10px 25px rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.35); display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s cubic-bezier(0.16, 1.3, 1); }
+    .cta-banner .btn-primary:hover { background: #FF5A1F; transform: translateY(-4px) scale(1.03); box-shadow: 0 0 50px rgba(255, 67, 0, 0.85), 0 14px 32px rgba(0, 0, 0, 0.45); color: #000000; }
 
     /* FOOTER */
     footer { padding: 60px 0 40px; border-top: 1px solid var(--panel-line); }
@@ -247,37 +589,41 @@
       .navbar { justify-content: space-between; }
     }
     .foot-links a { font-family: 'Cormorant Garamond', serif !important; }
-</style>
+  </style>
 
-<style id="agy-enhancements">
-  /* Roadmap glow and mobile menu */
-  .glow-card { transition: all 0.4s cubic-bezier(.16, 1, .3, 1); position: relative; }
-  .glow-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,67,0,0.15), inset 0 0 20px rgba(255,255,255,0.05); border-color: rgba(255,67,0,0.3); }
+  <style id="agy-enhancements">
+    .glow-card { transition: all 0.4s cubic-bezier(.16, 1.3, 1); position: relative; }
+    .glow-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,67,0,0.15), inset 0 0 20px rgba(255,255,255,0.05); border-color: rgba(255,67,0,0.3); }
 
-  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; transition: 0.3s; }
-  .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.is-active span:nth-child(2) { opacity: 0; }
-  .hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; transition: 0.3s; }
+    .hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.is-active span:nth-child(2) { opacity: 0; }
+    .hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21,10,13,0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
-  .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
-  .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.3s; }
-  .mobile-menu-overlay.is-active a { opacity: 1; transform: translateY(0); }
+    .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21,10,13,0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+    .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
+    .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; opacity: 0; transform: translateY(20px); transition: 0.3s; }
+    .mobile-menu-overlay.is-active a { opacity: 1; transform: translateY(0); }
 
-  @media (max-width: 860px) {
-    .navlinks { display: none !important; }
-    .hamburger { display: block; }
-  }
-</style>
+    @media (max-width: 860px) {
+      .navlinks { display: none !important; }
+      .hamburger { display: block; }
+    }
+  </style>
 
-<style id="agy-left-align">
-  .page-hero .wrap { text-align: left !important; align-items: flex-start; }
-  .page-hero { justify-content: flex-start !important; }
-</style>
+  <style id="agy-left-align">
+    .page-hero .wrap { text-align: left !important; align-items: flex-start; }
+    .page-hero { justify-content: flex-start !important; }
+  </style>
 </head>
 
 <body>
+  <div class="grain"></div>
+  <div class="scanlines"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
   <header>
     <div class="navbar">
       <a href="/" class="logo"><img src="/newlogo.svg" alt="Nodewave Logo" style="height: 28px; width: auto; margin-right: 8px;"><b>Nodewave</b></a>
@@ -287,7 +633,7 @@
         <a href="/about">About</a>
         <a href="/case-studies">Case Studies</a>
       </nav>
-      <a href="/contact" class="nav-cta">Let's Start ?</a>
+      <a href="/contact" class="nav-cta">Let's Start &rarr;</a>
     </div>
   </header>
 
@@ -301,8 +647,8 @@
         <h1 class="display reveal" style="margin-top:18px;">Operational Workflows, Automated.</h1>
         <p class="hero-sub reveal">Every business has operational work that repeats: information arrives, someone processes it, another person follows up, someone updates a system, and eventually someone has to report what happened. Nodewave turns those repeated processes into connected workflows.</p>
         <div class="hero-cta-row reveal">
-          <a href="#solutions-grid" class="btn-primary magnetic">Explore Solutions<span>?</span></a>
-          <a href="/contact" class="btn-ghost">Get an Operations Audit<span>?</span></a>
+          <a href="#solutions-grid" class="btn-primary magnetic">Explore Solutions<span>&rarr;</span></a>
+          <a href="/contact" class="btn-ghost">Get an Operations Audit<span>&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -310,87 +656,193 @@
     <!-- PROBLEM -->
     <section class="problem-section">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow" style="color:var(--phosphor);">THE PROBLEM</div>
-          <h2 class="display" style="color:#fff;">Your team shouldn't be the integration layer.</h2>
-          <p style="color:rgba(255,255,255,.72);margin-top:16px;max-width:560px;font-size:17px;">Many businesses have systems, but people still manually move information between them. Every handoff, copy-paste, and "someone needs to remember" is operational friction that compounds daily.</p>
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="section-head reveal" style="max-width:100%;margin-bottom:20px;">
+              <div class="eyebrow" style="color:var(--phosphor);">THE PROBLEM</div>
+              <h2 class="display">Your team shouldn't be the integration layer.</h2>
+              <p class="sub">Many businesses run good software, but human employees are forced to act as the manual glue between disconnected systems. Every handoff, copy-paste step, and forgotten follow-up creates friction where momentum stalls and revenue leaks.</p>
+            </div>
+            
+            <div class="problem-breakdown reveal">
+              <div class="problem-item">
+                <div class="problem-num">01</div>
+                <div class="problem-text">
+                  <h4>Intake Fragmentation</h4>
+                  <p>Inquiries arrive via forms, emails, and calls without structured parsing or instant routing.</p>
+                </div>
+              </div>
+              <div class="problem-item">
+                <div class="problem-num">02</div>
+                <div class="problem-text">
+                  <h4>Manual Copy-Paste Handoffs</h4>
+                  <p>Team members spend hours re-typing customer data between inboxes, CRMs, and spreadsheets.</p>
+                </div>
+              </div>
+              <div class="problem-item">
+                <div class="problem-num">03</div>
+                <div class="problem-text">
+                  <h4>Memory-Based Follow-Ups</h4>
+                  <p>Critical touchpoints and client deadlines stall because someone had to manually remember them.</p>
+                </div>
+              </div>
+            </div>
+
+            <p class="reveal" style="color:rgba(255,255,255,0.65);margin-top:24px;font-size:15px;line-height:1.6;">Nodewave automates these operational steps into unified, reliable workflows so work moves forward instantly without human bottlenecks.</p>
+          </div>
+
+          <div class="problem-right reveal">
+            <!-- STYLIZED BROKEN PROCESS FUNNEL DIAGRAM -->
+            <div class="funnel-card">
+              <div class="funnel-header">
+                <span class="tag">Process Diagnostic // Unoptimized Flow</span>
+                <span class="status"><span class="pulse-dot"></span> Bottlenecks Detected</span>
+              </div>
+              
+              <div class="funnel-body">
+                <!-- STAGE 1 -->
+                <div class="funnel-stage">
+                  <div class="funnel-box tier-1">
+                    <div class="stage-title"><span>01. Inbound Inquiries</span> <span style="color:#D2964F;font-size:12px;">100% Vol</span></div>
+                    <div class="stage-sub">Web forms, email leads, client requests</div>
+                  </div>
+                  <div class="leak-pill"><span>⚠️</span> 32% Delayed in Inboxes</div>
+                </div>
+
+                <div class="connector-flow"><div class="connector-line"></div></div>
+
+                <!-- STAGE 2 -->
+                <div class="funnel-stage">
+                  <div class="funnel-box tier-2">
+                    <div class="stage-title"><span>02. Manual System Handoff</span> <span style="color:#FF7A40;font-size:12px;">68% Passing</span></div>
+                    <div class="stage-sub">Manual CRM entry, team assignments</div>
+                  </div>
+                  <div class="leak-pill"><span>⚡</span> Copy-Paste Data Desync</div>
+                </div>
+
+                <div class="connector-flow"><div class="connector-line"></div></div>
+
+                <!-- STAGE 3 -->
+                <div class="funnel-stage">
+                  <div class="funnel-box tier-3">
+                    <div class="stage-title"><span>03. Follow-Up Touchpoints</span> <span style="color:#FF4300;font-size:12px;">40% Passing</span></div>
+                    <div class="stage-sub">Status checks, reminders, scheduling</div>
+                  </div>
+                  <div class="leak-pill alert"><span>⏳</span> Forgotten Touchpoints</div>
+                </div>
+
+                <div class="connector-flow"><div class="connector-line"></div></div>
+
+                <!-- STAGE 4 -->
+                <div class="funnel-stage">
+                  <div class="funnel-box tier-4">
+                    <div class="stage-title"><span>04. Operational Output</span> <span style="color:#9C1B37;font-size:12px;">Sluggish Flow</span></div>
+                    <div class="stage-sub" style="color:#FF7A40;">Severe manual overhead &amp; late reports</div>
+                  </div>
+                  <div class="leak-pill alert" style="background:rgba(255,67,0,0.2);"><span>⛔</span> Choke Point</div>
+                </div>
+              </div>
+
+              <div class="funnel-footer">
+                <div class="metric-chip">
+                  <div class="val">60%+</div>
+                  <div class="lbl">Manual Toil</div>
+                </div>
+                <div class="metric-chip">
+                  <div class="val">24-48h</div>
+                  <div class="lbl">Average Lag</div>
+                </div>
+                <div class="metric-chip">
+                  <div class="val">High</div>
+                  <div class="lbl">Process Leakage</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="flow-chain reveal">
-          <div class="flow-step">Lead arrives</div>
-          <div class="flow-arrow">?</div>
-          <div class="flow-step">Someone checks inbox</div>
-          <div class="flow-arrow">?</div>
-          <div class="flow-step">Information copied</div>
-          <div class="flow-arrow">?</div>
-          <div class="flow-step">CRM updated</div>
-          <div class="flow-arrow">?</div>
-          <div class="flow-step">Someone follows up</div>
-          <div class="flow-arrow">?</div>
-          <div class="flow-step">Report assembled</div>
-        </div>
-        <p class="reveal" style="color:rgba(255,255,255,.55);margin-top:32px;text-align:center;font-size:15px;max-width:520px;margin-left:auto;margin-right:auto;">Nodewave connects these operational steps into automated workflows so your team can spend less time moving information and more time acting on it.</p>
       </div>
     </section>
 
     <!-- SOLUTIONS GRID -->
-    <section id="solutions-grid">
+    <section id="solutions-grid" style="padding-top: 100px; padding-bottom: 95px;">
       <div class="wrap">
-        <div class="section-head reveal">
+        <div class="section-head reveal" style="max-width: 720px; margin-bottom: 0;">
           <div class="eyebrow">CORE WORKFLOWS</div>
           <h2 class="display">The workflows behind your operation.</h2>
           <p class="sub">Four permanent solution categories that address the most common operational friction points across businesses.</p>
         </div>
         <div class="solutions-grid">
           <a href="/solutions/intake" class="sol-card reveal">
-            <div class="num">01 / INTAKE</div>
             <h3 class="display">Intake Automation</h3>
             <p>Capture and process incoming information without unnecessary manual data entry, routing, or qualification. Turn incoming requests into structured, actionable work.</p>
-            <span class="card-link">Learn about intake automation ?</span>
+            <span class="card-link">Learn more about intake automation &rarr;</span>
           </a>
           <a href="/solutions/follow-ups" class="sol-card reveal">
-            <div class="num">02 / FOLLOW-UPS</div>
             <h3 class="display">Follow-Up Automation</h3>
-            <p>Automate reminders, notifications, status checks, and next-step communication. Make every follow-up happen on time, every time � without relying on memory.</p>
-            <span class="card-link">Learn about follow-up automation ?</span>
+            <p>Automate reminders, notifications, status checks, and next-step communication. Make every follow-up happen on time, every time - without relying on memory.</p>
+            <span class="card-link">Learn more about follow-up automation &rarr;</span>
           </a>
           <a href="/solutions/referrals" class="sol-card reveal">
-            <div class="num">03 / REFERRALS</div>
             <h3 class="display">Referral Management</h3>
             <p>Track referrals from source to handoff to outcome with less spreadsheet and inbox management. Know where every referral goes and what happened to it.</p>
-            <span class="card-link">Learn about referral automation ?</span>
+            <span class="card-link">Learn more about referral automation &rarr;</span>
           </a>
           <a href="/solutions/reporting" class="sol-card reveal">
-            <div class="num">04 / REPORTING</div>
             <h3 class="display">Reporting Automation</h3>
             <p>Automatically collect operational data and turn it into consistent reports and dashboards. Stop spending hours assembling reports that should generate themselves.</p>
-            <span class="card-link">Learn about reporting automation ?</span>
+            <span class="card-link">Learn more about reporting automation &rarr;</span>
           </a>
         </div>
       </div>
     </section>
 
     <!-- WHY NODEWAVE -->
-    <section>
+    <section id="why-nodewave-section">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow">WHY NODEWAVE</div>
           <h2 class="display">From manual process to operating system.</h2>
         </div>
-        <div class="why-strip">
-          <div class="why-strip-card reveal">
-            <div class="eyebrow" style="font-size:13px;">01</div>
+        
+        <!-- Animated process progress bar with moving orange arrow -->
+        <div class="why-progress-container reveal">
+          <div class="why-progress-track">
+            <div class="why-progress-fill" id="whyProgressFill">
+              <div class="why-arrow-tip">
+                <svg viewBox="0 0 24 24" fill="none" style="width:14px;height:14px;">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#0E0E0E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-strip" id="whyStrip">
+          <div class="why-strip-card reveal active" data-step="0">
+            <div class="why-step-indicator">
+              <div class="why-step-dot"></div>
+              <div class="why-step-num">01</div>
+            </div>
             <h3>We start with the workflow</h3>
             <p>We map the actual process before choosing technology. No pre-built template is forced onto your operation.</p>
           </div>
-          <div class="why-strip-card reveal">
-            <div class="eyebrow" style="font-size:13px;">02</div>
+          
+          <div class="why-strip-card reveal" data-step="1">
+            <div class="why-step-indicator">
+              <div class="why-step-dot"></div>
+              <div class="why-step-num">02</div>
+            </div>
             <h3>Humans stay in the loop</h3>
             <p>Automation doesn't mean removing people from every decision. Human approval points exist wherever judgment is needed.</p>
           </div>
-          <div class="why-strip-card reveal">
-            <div class="eyebrow" style="font-size:13px;">03</div>
-            <h3>We measure the result</h3>
-            <p>Automation should be tied to measurable operational outcomes � response time, completion rates, workload reduction.</p>
+          
+          <div class="why-strip-card reveal" data-step="2">
+            <div class="why-step-indicator">
+              <div class="why-step-dot"></div>
+              <div class="why-step-num">03</div>
+            </div>
+            <h3>We measure the results</h3>
+            <p>Automation should be tied to measurable operational outcomes: response times, completion rates, and workload reduction.</p>
           </div>
         </div>
       </div>
@@ -400,9 +852,9 @@
     <section style="padding-top:0;">
       <div class="wrap">
         <div class="cta-banner reveal">
-          <h2 class="display">Find the work your team shouldn't be doing manually.</h2>
-          <p>Tell us where work gets stuck. We'll map the workflow, identify the highest-value automation opportunities, and show you what could be automated.</p>
-          <a href="/contact" class="btn-primary magnetic">Get an Operations Audit<span>?</span></a>
+          <h2 class="display">Not sure what to automate? Let us have a look.</h2>
+          <p>We look into your business and figure out where AI can match or outperform your current processes in terms of time, quality, and efficiency.</p>
+          <a href="/contact" class="btn-primary magnetic">Get an Operations Audit<span>&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -427,12 +879,44 @@
       <svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none">
         <path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none" />
       </svg>
-      <div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">� 2026 Nodewave � Mumbai, India</div>
+      <div class="mono" style="color:var(--muted);font-size:12.5px;margin-top:16px;">© 2026 Nodewave, Mumbai, India</div>
     </div>
   </footer>
 
   <script>
     gsap.registerPlugin(ScrollTrigger);
+
+    /* WHY NODEWAVE PROGRESS SCROLL ANIMATION */
+    const whySec = document.getElementById('why-nodewave-section');
+    if (whySec) {
+      const progressFill = document.getElementById('whyProgressFill');
+      const cards = document.querySelectorAll('.why-strip-card');
+      
+      ScrollTrigger.create({
+        trigger: whySec,
+        start: 'top 75%',
+        end: 'bottom 45%',
+        scrub: 0.3,
+        onUpdate: (self) => {
+          const p = self.progress;
+          // Progress line width from 16% (centered at card 1) to 88% (card 3)
+          const fillPct = 16 + (p * 72);
+          if (progressFill) {
+            progressFill.style.width = Math.min(96, Math.max(16, fillPct)) + '%';
+          }
+          
+          cards.forEach((c, idx) => {
+            if (p < 0.36) {
+              c.classList.toggle('active', idx === 0);
+            } else if (p < 0.70) {
+              c.classList.toggle('active', idx === 1);
+            } else {
+              c.classList.toggle('active', idx === 2);
+            }
+          });
+        }
+      });
+    }
 
     /* INTRO */
     function playIntro() {
@@ -472,27 +956,31 @@
     let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
     window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
     gsap.ticker.add(() => { rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; });
-    document.querySelectorAll('a,button,.sol-card').forEach(el => {
+    document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', () => ring.classList.add('active'));
       el.addEventListener('mouseleave', () => ring.classList.remove('active'));
     });
 
-    /* MAGNETIC */
+    /* MAGNETIC BUTTONS */
     document.querySelectorAll('.magnetic').forEach(btn => {
       const xTo = gsap.quickTo(btn, 'x', { duration: .5, ease: 'power3' });
       const yTo = gsap.quickTo(btn, 'y', { duration: .5, ease: 'power3' });
-      btn.addEventListener('mousemove', e => { const r = btn.getBoundingClientRect(); xTo((e.clientX - r.left - r.width / 2) * .3); yTo((e.clientY - r.top - r.height / 2) * .4); });
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        xTo((e.clientX - r.left - r.width / 2) * .3);
+        yTo((e.clientY - r.top - r.height / 2) * .4);
+      });
       btn.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
     });
 
-    /* SCROLL REVEALS */
+    /* SCROLL REVEAL */
     gsap.utils.toArray('.reveal').forEach(el => {
       gsap.to(el, { opacity: 1, y: 0, duration: .9, ease: 'back.out(1.2)', scrollTrigger: { trigger: el, start: 'top 88%' } });
     });
 
-    /* FOOTER SIGNAL */
+    /* FOOTER WAVE */
     const footPath = document.getElementById('foot-path');
-    let ft = 0;
+    let ft = 0, footReq;
     function footAnim() {
       ft += 0.05;
       let d = 'M0,14 ';
@@ -501,45 +989,44 @@
         d += `L${x},${y} `;
       }
       footPath.setAttribute('d', d);
-      requestAnimationFrame(footAnim);
+      footReq = requestAnimationFrame(footAnim);
     }
-    footAnim();
+    new IntersectionObserver(e => { e[0].isIntersecting ? footAnim() : cancelAnimationFrame(footReq); }).observe(document.querySelector('footer'));
   </script>
 
-<script id="agy-js">
-  document.addEventListener('DOMContentLoaded', () => {
-    if(!document.querySelector('.hamburger')) {
-      const nav = document.querySelector('.navbar');
-      if(nav) {
-        const btn = document.createElement('button');
-        btn.className = 'hamburger';
-        btn.innerHTML = '<span></span><span></span><span></span>';
-        nav.appendChild(btn);
+  <script id="agy-js">
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!document.querySelector('.hamburger')) {
+        const nav = document.querySelector('.navbar');
+        if (nav) {
+          const btn = document.createElement('button');
+          btn.className = 'hamburger';
+          btn.innerHTML = '<span></span><span></span><span></span>';
+          nav.appendChild(btn);
 
-        const overlay = document.createElement('div');
-        overlay.className = 'mobile-menu-overlay';
-        overlay.innerHTML = '<a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a>';
-        document.body.appendChild(overlay);
+          const overlay = document.createElement('div');
+          overlay.className = 'mobile-menu-overlay';
+          overlay.innerHTML = '<a href="/solutions">Solutions</a><a href="/industries">Industries</a><a href="/about">About</a><a href="/case-studies">Case Studies</a><a href="/contact">Contact</a>';
+          document.body.appendChild(overlay);
 
-        btn.addEventListener('click', () => {
-          btn.classList.toggle('is-active');
-          overlay.classList.toggle('is-active');
-          if(overlay.classList.contains('is-active')) {
-            gsap.fromTo(overlay.querySelectorAll('a'), {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.1, duration: 0.5});
-          }
-        });
+          btn.addEventListener('click', () => {
+            btn.classList.toggle('is-active');
+            overlay.classList.toggle('is-active');
+            if (overlay.classList.contains('is-active')) {
+              gsap.fromTo(overlay.querySelectorAll('a'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 });
+            }
+          });
+        }
       }
-    }
 
-    gsap.utils.toArray('.related-card, .industry-card, .wf-card, .zigzag-row').forEach(card => {
-      card.classList.add('glow-card');
-      const dot = card.querySelector('.dot');
-      if(dot) {
-        gsap.fromTo(dot, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, scrollTrigger: {trigger: card, start: 'top 80%'}});
-      }
+      gsap.utils.toArray('.related-card, .industry-card, .fund-card, .wf-card, .zigzag-row').forEach(card => {
+        card.classList.add('glow-card');
+        const dot = card.querySelector('.dot');
+        if (dot) {
+          gsap.fromTo(dot, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, scrollTrigger: { trigger: card, start: 'top 80%' } });
+        }
+      });
     });
-  });
-</script>
+  </script>
 </body>
-
 </html>
