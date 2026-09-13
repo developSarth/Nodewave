@@ -135,14 +135,15 @@
 
 
     /* ============ CURSOR ============ */
-    .cursor-dot.cursor-ring {
+    .cursor-dot, .cursor-ring {
       position: fixed;
       top: 0;
       left: 0;
-      pointer-events: none;
+      pointer-events: none !important;
       z-index: 999999;
       border-radius: 50%;
-      transform: translate(-50%, -50%);
+      user-select: none;
+      will-change: transform;
     }
 
     .cursor-dot {
@@ -167,7 +168,7 @@
 
     @media (max-width:860px) {
 
-      .cursor-dot.cursor-ring {
+      .cursor-dot, .cursor-ring {
         display: none;
       }
     }
@@ -1345,8 +1346,8 @@
 
 <style id="agy-enhancements">
   /* Roadmap glow and mobile menu */
-  .glow-card { transition: all 0.4s cubic-bezier(.16, 1.3, 1); position: relative; }
-  .glow-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(255,67,0,0.15), inset 0 0 20px rgba(255,255,255,0.05); border-color: rgba(255,67,0,0.3); }
+  
+  
 
   .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
   .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; transition: 0.3s; }
@@ -1883,59 +1884,70 @@
     /* ---------- PRELOADER REMOVED ---------- */
       setTimeout(() => { if(typeof playIntro === 'function') playIntro(); }, 100);
 
-      /* ---------- CURSOR ---------- */
+      /* ---------- HARDWARE-ACCELERATED CUSTOM CURSOR ---------- */
     const dot = document.querySelector('.cursor-dot');
     const ring = document.querySelector('.cursor-ring');
-    gsap.set([dot, ring], {xPercent: -50, yPercent: -50});
-    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; gsap.set(dot, {x: mx, y: my}); });
-    gsap.ticker.add(() => {
-      rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
-      gsap.set(ring, {x: rx, y: ry});
-    });
-    document.querySelectorAll('a, button').forEach(el => {
-      el.addEventListener('mouseenter', () => ring.classList.add('active'));
-      el.addEventListener('mouseleave', () => ring.classList.remove('active'));
-    });
+    if (dot && ring) {
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      let hasMoved = false;
 
-    /* ---------- MAGNETIC BUTTONS ---------- */
-    document.querySelectorAll('.magnetic').forEach(btn => {
-      const xTo = gsap.quickTo(btn, 'x', { duration: .5, ease: 'power3' });
-      const yTo = gsap.quickTo(btn, 'y', { duration: .5, ease: 'power3' });
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        xTo((e.clientX - r.left - r.width / 2) * .3);
-        yTo((e.clientY - r.top - r.height / 2) * .4);
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX;
+        my = e.clientY;
+        if (!hasMoved) {
+          rx = mx;
+          ry = my;
+          hasMoved = true;
+        }
+        dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+      }, { passive: true });
+
+      gsap.ticker.add(() => {
+        if (!hasMoved) return;
+        rx += (mx - rx) * 0.18;
+        ry += (my - ry) * 0.18;
+        ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
       });
-      btn.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
-    });
+
+      const interactiveSelector = 'a, button, [role="button"], .sol-card, .industry-card, .why-strip-card, .pcard, .bcard, .fund-card, .related-card, .wf-card, .example-card, .question-card, .demo-card, .faq-item, .card-link, .magnetic, .nav-cta, .btn-primary, .btn-ghost, .metric-chip, .problem-item, .chip';
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest(interactiveSelector)) {
+          ring.classList.add('active');
+        }
+      });
+      document.addEventListener('mouseout', e => {
+        if (!e.relatedTarget || !e.relatedTarget.closest(interactiveSelector)) {
+          ring.classList.remove('active');
+        }
+      });
+    }
 
     /* ---------- HERO INTRO ---------- */
     function playIntro() {
-      const tl = gsap.timeline({ defaults: { ease: 'back.out(1.2)' } });
-      tl.to('.hero-inner .reveal', { opacity: 1, y: 0, duration: 1, stagger: .09 });
-      gsap.to('header', { opacity: 1, duration: .8 });
+      gsap.to('header', { opacity: 1, duration: 0.8 });
+      gsap.to('.hero-inner .reveal', { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out' });
     }
     gsap.set('header', { opacity: 0 });
 
-    /* ---------- SCROLL REVEALS ---------- */
+    /* ---------- SCROLL REVEALS (SMOOTH & NON-JITTERY) ---------- */
     ScrollTrigger.batch('.reveal:not(.hero-inner .reveal)', {
       start: 'top 88%',
+      once: true,
       onEnter: batch => gsap.to(batch, {
         opacity: 1,
         y: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: 'back.out(1.4)',
+        duration: 0.75,
+        stagger: 0.08,
+        ease: 'power2.out',
         overwrite: true
       })
     });
 
     /* stagger bento cards a touch */
     gsap.utils.toArray('.bcard').forEach((el, i) => {
-      gsap.fromTo(el, { opacity: 0, y: 36 }, {
-        opacity: 1, y: 0, duration: .8, delay: (i % 3) * 0.06, ease: 'back.out(1.2)',
-        scrollTrigger: { trigger: el, start: 'top 90%' }
+      gsap.fromTo(el, { opacity: 0, y: 28 }, {
+        opacity: 1, y: 0, duration: 0.7, delay: (i % 3) * 0.05, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       });
     });
 
@@ -2133,21 +2145,12 @@
           btn.classList.toggle('is-active');
           overlay.classList.toggle('is-active');
           if(overlay.classList.contains('is-active')) {
-            gsap.fromTo(overlay.querySelectorAll('a'), {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.1, duration: 0.5});
+            gsap.fromTo(overlay.querySelectorAll('a'), {opacity: 0, y: 20}, {opacity: 1, y: 0, stagger: 0.1, duration: 0.4});
           }
         });
       }
     }
-
-    gsap.utils.toArray('.related-card, .industry-card, .fund-card, .wf-card, .zigzag-row').forEach(card => {
-      card.classList.add('glow-card');
-      const dot = card.querySelector('.dot');
-      if(dot) {
-        gsap.fromTo(dot, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, scrollTrigger: {trigger: card, start: 'top 80%'}});
-      }
-    });
   });
 </script>
 </body>
-
 </html>
