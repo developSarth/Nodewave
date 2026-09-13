@@ -150,13 +150,13 @@
       width: 5px;
       height: 5px;
       background: var(--phosphor);
-      box-shadow: 0 0 8px 2px rgba(255, 67, 0.6);
+      box-shadow: 0 0 8px 2px rgba(255, 67, 0, 0.6);
     }
 
     .cursor-ring {
       width: 34px;
       height: 34px;
-      border: 1px solid rgba(10, 10, 10.35);
+      border: 1px solid rgba(10, 10, 10, 0.35);
       transition: width .25s var(--ease-out), height .25s var(--ease-out), border-color .25s;
     }
 
@@ -222,11 +222,11 @@
       justify-content: space-between;
       height: 60px;
       border-radius: 999px;
-      background: rgba(251, 250, 247.78);
+      background: rgba(251, 250, 247, 0.78);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border: 1px solid rgba(10, 10, 10.1);
-      box-shadow: 0 8px 30px rgba(0, 0, 0.08);
+      border: 1px solid rgba(10, 10, 10, 0.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     }
 
     @media (max-width:640px) {
@@ -459,7 +459,7 @@
       font-weight: 320;
       font-size: 15.2px;
       font-family: 'Manrope', serif;
-      box-shadow: 0 10px 26px rgba(255, 67, 0.28);
+      box-shadow: 0 10px 26px rgba(255, 67, 0, 0.28);
     }
 
     .btn-ghost {
@@ -471,7 +471,7 @@
       font-size: 15px;
       letter-spacing: .01em;
       color: var(--fog-dim);
-      border-bottom: 1px solid rgba(10, 10, 10.25);
+      border-bottom: 1px solid rgba(10, 10, 10, 0.25);
     }
 
     .btn-ghost:hover {
@@ -566,7 +566,7 @@
       font-family: 'Manrope', sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      color: rgba(255, 255, 255.65);
+      color: rgba(255, 255, 255, 0.65);
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -666,7 +666,7 @@
       font-size: 13.5px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255.6);
+      color: rgba(255, 255, 255, 0.6);
       margin-top: 6px;
     }
 
@@ -720,7 +720,8 @@
 
     @media (max-width:860px) {
 
-      .bcard.c-span4.bcard.c-span2 {
+      .bcard.c-span4,
+      .bcard.c-span2 {
         grid-column: span 1;
       }
     }
@@ -742,7 +743,7 @@
     }
 
     .bcard p {
-      color: rgba(255, 255, 255.72);
+      color: rgba(255, 255, 255, 0.72);
       font-size: 18px;
       margin-top: 12px;
       max-width: 420px;
@@ -761,8 +762,8 @@
       font-size: 14.5px;
       padding: 5px 11px;
       border-radius: 6px;
-      background: rgba(255, 255, 255.06);
-      border: 1px solid rgba(255, 67, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 67, 0, 0.35);
       color: #FFFFFF;
     }
 
@@ -831,12 +832,20 @@
       border-bottom: 1px solid var(--panel-line);
     }
 
-    @media (max-width:860px) {
-
-      .why-row.why-row.reverse {
+    @media (max-width: 860px) {
+      .why-row,
+      .why-row.reverse {
         grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 40px 0;
+        gap: 28px;
+        padding: 36px 0;
+      }
+
+      .why-row.reverse .why-copy {
+        order: 1;
+      }
+
+      .why-row.reverse .why-visual {
+        order: 2;
       }
     }
 
@@ -850,7 +859,7 @@
 
     .why-copy h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 33.5px;
+      font-size: clamp(26px, 4.5vw, 33.5px);
       font-weight: 500;
       margin-top: 12px;
       line-height: 1.2;
@@ -861,47 +870,60 @@
       margin-top: 14px;
       max-width: 480px;
       line-height: 1.7;
+      font-size: clamp(16px, 3.8vw, 19px);
     }
 
     .why-list-items {
       margin-top: 20px;
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 10px;
     }
 
     .why-list-items div {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
+      font-size: clamp(17px, 3.8vw, 20px);
       color: var(--fog-dim);
       display: flex;
       align-items: baseline;
       gap: 10px;
+      line-height: 1.4;
     }
 
     .why-list-items div::before {
       content: '▸';
       color: var(--phosphor);
+      flex-shrink: 0;
     }
 
     .why-visual {
       border-radius: var(--radius-lg);
       background: var(--panel);
-      border: 1px solid rgba(255, 255, 255.14);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       padding: 28px;
-      min-height: 230px;
+      min-height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-/* stopwatch */
+    @media (max-width: 860px) {
+      .why-visual {
+        padding: 22px 18px;
+        min-height: 180px;
+      }
+    }
+
+    /* stopwatch */
     .stopwatch {
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       position: relative;
+      margin: 0 auto;
     }
 
     .stopwatch .face {
@@ -909,7 +931,7 @@
       height: 100%;
       border-radius: 50%;
       background: var(--board);
-      box-shadow: 0 6px 18px rgba(0, 0, 0.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
       border: 1.5px solid var(--copper);
     }
 
@@ -918,11 +940,11 @@
       left: 50%;
       top: 50%;
       width: 2px;
-      height: 56px;
+      height: 52px;
       background: linear-gradient(180deg, var(--phosphor), transparent 90%);
       transform-origin: 50% 100%;
       transform: translate(-50%, -100%) rotate(0deg);
-      box-shadow: 0 0 6px rgba(255, 67, 0.6);
+      box-shadow: 0 0 6px rgba(255, 67, 0, 0.6);
     }
 
     .stopwatch .cap {
@@ -934,7 +956,7 @@
       border-radius: 50%;
       background: var(--copper);
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 6px rgba(255, 67, 0.5);
+      box-shadow: 0 0 6px rgba(255, 67, 0, 0.5);
     }
 
     .stopwatch .tick {
@@ -943,7 +965,7 @@
       top: 50%;
       width: 1px;
       height: 8px;
-      background: rgba(10, 10, 10.18);
+      background: rgba(10, 10, 10, 0.18);
       transform-origin: 50% 68px;
     }
 
@@ -951,27 +973,37 @@
     .transform-box {
       width: 100%;
       font-family: 'Manrope', sans-serif;
-      font-size: 15.5px;
-      line-height: 1.7;
-      color: rgba(255, 255, 255.78);
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.78);
     }
 
     .transform-box .rough-line {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 20px;
+      font-size: clamp(17px, 3.8vw, 20px);
       color: #FFFFFF;
       opacity: .95;
+      line-height: 1.4;
     }
 
     .transform-box .arrow {
       color: var(--phosphor-2);
-      margin: 12px 0;
-      font-size: 17px;
+      margin: 10px 0;
+      font-size: 15px;
     }
 
     .transform-box .code-out {
-      color: rgba(255, 255, 255.85);
+      color: rgba(255, 255, 255, 0.85);
+      font-family: 'Geist', monospace;
+      font-size: clamp(12.5px, 3.2vw, 14.5px);
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow-x: auto;
+      word-break: break-word;
     }
 
     .transform-box .code-out .k {
@@ -982,7 +1014,7 @@
       color: #FFD9C4;
     }
 
-/* API Video */
+    /* API Video */
     .api-video-container {
       width: 100%;
       max-width: 400px;
@@ -990,6 +1022,7 @@
       overflow: hidden;
       box-shadow: 0 0 30px rgba(255, 67, 0, 0.15);
       border: 1px solid rgba(255, 67, 0, 0.2);
+      margin: 0 auto;
     }
     .api-video-container video {
       width: 100%;
@@ -1150,7 +1183,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 52px;
-      box-shadow: 0 10px 26px rgba(122, 17, 40.06);
+      box-shadow: 0 10px 26px rgba(122, 17, 40, 0.06);
     }
 
     @media (max-width:860px) {
@@ -1169,7 +1202,7 @@
 
     .contact-left p {
       font-family: 'Manrope', sans-serif;
-      color: rgba(255, 255, 255.78);
+      color: rgba(255, 255, 255, 0.78);
       margin-top: 16px;
       max-width: 440px;
       line-height: 1.7;
@@ -1179,7 +1212,7 @@
       margin-top: 34px;
       font-family: 'Cormorant Garamond', serif;
       font-size: 13.5px;
-      color: rgba(255, 255, 255.55);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     .contact-left .reply strong {
@@ -1197,7 +1230,7 @@
       font-size: 13.5px;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255.55);
+      color: rgba(255, 255, 255, 0.55);
       margin-bottom: 8px;
     }
 
@@ -1205,8 +1238,8 @@
       width: 100%;
       padding: 13px 14px;
       border-radius: 10px;
-      background: rgba(255, 255, 255.07);
-      border: 1px solid rgba(255, 255, 255.18);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       color: #FFFFFF;
       font-family: 'Cormorant Garamond', serif;
       font-size: 18px;
@@ -1214,7 +1247,7 @@
     }
 
     .field input::placeholder.field textarea::placeholder {
-      color: rgba(255, 255, 255.4);
+      color: rgba(255, 255, 255, 0.4);
     }
 
     .field textarea {
@@ -1225,7 +1258,7 @@
     .field input:focus.field textarea:focus {
       outline: none;
       border-color: var(--phosphor);
-      box-shadow: 0 0 0 3px rgba(255, 67, 0.18);
+      box-shadow: 0 0 0 3px rgba(255, 67, 0, 0.18);
     }
 
     .submit-btn {
@@ -1237,7 +1270,7 @@
       color: #0E0E0E;
       font-weight: 600;
       font-size: 18px;
-      box-shadow: 0 10px 26px rgba(255, 67, 0.25);
+      box-shadow: 0 10px 26px rgba(255, 67, 0, 0.25);
     }
 
     /* ============ FOOTER ============ */
@@ -1306,9 +1339,8 @@
         font-size: 18px !important;
         padding: 0 16px !important;
       }
-      .bento-grid.why-list {
+      .bento {
         grid-template-columns: 1fr !important;
-        padding: 0 16px !important;
       }
       .bcard {
         grid-column: span 1 !important;
@@ -1453,7 +1485,7 @@
           <div class="dial reveal">
             <div class="dial-circle-wrap">
               <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255,255,255.06)" stroke-width="5" fill="none" />
+                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
                 <circle class="dial-arc" data-val="80" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
                   fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
                   transform="rotate(-90 38 38)" />
@@ -1465,7 +1497,7 @@
           <div class="dial reveal">
             <div class="dial-circle-wrap">
               <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255,255,255.06)" stroke-width="5" fill="none" />
+                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
                 <circle class="dial-arc" data-val="65" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
                   fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
                   transform="rotate(-90 38 38)" />
@@ -1477,7 +1509,7 @@
           <div class="dial reveal">
             <div class="dial-circle-wrap">
               <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255,255,255.06)" stroke-width="5" fill="none" />
+                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
                 <circle class="dial-arc" data-val="99" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
                   fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
                   transform="rotate(-90 38 38)" />
@@ -1489,7 +1521,7 @@
           <div class="dial reveal">
             <div class="dial-circle-wrap">
               <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255,255,255.06)" stroke-width="5" fill="none" />
+                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
                 <circle class="dial-arc" data-val="90" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
                   fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
                   transform="rotate(-90 38 38)" />
@@ -1653,7 +1685,6 @@
             </div>
           </div>
         </div>
-        </div>
       </div>
     </section>
 
@@ -1664,14 +1695,14 @@
         <div class="section-head reveal" style="max-width:700px;">
           <div class="eyebrow" style="color:#D2964F;">CURRENT FOCUS</div>
           <h2 class="display" style="color:#fff;margin-top:18px;">Law Firms. For a reason.</h2>
-          <p class="sub" style="color:rgba(255,255,255.72);max-width:600px;">Law firm operations contain high volumes of repetitive, time-sensitive workflows including intake qualification, follow-up coordination, referral management, and operational reporting. The administrative burden is heavy and the time saved is immediate.</p>
+          <p class="sub" style="color:rgba(255, 255, 255, 0.72);max-width:600px;">Law firm operations contain high volumes of repetitive, time-sensitive workflows including intake qualification, follow-up coordination, referral management, and operational reporting. The administrative burden is heavy and the time saved is immediate.</p>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:16px;" class="reveal">
-          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255,255,255.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Intake</div>
-          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255,255,255.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Follow-Ups</div>
-          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255,255,255.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Referral Management</div>
-          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255,255,255.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Reporting</div>
-          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255,255,255.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Customer Support</div>
+          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Intake</div>
+          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Follow-Ups</div>
+          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Referral Management</div>
+          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Reporting</div>
+          <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Customer Support</div>
         </div>
         <a href="/industries/law-firms" class="btn-primary magnetic reveal" style="margin-top:36px;">Explore Law Firm Automation<span>&rarr;</span></a>
       </div>
@@ -1989,7 +2020,7 @@
       grad.addColorStop(1, 'rgba(122,17,40,0.85)');
       ctx.strokeStyle = grad;
       ctx.lineWidth = 2 * devicePixelRatio;
-      ctx.shadowColor = 'rgba(255,67,0.4)';
+      ctx.shadowColor = 'rgba(255, 67, 0, 0.4)';
       ctx.shadowBlur = 14 * devicePixelRatio;
       ctx.stroke();
 
@@ -2107,19 +2138,21 @@
     gsap.utils.toArray('.why-row').forEach((row, i) => {
       const copy = row.querySelector('.why-copy');
       const visual = row.querySelector('.why-visual');
+      const isMobile = window.innerWidth <= 860;
+      
       if (copy) {
         gsap.fromTo(copy, 
-          { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
-          { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: row, start: 'top 80%' }
+          { opacity: 0, x: isMobile ? 0 : (i % 2 === 0 ? -40 : 40), y: isMobile ? 24 : 0 },
+          { opacity: 1, x: 0, y: 0, duration: 0.85, ease: 'power3.out',
+            scrollTrigger: { trigger: row, start: 'top 85%' }
           }
         );
       }
       if (visual) {
         gsap.fromTo(visual, 
-          { opacity: 0, x: i % 2 === 0 ? 40 : -40 },
-          { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out', delay: 0.15,
-            scrollTrigger: { trigger: row, start: 'top 80%' }
+          { opacity: 0, x: isMobile ? 0 : (i % 2 === 0 ? 40 : -40), y: isMobile ? 24 : 0 },
+          { opacity: 1, x: 0, y: 0, duration: 0.85, ease: 'power3.out', delay: isMobile ? 0.08 : 0.15,
+            scrollTrigger: { trigger: row, start: 'top 85%' }
           }
         );
       }
