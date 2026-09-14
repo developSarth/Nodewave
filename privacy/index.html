@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Privacy Policy | Nodewave</title>
+  <meta name="description"
+    content="Read the Nodewave Privacy Policy. Learn how we protect client workflow data, ensure enterprise confidentiality, and comply with GDPR and CCPA.">
+  <link rel="canonical" href="https://nodewave.co/privacy">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nodewave.co/privacy">
+  <meta property="og:title" content="Privacy Policy | Nodewave">
+  <meta property="og:description"
+    content="Learn how Nodewave protects client workflow data, ensures enterprise confidentiality, and adheres to global privacy standards.">
+  <meta property="og:image" content="https://nodewave.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Nodewave">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy | Nodewave">
+  <meta name="twitter:description"
+    content="Learn how Nodewave protects client workflow data and ensures enterprise confidentiality.">
+  <meta name="twitter:image" content="https://nodewave.co/og-image.png">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Fonts & Scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Geist:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Modular Enhancements -->
+  <link rel="stylesheet" href="/assets/css/site-enhancements.css">
+  <script src="/assets/js/site-enhancements.js" defer></script>
+
+  <style>
+    :root {
+      --board: #FBFAF7;
+      --board-2: #F4F2ED;
+      --panel: #150A0D;
+      --panel-line: rgba(10, 10, 10, 0.14);
+      --copper: #7A1128;
+      --copper-2: #9C1B37;
+      --phosphor: #FF4300;
+      --phosphor-2: #FF7A40;
+      --fog: #0E0E0E;
+      --fog-dim: #2E2E2C;
+      --muted: #6B6B66;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --ease-out: cubic-bezier(.16, 1.3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: var(--phosphor); color: var(--board); }
+
+    body {
+      margin: 0;
+      background: var(--board);
+      color: var(--fog);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    p, li, span, button, a { font-family: 'Manrope', sans-serif !important; }
+    @media (max-width: 860px) { body { cursor: auto; } }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 450; }
+
+    .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 640px) { .wrap { padding: 0 22px; } }
+
+    .cursor-dot, .cursor-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999999; border-radius: 50%; transform: translate(-50%, -50%);
+    }
+    .cursor-dot { width: 5px; height: 5px; background: var(--phosphor); box-shadow: 0 0 8px 2px rgba(255, 67, 0, 0.6); }
+    .cursor-ring { width: 34px; height: 34px; border: 1px solid rgba(10, 10, 10, 0.35); transition: width .25s var(--ease-out), height .25s var(--ease-out), border-color .25s; }
+    .cursor-ring.active { width: 56px; height: 56px; border-color: var(--phosphor); }
+    @media (max-width: 860px) { .cursor-dot, .cursor-ring { display: none; } }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 18px 0; }
+    .navbar {
+      max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px;
+      border-radius: 999px; background: rgba(251, 250, 247, 0.78); backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(10, 10, 10, 0.1); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 640px) { .navbar { padding: 0 16px; border-radius: 20px; } }
+
+    .logo { display: flex; align-items: center; gap: 4px; font-family: 'Manrope', sans-serif; font-size: 21.5px; letter-spacing: .01em; }
+    .logo b { font-weight: 500; color: var(--fog); }
+
+    .navlinks { display: flex; gap: 34px; font-size: 18.5px; letter-spacing: .04em; color: var(--fog-dim); }
+    .navlinks a { position: relative; padding: 4px 0; transition: color .25s; }
+    .navlinks a:hover { color: var(--fog); }
+    @media (max-width: 860px) { .navlinks { display: none !important; } }
+
+    .nav-cta {
+      font-size: 13.4px; letter-spacing: .02em; padding: 9px 20px; border-radius: 999px; background: rgba(255, 67, 0, 0.08);
+      color: var(--phosphor); border: none; backdrop-filter: blur(12px); font-weight: 600;
+    }
+
+    .page-hero {
+      min-height: 42vh; display: flex; align-items: center; padding-top: 155px; padding-bottom: 45px; position: relative;
+    }
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif !important; font-weight: 600; font-size: 20px; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--copper); display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .display { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5.8vw, 68px); line-height: 1.08; letter-spacing: -0.01em; }
+    .hero-sub { margin-top: 18px; max-width: 660px; color: var(--fog-dim); font-size: 17.5px; line-height: 1.7; }
+
+    .legal-container {
+      background: var(--board); border-top: 1px solid var(--panel-line); padding: 70px 0 100px;
+    }
+    .legal-content {
+      max-width: 820px; font-family: 'Manrope', sans-serif !important; font-size: 16px; line-height: 1.8; color: var(--fog-dim);
+    }
+    .legal-content h2 {
+      font-size: 32px; font-weight: 500; color: var(--fog); margin-top: 48px; margin-bottom: 16px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--panel-line);
+    }
+    .legal-content h3 { font-size: 22px; font-weight: 500; color: var(--fog); margin-top: 28px; margin-bottom: 12px; }
+    .legal-content p { margin-bottom: 18px; }
+    .legal-content ul { margin: 0 0 22px 24px; padding: 0; }
+    .legal-content li { margin-bottom: 10px; list-style-type: square; }
+    .legal-content strong { color: var(--fog); }
+
+    .callout-box {
+      background: var(--board-2); border-left: 3px solid var(--phosphor); padding: 20px 24px; border-radius: 8px; margin: 28px 0;
+    }
+
+    footer { padding: 60px 0 40px; border-top: 1px solid var(--panel-line); }
+    .foot-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 30px; }
+    .foot-brand p { color: var(--muted); font-size: 14.5px; max-width: 320px; margin-top: 10px; }
+    .foot-links { display: flex; gap: 24px; font-size: 15px; color: var(--fog-dim); flex-wrap: wrap; }
+    .foot-links a:hover { color: var(--phosphor); }
+    #foot-signal { width: 100%; height: 36px; margin-top: 26px; opacity: .7; }
+    .foot-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; }
+    @media (max-width: 860px) { .hamburger { display: block; } }
+    .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21, 10, 13, 0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+    .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
+    .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif !important; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="/" class="logo">
+        <img src="/newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;">
+        <b>Nodewave</b>
+      </a>
+      <nav class="navlinks">
+        <a href="/solutions">Solutions</a>
+        <a href="/industries">Industries</a>
+        <a href="/about">About</a>
+        <a href="/case-studies">Case Studies</a>
+      </nav>
+      <a href="/contact" class="nav-cta">Let's Start →</a>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay">
+    <a href="/solutions">Solutions</a>
+    <a href="/industries">Industries</a>
+    <a href="/about">About</a>
+    <a href="/case-studies">Case Studies</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow">LEGAL & DATA PROTECTION</div>
+        <h1 class="display">Privacy Policy.</h1>
+        <p class="hero-sub">
+          Last updated: September 14, 2026. This policy describes how Nodewave collects, uses, protects, and handles personal and operational data across our website and automation services.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="legal-container">
+      <div class="wrap">
+        <article class="legal-content">
+          <div class="callout-box">
+            <strong>Core Principle:</strong> Nodewave is an operational workflow engineering firm. We automate backend business processes. <strong>We do not sell client data, we do not monetize personal information, and we do not train public AI models on proprietary client workflows.</strong>
+          </div>
+
+          <h2>1. Data Controller Information</h2>
+          <p>
+            The data controller responsible for personal information collected through this website (nodewave.co) is:
+          </p>
+          <p>
+            <strong>Nodewave</strong><br>
+            Mumbai, India<br>
+            Operating across IST, EST, and PST timezones.<br>
+            Direct Privacy Contact: <a href="mailto:sreehari@nodewave.co" style="color:var(--phosphor);">sreehari@nodewave.co</a>
+          </p>
+
+          <h2>2. Information We Collect</h2>
+          <h3>A. Information You Provide Directly</h3>
+          <p>
+            When you interact with our website—such as requesting an operations audit, booking a consultation via Cal.com, or submitting an inquiry—we collect:
+          </p>
+          <ul>
+            <li><strong>Contact details:</strong> Full name, professional work email address, phone number (optional).</li>
+            <li><strong>Business information:</strong> Company or law firm name, team size, primary practice area.</li>
+            <li><strong>Workflow descriptions:</strong> Information you share regarding operational bottlenecks, software in use (e.g. Clio, HubSpot, Zapier), and automation objectives.</li>
+          </ul>
+
+          <h3>B. Automatically Collected Information & Telemetry</h3>
+          <p>
+            When you browse nodewave.co, we may collect anonymous, aggregated technical data including:
+          </p>
+          <ul>
+            <li>Browser type, operating system, device viewport dimensions.</li>
+            <li>Aggregated page visit patterns, scroll depth milestones, and call-to-action engagement.</li>
+            <li>Anonymized IP addresses (truncated to prevent individual identification).</li>
+          </ul>
+
+          <h2>3. Confidentiality & Client Workflow Security</h2>
+          <p>
+            When Nodewave implements custom automation architectures for clients (especially law firms, financial institutions, and health enterprises handling regulated data):
+          </p>
+          <ul>
+            <li><strong>Confidentiality First:</strong> All operational architectures, API keys, webhook endpoints, and database schemas are handled under strict Non-Disclosure Agreements (NDAs).</li>
+            <li><strong>Zero-Retention Processing:</strong> Automated workflows process operational records transiently in-flight to route them directly to your designated CRM, practice management system, or database without unauthorized third-party caching.</li>
+            <li><strong>Enterprise Encryption:</strong> All data transmissions utilize TLS 1.3 encryption in transit and AES-256 encryption at rest where credentials are stored.</li>
+          </ul>
+
+          <h2>4. Legal Grounds for Processing (GDPR & International Compliance)</h2>
+          <p>We process your data under the following legal bases:</p>
+          <ul>
+            <li><strong>Performance of a Contract:</strong> To deliver requested operations audits, workflow blueprints, and consulting services.</li>
+            <li><strong>Legitimate Interest:</strong> To ensure website security, prevent spam/abuse, and refine our service positioning.</li>
+            <li><strong>Consent:</strong> For optional non-essential telemetry and analytics cookies, which you may grant or decline via our Cookie Consent banner.</li>
+          </ul>
+
+          <h2>5. Cookies & Telemetry</h2>
+          <p>
+            We use essential cookies necessary for website security and layout rendering. With your permission, we also deploy anonymous analytics telemetry to understand how visitors interact with our content. You can manage or revoke your preferences at any time via the cookie banner or your browser settings.
+          </p>
+
+          <h2>6. Third-Party Service Providers</h2>
+          <p>We partner with vetted, enterprise-grade subprocessors to operate our digital infrastructure:</p>
+          <ul>
+            <li><strong>Scheduling:</strong> Cal.com (open-source calendar scheduling infrastructure).</li>
+            <li><strong>Hosting & CDN:</strong> Secure global edge network providers delivering fast SSL-encrypted page loads.</li>
+            <li><strong>Analytics:</strong> Privacy-compliant Google Analytics 4 (configured with IP anonymization).</li>
+          </ul>
+
+          <h2>7. Your Data Rights</h2>
+          <p>
+            Under GDPR, CCPA, and applicable global privacy legislation, you maintain the right to:
+          </p>
+          <ul>
+            <li>Request access to the personal data we hold about you.</li>
+            <li>Request correction of inaccurate or incomplete records.</li>
+            <li>Request deletion ("Right to be Forgotten") of your contact details.</li>
+            <li>Object to or restrict specific processing activities.</li>
+            <li>Receive a portable digital copy of your provided information.</li>
+          </ul>
+          <p>
+            To exercise any of these rights, email us at <a href="mailto:sreehari@nodewave.co" style="color:var(--phosphor);">sreehari@nodewave.co</a>. We respond to verified requests within 30 days without charge.
+          </p>
+
+          <h2>8. Updates to This Policy</h2>
+          <p>
+            We may update this Privacy Policy periodically to reflect technological or legal developments. Significant modifications will be noted on this page with an updated revision date.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-row">
+        <div class="foot-brand">
+          <a href="/" class="logo">
+            <img src="/newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;">
+            <b>Nodewave</b>
+          </a>
+          <p>Intelligent operational workflows that automate repetitive business processes.</p>
+        </div>
+        <div class="foot-links">
+          <a href="/solutions">Solutions</a>
+          <a href="/industries">Industries</a>
+          <a href="/about">About</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+      <svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none" role="img" aria-label="Decorative wave separator">
+        <path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none" />
+      </svg>
+      <div class="foot-meta">
+        <div>© 2026 Nodewave. Mumbai, India • Serving Clients Globally (IST / EST / PST)</div>
+        <div>Direct inquiries: <a href="mailto:sreehari@nodewave.co" style="color:var(--phosphor);">sreehari@nodewave.co</a> • Response SLA: &lt; 4 Hours</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    if (dot && ring) {
+      window.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+    }
+
+    const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    if (hamburger && overlay) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        overlay.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+
+</html>

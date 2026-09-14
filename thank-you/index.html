@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Audit Request Confirmed | Nodewave</title>
+  <meta name="description"
+    content="Your operations audit request has been confirmed. Here is what happens next as we review your workflows.">
+  <link rel="canonical" href="https://nodewave.co/thank-you/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nodewave.co/thank-you/">
+  <meta property="og:title" content="Audit Request Confirmed | Nodewave">
+  <meta property="og:description"
+    content="Your operations audit request has been confirmed. Here is what happens next.">
+  <meta property="og:image" content="https://nodewave.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Nodewave">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Audit Request Confirmed | Nodewave">
+  <meta name="twitter:description"
+    content="Your operations audit request has been confirmed. Here is what happens next.">
+  <meta name="twitter:image" content="https://nodewave.co/og-image.png">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Fonts & Scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Geist:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Modular Enhancements -->
+  <link rel="stylesheet" href="/assets/css/site-enhancements.css">
+  <script src="/assets/js/site-enhancements.js" defer></script>
+
+  <style>
+    :root {
+      --board: #FBFAF7;
+      --board-2: #F4F2ED;
+      --panel: #150A0D;
+      --panel-line: rgba(10, 10, 10, 0.14);
+      --copper: #7A1128;
+      --copper-2: #9C1B37;
+      --phosphor: #FF4300;
+      --phosphor-2: #FF7A40;
+      --fog: #0E0E0E;
+      --fog-dim: #2E2E2C;
+      --muted: #6B6B66;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --ease-out: cubic-bezier(.16, 1.3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: var(--phosphor); color: var(--board); }
+
+    body {
+      margin: 0;
+      background: var(--board);
+      color: var(--fog);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none;
+    }
+
+    p, li, span, button, a { font-family: 'Manrope', sans-serif !important; }
+    @media (max-width: 860px) { body { cursor: auto; } }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 450; }
+
+    .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 640px) { .wrap { padding: 0 22px; } }
+
+    .cursor-dot, .cursor-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999999; border-radius: 50%; transform: translate(-50%, -50%);
+    }
+    .cursor-dot { width: 5px; height: 5px; background: var(--phosphor); box-shadow: 0 0 8px 2px rgba(255, 67, 0, 0.6); }
+    .cursor-ring { width: 34px; height: 34px; border: 1px solid rgba(10, 10, 10, 0.35); transition: width .25s var(--ease-out), height .25s var(--ease-out), border-color .25s; }
+    .cursor-ring.active { width: 56px; height: 56px; border-color: var(--phosphor); }
+    @media (max-width: 860px) { .cursor-dot, .cursor-ring { display: none; } }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 18px 0; }
+    .navbar {
+      max-width: 1240px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 60px;
+      border-radius: 999px; background: rgba(251, 250, 247, 0.78); backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(10, 10, 10, 0.1); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 640px) { .navbar { padding: 0 16px; border-radius: 20px; } }
+
+    .logo { display: flex; align-items: center; gap: 4px; font-family: 'Manrope', sans-serif; font-size: 21.5px; letter-spacing: .01em; }
+    .logo b { font-weight: 500; color: var(--fog); }
+
+    .navlinks { display: flex; gap: 34px; font-size: 18.5px; letter-spacing: .04em; color: var(--fog-dim); }
+    .navlinks a { position: relative; padding: 4px 0; transition: color .25s; }
+    .navlinks a:hover { color: var(--fog); }
+    @media (max-width: 860px) { .navlinks { display: none !important; } }
+
+    .nav-cta {
+      font-size: 13.4px; letter-spacing: .02em; padding: 9px 20px; border-radius: 999px; background: rgba(255, 67, 0, 0.08);
+      color: var(--phosphor); border: none; backdrop-filter: blur(12px); font-weight: 600;
+    }
+
+    .page-hero {
+      min-height: 50vh; display: flex; align-items: center; padding-top: 155px; padding-bottom: 45px; position: relative; overflow: hidden;
+    }
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif !important; font-weight: 600; font-size: 20px; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--copper); display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .display { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5.8vw, 68px); line-height: 1.08; letter-spacing: -0.01em; }
+    .hero-sub { margin-top: 20px; max-width: 660px; color: var(--fog-dim); font-size: 17.5px; line-height: 1.7; }
+
+    .confirm-card {
+      background: var(--panel); border-radius: 28px; padding: 44px 40px; border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #FBFAF7; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); margin-bottom: 60px;
+    }
+    @media (max-width: 640px) { .confirm-card { padding: 30px 22px; border-radius: 20px; } }
+
+    .badge-confirmed {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px;
+      background: rgba(255, 67, 0, 0.12); color: #FF7A40; font-size: 13.5px; font-weight: 600; margin-bottom: 20px;
+      border: 1px solid rgba(255, 67, 0, 0.25);
+    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #FF4300; box-shadow: 0 0 10px #FF4300; }
+
+    .step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
+    @media (max-width: 860px) { .step-grid { grid-template-columns: 1fr; gap: 18px; } }
+
+    .step-card {
+      padding: 30px 26px; border-radius: 18px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: transform .25s, border-color .25s;
+    }
+    .step-card:hover { transform: translateY(-3px); border-color: rgba(255, 67, 0, 0.35); }
+    .step-num { font-family: 'Cormorant Garamond', serif !important; font-weight: 600; font-size: 20px; color: var(--phosphor); margin-bottom: 12px; }
+    .step-card h3 { font-size: 22px; font-weight: 500; margin-bottom: 10px; color: #FBFAF7; }
+    .step-card p { font-size: 14.5px; line-height: 1.6; color: rgba(251, 250, 247, 0.7); }
+
+    .cal-actions {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, 0.08);
+      align-items: center;
+    }
+    .btn-action {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px;
+      background: #FF4300; color: #FBFAF7; font-weight: 600; font-size: 14px; box-shadow: 0 4px 16px rgba(255, 67, 0, 0.35);
+    }
+    .btn-subtle {
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08); color: #FBFAF7; font-weight: 500; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .btn-subtle:hover { background: rgba(255, 255, 255, 0.14); }
+
+    /* Reading Section */
+    .reading-section { background: var(--board-2); border-top: 1px solid var(--panel-line); padding: 75px 0; }
+    .reading-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
+    @media (max-width: 768px) { .reading-grid { grid-template-columns: 1fr; } }
+    .reading-card {
+      padding: 32px 28px; border-radius: 18px; background: var(--board); border: 1px solid var(--panel-line);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .reading-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
+    .reading-card h3 { font-size: 24px; margin-bottom: 10px; }
+    .reading-card p { font-size: 15px; color: var(--fog-dim); line-height: 1.65; margin-bottom: 18px; }
+    .reading-link { font-weight: 600; font-size: 14px; color: var(--phosphor); display: inline-flex; align-items: center; gap: 4px; }
+
+    footer { padding: 60px 0 40px; border-top: 1px solid var(--panel-line); }
+    .foot-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 30px; }
+    .foot-brand p { color: var(--muted); font-size: 14.5px; max-width: 320px; margin-top: 10px; }
+    .foot-links { display: flex; gap: 24px; font-size: 15px; color: var(--fog-dim); flex-wrap: wrap; }
+    .foot-links a:hover { color: var(--phosphor); }
+    #foot-signal { width: 100%; height: 36px; margin-top: 26px; opacity: .7; }
+    .foot-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--fog); margin-bottom: 5px; }
+    @media (max-width: 860px) { .hamburger { display: block; } }
+    .mobile-menu-overlay { position: fixed; inset: 0; background: rgba(21, 10, 13, 0.95); backdrop-filter: blur(10px); z-index: 1000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+    .mobile-menu-overlay.is-active { opacity: 1; pointer-events: auto; }
+    .mobile-menu-overlay a { font-family: 'Cormorant Garamond', serif !important; font-size: 28px; color: #fff; margin: 15px 0; text-decoration: none; }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="/" class="logo">
+        <img src="/newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;">
+        <b>Nodewave</b>
+      </a>
+      <nav class="navlinks">
+        <a href="/solutions">Solutions</a>
+        <a href="/industries">Industries</a>
+        <a href="/about">About</a>
+        <a href="/case-studies">Case Studies</a>
+      </nav>
+      <a href="/contact" class="nav-cta">Contact →</a>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay">
+    <a href="/solutions">Solutions</a>
+    <a href="/industries">Industries</a>
+    <a href="/about">About</a>
+    <a href="/case-studies">Case Studies</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow">CONFIRMATION // NEXT STEPS</div>
+        <h1 class="display" id="thankyou-heading">Your Operations Audit is Scheduled.</h1>
+        <p class="hero-sub" id="thankyou-sub">
+          We have received your details. Our systems engineers are reviewing your operation to pinpoint high-leverage bottlenecks and prepare your tailored automation architecture.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONFIRMATION & TIMELINE CONTAINER -->
+    <section style="padding-top: 0;">
+      <div class="wrap">
+        <div class="confirm-card">
+          <div class="badge-confirmed">
+            <span class="badge-dot"></span>
+            <span>Audit Request Logged • Priority Review Active</span>
+          </div>
+
+          <h2 style="font-size: 32px; font-weight: 500; margin-bottom: 12px;">What happens next.</h2>
+          <p style="color: rgba(251, 250, 247, 0.7); max-width: 640px; font-size: 15.5px; line-height: 1.6;">
+            Here is our standard 3-phase preparation process before our strategic call:
+          </p>
+
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-num">01 / Within 4 Hours</div>
+              <h3>Workflow Pre-Audit</h3>
+              <p>We analyze your team's operational surface, software stack, and typical industry bottlenecks to come prepared with specific workflow hypotheses.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">02 / Live Call (30 min)</div>
+              <h3>Bottleneck Mapping</h3>
+              <p>Together, we trace your exact information flow—identifying where manual handoffs cause delays, missed follow-ups, or unbilled hours.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-num">03 / Post-Call Blueprint</div>
+              <h3>Automation Architecture</h3>
+              <p>You receive an end-to-end technical blueprint detailing which tools to connect, what logic to automate, and projected monthly hours saved.</p>
+            </div>
+          </div>
+
+          <div class="cal-actions">
+            <a href="https://app.cal.com/nodewave/30min" target="_blank" rel="noopener" class="btn-action" data-analytics-cta="thankyou_calendar_sync">
+              📅 Sync with Cal.com Slot →
+            </a>
+            <a href="/" class="btn-subtle">
+              Back to Home
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDED READING -->
+    <section class="reading-section">
+      <div class="wrap">
+        <div class="eyebrow" style="margin-bottom: 10px;">WHILE YOU WAIT</div>
+        <h2 style="font-size: clamp(28px, 4vw, 42px); line-height: 1.2;">Explore proven automation architectures.</h2>
+
+        <div class="reading-grid">
+          <div class="reading-card">
+            <h3>Law Firm Operations Automation</h3>
+            <p>How personal injury and litigation firms eliminate 20+ hours of intake triage and automated lead follow-ups each week.</p>
+            <a href="/industries/law-firms" class="reading-link">Read Law Firm Architecture →</a>
+          </div>
+          <div class="reading-card">
+            <h3>Core Solutions Portfolio</h3>
+            <p>Deep dives into our intake pipelines, multi-touch follow-up systems, referral routing, and executive reporting workflows.</p>
+            <a href="/solutions" class="reading-link">Explore Solutions →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-row">
+        <div class="foot-brand">
+          <a href="/" class="logo">
+            <img src="/newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;">
+            <b>Nodewave</b>
+          </a>
+          <p>Intelligent operational workflows that automate repetitive business processes.</p>
+        </div>
+        <div class="foot-links">
+          <a href="/solutions">Solutions</a>
+          <a href="/industries">Industries</a>
+          <a href="/about">About</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+      <svg id="foot-signal" viewBox="0 0 1200 36" preserveAspectRatio="none" role="img" aria-label="Decorative wave separator">
+        <path id="foot-path" d="M0,14 L1200,14" stroke="#7A1128" stroke-width="1" fill="none" />
+      </svg>
+      <div class="foot-meta">
+        <div>© 2026 Nodewave. Mumbai, India • Serving Clients Globally (IST / EST / PST)</div>
+        <div>Direct inquiries: <a href="mailto:sreehari@nodewave.co" style="color:var(--phosphor);">sreehari@nodewave.co</a> • Response SLA: &lt; 4 Hours</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Personalize greeting if user just submitted the form
+    const submittedName = sessionStorage.getItem('nodewave_audit_name');
+    if (submittedName) {
+      const heading = document.getElementById('thankyou-heading');
+      if (heading) {
+        heading.textContent = `Thank You, ${submittedName}. Your Audit is Scheduled.`;
+      }
+    }
+
+    // Custom cursor & Hamburger interaction
+    const dot = document.querySelector('.cursor-dot');
+    const ring = document.querySelector('.cursor-ring');
+    if (dot && ring) {
+      window.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+    }
+
+    const hamburger = document.querySelector('.hamburger');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    if (hamburger && overlay) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('is-active');
+        overlay.classList.toggle('is-active');
+      });
+    }
+  </script>
+</body>
+
+</html>

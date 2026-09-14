@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /ref.html
+Disallow: /safe_apply.ps1
+Disallow: /thank-you/
+Disallow: /*.md$
+Disallow: /*.ps1$
+
 Sitemap: https://nodewave.co/sitemap.xml

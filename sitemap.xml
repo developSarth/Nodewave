@@ -1,54 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Core Pages -->
+  <!-- Core Brand Pages -->
   <url>
     <loc>https://nodewave.co/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://nodewave.co/about</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nodewave.co/contact</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nodewave.co/case-studies</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Solutions Hub & Subpages -->
+  <!-- Solutions Hub & Capabilities -->
   <url>
     <loc>https://nodewave.co/solutions</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nodewave.co/solutions/intake</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://nodewave.co/solutions/follow-ups</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://nodewave.co/solutions/referrals</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://nodewave.co/solutions/reporting</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://nodewave.co/solutions/customer-support</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 
-  <!-- Industries Hub & Subpages -->
+  <!-- Industries Hub & Vertical Beachheads -->
   <url>
     <loc>https://nodewave.co/industries</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nodewave.co/industries/law-firms</loc>
-    <priority>0.85</priority>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Case Studies Hub -->
+  <!-- Legal & Support Pages -->
   <url>
-    <loc>https://nodewave.co/case-studies</loc>
-    <priority>0.9</priority>
+    <loc>https://nodewave.co/privacy</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nodewave.co/terms</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
