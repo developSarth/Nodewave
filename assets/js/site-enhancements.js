@@ -147,8 +147,8 @@
   };
 
   function initAnalyticsEngine() {
-    // If GA4 measurement ID is set in window.NODEWAVE_GA_ID or default placeholder
-    const gaId = window.NODEWAVE_GA_ID || null;
+    // GA4 measurement ID
+    const gaId = window.NODEWAVE_GA_ID || 'G-1EXD0W1J2G';
     if (gaId && !window.gtag) {
       const script = document.createElement('script');
       script.async = true;
@@ -197,14 +197,115 @@
     );
   }
 
+  // ---------- 4. VALUE CALCULATOR ENGINE ----------
+  function initValueCalculator() {
+    const calcSection = document.querySelector('.value-calc-section');
+    if (!calcSection) return;
+
+    const hourlyInput = calcSection.querySelector('#calc-hourly');
+    const timeInput = calcSection.querySelector('#calc-time');
+    const freqInput = calcSection.querySelector('#calc-freq');
+    const peopleInput = calcSection.querySelector('#calc-people');
+
+    const hourlyDisp = calcSection.querySelector('#calc-hourly-disp');
+    const timeDisp = calcSection.querySelector('#calc-time-disp');
+    const freqDisp = calcSection.querySelector('#calc-freq-disp');
+    const peopleDisp = calcSection.querySelector('#calc-people-disp');
+
+    const toggleWk = calcSection.querySelector('#calc-toggle-wk');
+    const toggleMo = calcSection.querySelector('#calc-toggle-mo');
+
+    const metricMain = calcSection.querySelector('#calc-metric-main');
+    const metricHours = calcSection.querySelector('#calc-metric-hours');
+    const metricMonth = calcSection.querySelector('#calc-metric-month');
+
+    if (!hourlyInput || !timeInput || !freqInput || !peopleInput) return;
+
+    let isWeekly = true;
+
+    function formatCurrency(val) {
+      if (val >= 1000) {
+        return '$' + (val / 1000).toFixed(1) + 'k';
+      }
+      return '$' + Math.round(val).toLocaleString();
+    }
+
+    function formatHours(val) {
+      if (val >= 1000) {
+        return (val / 1000).toFixed(1) + 'k hrs';
+      }
+      return Math.round(val).toLocaleString() + ' hrs';
+    }
+
+    function updateSliderTrack(slider) {
+      const min = parseFloat(slider.min) || 0;
+      const max = parseFloat(slider.max) || 100;
+      const val = parseFloat(slider.value) || 0;
+      const percent = ((val - min) / (max - min)) * 100;
+      slider.style.background = `linear-gradient(to right, #FF4300 0%, #FF4300 ${percent}%, #E5E2DC ${percent}%, #E5E2DC 100%)`;
+    }
+
+    function calculate() {
+      const hourly = parseFloat(hourlyInput.value) || 90;
+      const time = parseFloat(timeInput.value) || 2;
+      const freq = parseFloat(freqInput.value) || 5;
+      const people = parseFloat(peopleInput.value) || 3;
+
+      if (hourlyDisp) hourlyDisp.textContent = '$' + hourly;
+      if (timeDisp) timeDisp.textContent = (time % 1 === 0 ? time : time.toFixed(1)) + ' hrs';
+      if (freqDisp) freqDisp.textContent = freq + '×';
+      if (peopleDisp) peopleDisp.textContent = people;
+
+      updateSliderTrack(hourlyInput);
+      updateSliderTrack(timeInput);
+      updateSliderTrack(freqInput);
+      updateSliderTrack(peopleInput);
+
+      const annualTasks = isWeekly ? freq * 52 : freq * 12;
+      const totalHours = annualTasks * time * people;
+      const hoursFreed = Math.round(totalHours * 0.70);
+      const valueFreed = Math.round(hoursFreed * hourly);
+      const monthlyValue = Math.round(valueFreed / 12);
+
+      if (metricMain) metricMain.textContent = formatCurrency(valueFreed);
+      if (metricHours) metricHours.textContent = formatHours(hoursFreed);
+      if (metricMonth) metricMonth.textContent = formatCurrency(monthlyValue);
+    }
+
+    [hourlyInput, timeInput, freqInput, peopleInput].forEach((input) => {
+      input.addEventListener('input', calculate);
+    });
+
+    if (toggleWk && toggleMo) {
+      toggleWk.addEventListener('click', () => {
+        isWeekly = true;
+        toggleWk.classList.add('is-active');
+        toggleMo.classList.remove('is-active');
+        calculate();
+      });
+
+      toggleMo.addEventListener('click', () => {
+        isWeekly = false;
+        toggleMo.classList.add('is-active');
+        toggleWk.classList.remove('is-active');
+        calculate();
+      });
+    }
+
+    calculate();
+  }
+
   // ---------- INITIALIZE ON DOM READY ----------
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       initCookieBanner();
       initStickyMobileCTA();
+      initValueCalculator();
     });
   } else {
     initCookieBanner();
     initStickyMobileCTA();
+    initValueCalculator();
   }
 })();
+

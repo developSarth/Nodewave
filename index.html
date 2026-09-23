@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EXD0W1J2G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1EXD0W1J2G');
+</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Nodewave | Intelligent Workflow Automation for Growing Teams</title>
@@ -317,12 +327,12 @@
 
     .logo b {
       font-weight: 500;
-      color: var(#0E0E0E);
+      color: var(--fog, #0E0E0E);
     }
 
     .logo .dim {
       color: var(--muted);
-      font-size: 17 px;
+      font-size: 17px;
     }
 
     .navlinks {
@@ -454,7 +464,18 @@
       opacity: .9;
     }
 
-    
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(21, 10, 13, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 10, 13, 0.045) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 35%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 35%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
 
     .hero-inner {
       position: relative;
@@ -1493,7 +1514,7 @@
   <main id="top">
 
     <section id="hero">
-      
+      <div class="hero-grid"></div>
       <canvas id="hero-canvas"></canvas>
       <div class="wrap hero-inner">
         <h1 class="hero-head display">
@@ -1771,6 +1792,102 @@
           <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Customer Support</div>
         </div>
         <a href="/industries/law-firms" class="btn-primary magnetic reveal" style="margin-top:36px;">Explore Law Firm Automation<span>&rarr;</span></a>
+      </div>
+    </section>
+
+    <!-- VALUE CALCULATOR -->
+    <section class="value-calc-section" id="calculator">
+      <div class="wrap">
+        <div class="calc-grid">
+          
+          <!-- LEFT: INTERACTIVE SLIDERS -->
+          <div class="calc-left reveal">
+            <div class="calc-eyebrow">VALUE CALCULATOR</div>
+            <h2 class="calc-title">See what automation is worth to your team.</h2>
+            <p class="calc-sub">Adjust the inputs to estimate the expert time you could reclaim each year — no sign-up required.</p>
+
+            <div class="calc-sliders">
+              <!-- SLIDER 1 -->
+              <div class="calc-row">
+                <div class="calc-row-header">
+                  <span class="calc-label">Loaded hourly cost</span>
+                  <span class="calc-val-display" id="calc-hourly-disp">$90</span>
+                </div>
+                <div class="calc-desc">Divide the annual fully-loaded salary (salary + benefits + tools) by 2,000 working hours to get a rough per-hour cost.</div>
+                <div class="calc-control-wrap">
+                  <input type="range" class="calc-slider" id="calc-hourly" min="20" max="250" step="5" value="90" aria-label="Loaded hourly cost">
+                </div>
+              </div>
+
+              <!-- SLIDER 2 -->
+              <div class="calc-row">
+                <div class="calc-row-header">
+                  <span class="calc-label">Time per task</span>
+                  <span class="calc-val-display" id="calc-time-disp">2 hrs</span>
+                </div>
+                <div class="calc-desc">Think of one specific recurring task: data entry, report compilation, follow-up emails. How long does it actually take each time?</div>
+                <div class="calc-control-wrap">
+                  <input type="range" class="calc-slider" id="calc-time" min="0.5" max="8" step="0.5" value="2" aria-label="Time per task">
+                </div>
+              </div>
+
+              <!-- SLIDER 3 -->
+              <div class="calc-row">
+                <div class="calc-row-header">
+                  <span class="calc-label">Frequency</span>
+                  <span class="calc-val-display" id="calc-freq-disp">5×</span>
+                </div>
+                <div class="calc-desc">How many times does this task occur per week or month across your operation?</div>
+                <div class="calc-control-wrap">
+                  <input type="range" class="calc-slider" id="calc-freq" min="1" max="50" step="1" value="5" aria-label="Task frequency">
+                  <div class="calc-freq-toggle" role="group" aria-label="Frequency Unit">
+                    <button type="button" class="calc-toggle-btn is-active" id="calc-toggle-wk">/ Wk</button>
+                    <button type="button" class="calc-toggle-btn" id="calc-toggle-mo">/ Mo</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SLIDER 4 -->
+              <div class="calc-row">
+                <div class="calc-row-header">
+                  <span class="calc-label">People doing this task</span>
+                  <span class="calc-val-display" id="calc-people-disp">3</span>
+                </div>
+                <div class="calc-desc">How many team members perform this task? Multiply the time impact across your whole team.</div>
+                <div class="calc-control-wrap">
+                  <input type="range" class="calc-slider" id="calc-people" min="1" max="20" step="1" value="3" aria-label="People doing task">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: FLOATING SUMMARY CARD -->
+          <div class="calc-right reveal">
+            <div class="calc-card">
+              <div class="calc-card-eyebrow">EXPERT TIME FREED / YEAR</div>
+              <div class="calc-card-metric" id="calc-metric-main">$98.3k</div>
+              <div class="calc-card-sub">in expert time your team could redirect to higher-value work</div>
+
+              <div class="calc-card-strip">
+                <div class="calc-strip-col">
+                  <div class="strip-num" id="calc-metric-hours">1.1k hrs</div>
+                  <div class="strip-lbl">HOURS FREED / YEAR</div>
+                </div>
+                <div class="calc-strip-col">
+                  <div class="strip-num" id="calc-metric-month">$8.2k</div>
+                  <div class="strip-lbl">VALUE FREED / MONTH</div>
+                </div>
+              </div>
+
+              <div class="calc-card-note">A rough guide, not a quote — actual savings depend on your specific workflows.</div>
+
+              <a href="/contact" class="btn-primary calc-cta-btn magnetic" data-analytics-cta="calc_book_audit">
+                Book a free automation audit <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 

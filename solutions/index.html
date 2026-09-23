@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EXD0W1J2G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1EXD0W1J2G');
+</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Solutions | Nodewave</title>
@@ -220,10 +230,10 @@
     .page-hero .hero-sub { margin-top: 28px; max-width: 620px; color: var(--fog-dim); font-size: 18px; line-height: 1.75; }
     .page-hero .hero-cta-row { display: flex; align-items: center; gap: 22px; margin-top: 42px; flex-wrap: wrap; }
 
-    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 999px; background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor)); color: #0E0E0E; font-weight: 700; font-size: 15.2px; font-family: 'Manrope', serif; box-shadow: 0 10px 26px rgba(255,67,0.28); transition: transform .3s var(--ease-out); }
+    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 999px; background: linear-gradient(180deg, var(--phosphor-2), var(--phosphor)); color: #0E0E0E; font-weight: 700; font-size: 15.2px; font-family: 'Manrope', serif; box-shadow: 0 10px 26px rgba(, , , 0.); transition: transform .3s var(--ease-out); }
     .btn-primary:hover { transform: translateY(-3px); }
 
-    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 15px 8px; font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: .01em; color: var(--fog-dim); border-bottom: 1px solid rgba(10,10,10.25); transition: color .25s, border-color .25s; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; padding: 15px 8px; font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: .01em; color: var(--fog-dim); border-bottom: 1px solid rgba(, , , 0.); transition: color .25s, border-color .25s; }
     .btn-ghost:hover { color: var(--phosphor); border-color: var(--phosphor); }
 
     /* SOLUTION CARDS */
@@ -305,115 +315,165 @@
     .problem-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #FFFFFF; margin: 0; line-height: 1.25; }
     .problem-text p { font-size: 14.5px; color: rgba(255,255,255,0.68); margin-top: 4px; line-height: 1.5; }
     
-    /* FUNNEL CARD */
-    .funnel-card {
-      background: linear-gradient(165deg, rgba(28, 14, 18, 0.98), rgba(14, 7, 9, 0.99));
-      border: 1px solid rgba(255, 67, 0, 0.22);
-      border-top: 2px solid var(--phosphor);
-      border-radius: 20px;
-      padding: 30px 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 35px rgba(122,17,40,0.2);
+    /* OPERATIONAL FLOW CARD (Equal size, structured, minimal & executive) */
+    .flow-card {
+      background: linear-gradient(165deg, rgba(24, 12, 16, 0.98), rgba(15, 8, 10, 0.99));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 2px solid #FF4300;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 35px rgba(255, 67, 0, 0.05);
       position: relative;
       overflow: hidden;
     }
-    .funnel-card::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(255,67,0,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
     
-    .funnel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px; margin-bottom: 22px; }
-    .funnel-header .tag { font-family: 'Manrope', sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-    .funnel-header .status { display: inline-flex; align-items: center; gap: 6px; font-family: 'Manrope', sans-serif; font-size: 11.5px; font-weight: 600; color: var(--phosphor); background: rgba(255,67,0,0.12); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,67,0,0.25); }
-    .funnel-header .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--phosphor); box-shadow: 0 0 8px var(--phosphor); animation: pulseWarn 1.8s infinite; }
-    
-    @keyframes pulseWarn {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    
-    .funnel-body { display: flex; flex-direction: column; gap: 10px; position: relative; }
-    
-    .funnel-stage {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
+    .flow-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
     }
-    @media (max-width: 600px) {
-      .funnel-stage { grid-template-columns: 1fr; gap: 6px; }
+    .flow-header .tag {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
     }
-    
-    .funnel-box {
-      border-radius: 10px;
-      padding: 12px 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
-      position: relative;
-      transition: all 0.3s;
-    }
-    .funnel-box.tier-1 { width: 100%; border-left: 3px solid #D2964F; }
-    .funnel-box.tier-2 { width: 88%; margin: 0 auto 0 0; border-left: 3px solid #FF7A40; background: rgba(255,122,64,0.04); }
-    .funnel-box.tier-3 { width: 72%; margin: 0 auto 0 0; border-left: 3px solid #FF4300; background: rgba(255,67,0,0.06); }
-    .funnel-box.tier-4 { width: 58%; margin: 0 auto 0 0; border-left: 3px solid #9C1B37; background: rgba(156,27,55,0.12); border-color: rgba(255,67,0,0.25); }
-    @media (max-width: 600px) {
-      .funnel-box.tier-2, .funnel-box.tier-3, .funnel-box.tier-4 { width: 100%; }
-    }
-    
-    .funnel-box .stage-title { font-family: 'Manrope', sans-serif; font-size: 13.5px; font-weight: 600; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; }
-    .funnel-box .stage-sub { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 2px; }
-    
-    .leak-pill {
+    .flow-header .status {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
       font-family: 'Manrope', sans-serif;
       font-size: 11.5px;
       font-weight: 600;
-      color: #FF7A40;
-      background: rgba(255,67,0,0.08);
-      border: 1px dashed rgba(255,67,0,0.35);
-      white-space: nowrap;
+      color: #D2964F;
+      background: rgba(210, 150, 79, 0.1);
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(210, 150, 79, 0.25);
     }
-    .leak-pill.alert { color: #FF4300; background: rgba(255,67,0,0.14); border-color: rgba(255,67,0,0.5); }
+    .flow-header .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #D2964F;
+      box-shadow: 0 0 8px #D2964F;
+    }
     
-    .connector-flow {
+    .flow-body {
       display: flex;
-      align-items: center;
-      padding-left: 20px;
-      height: 12px;
-    }
-    .connector-line {
-      width: 2px;
-      height: 12px;
-      background: repeating-linear-gradient(to bottom, rgba(255,67,0,0.6), rgba(255,67,0,0.6) 2px, transparent 2px, transparent 5px);
+      flex-direction: column;
+      gap: 0;
+      position: relative;
     }
     
-    .funnel-footer {
+    .flow-box {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 14px;
+      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.25s, transform 0.25s, background-color 0.25s;
+    }
+    .flow-box:hover {
+      border-color: rgba(255, 67, 0, 0.35);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .flow-box-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    
+    .flow-step-badge {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #FF7A40;
+      background: rgba(255, 67, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    
+    .flow-meta-pill {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    
+    .flow-box-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 4px 0;
+    }
+    
+    .flow-box-desc {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.65);
+      margin: 0;
+    }
+    
+    .flow-connector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 18px;
+      position: relative;
+    }
+    .flow-connector-line {
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255, 67, 0, 0.6), rgba(210, 150, 79, 0.6));
+    }
+    
+    .flow-footer {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .metric-chip {
-      background: rgba(0,0,0,0.3);
-      padding: 10px 8px;
-      border-radius: 8px;
+    .flow-metric-chip {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 12px 10px;
+      border-radius: 12px;
       text-align: center;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .metric-chip .val { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; color: var(--phosphor); }
-    .metric-chip .lbl { font-family: 'Manrope', sans-serif; font-size: 10.5px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+    .flow-metric-chip .val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #FF7A40;
+      line-height: 1.1;
+    }
+    .flow-metric-chip .lbl {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
 
     /* WHY NODEWAVE DYNAMIC PROCESS */
     #why-nodewave-section { padding: 95px 0; position: relative; }
@@ -703,69 +763,73 @@
           </div>
 
           <div class="problem-right reveal">
-            <!-- STYLIZED BROKEN PROCESS FUNNEL DIAGRAM -->
-            <div class="funnel-card">
-              <div class="funnel-header">
-                <span class="tag">Process Diagnostic // Unoptimized Flow</span>
-                <span class="status"><span class="pulse-dot"></span> Bottlenecks Detected</span>
+            <!-- STRUCTURED CONNECTED OPERATIONAL WORKFLOW DIAGRAM -->
+            <div class="flow-card">
+              <div class="flow-header">
+                <span class="tag">Operational Architecture // Flow Sequence</span>
+                <span class="status"><span class="status-dot"></span> Continuous Execution</span>
               </div>
               
-              <div class="funnel-body">
-                <!-- STAGE 1 -->
-                <div class="funnel-stage">
-                  <div class="funnel-box tier-1">
-                    <div class="stage-title"><span>01. Inbound Inquiries</span> <span style="color:#D2964F;font-size:12px;">100% Vol</span></div>
-                    <div class="stage-sub">Web forms, email leads, client requests</div>
+              <div class="flow-body">
+                <!-- STEP 1 -->
+                <div class="flow-box">
+                  <div class="flow-box-top">
+                    <span class="flow-step-badge">STEP 01</span>
+                    <span class="flow-meta-pill">Instant Trigger</span>
                   </div>
-                  <div class="leak-pill"><span>⚠️</span> 32% Delayed in Inboxes</div>
+                  <h4 class="flow-box-title">Multi-Channel Inbound Capture</h4>
+                  <p class="flow-box-desc">Web forms, email inquiries, and client messages are ingested and normalized into structured data instantly.</p>
                 </div>
 
-                <div class="connector-flow"><div class="connector-line"></div></div>
+                <div class="flow-connector"><div class="flow-connector-line"></div></div>
 
-                <!-- STAGE 2 -->
-                <div class="funnel-stage">
-                  <div class="funnel-box tier-2">
-                    <div class="stage-title"><span>02. Manual System Handoff</span> <span style="color:#FF7A40;font-size:12px;">68% Passing</span></div>
-                    <div class="stage-sub">Manual CRM entry, team assignments</div>
+                <!-- STEP 2 -->
+                <div class="flow-box">
+                  <div class="flow-box-top">
+                    <span class="flow-step-badge">STEP 02</span>
+                    <span class="flow-meta-pill">Zero Manual Lookup</span>
                   </div>
-                  <div class="leak-pill"><span>⚡</span> Copy-Paste Data Desync</div>
+                  <h4 class="flow-box-title">Automated Validation &amp; Enrichment</h4>
+                  <p class="flow-box-desc">Historical records, conflict checks, and client context attach to the record without human copy-pasting.</p>
                 </div>
 
-                <div class="connector-flow"><div class="connector-line"></div></div>
+                <div class="flow-connector"><div class="flow-connector-line"></div></div>
 
-                <!-- STAGE 3 -->
-                <div class="funnel-stage">
-                  <div class="funnel-box tier-3">
-                    <div class="stage-title"><span>03. Follow-Up Touchpoints</span> <span style="color:#FF4300;font-size:12px;">40% Passing</span></div>
-                    <div class="stage-sub">Status checks, reminders, scheduling</div>
+                <!-- STEP 3 -->
+                <div class="flow-box">
+                  <div class="flow-box-top">
+                    <span class="flow-step-badge">STEP 03</span>
+                    <span class="flow-meta-pill">Guaranteed SLA</span>
                   </div>
-                  <div class="leak-pill alert"><span>⏳</span> Forgotten Touchpoints</div>
+                  <h4 class="flow-box-title">Rule-Based Routing &amp; Follow-Ups</h4>
+                  <p class="flow-box-desc">Work routes to the exact responsible team member while reminder cadences schedule automatically.</p>
                 </div>
 
-                <div class="connector-flow"><div class="connector-line"></div></div>
+                <div class="flow-connector"><div class="flow-connector-line"></div></div>
 
-                <!-- STAGE 4 -->
-                <div class="funnel-stage">
-                  <div class="funnel-box tier-4">
-                    <div class="stage-title"><span>04. Operational Output</span> <span style="color:#9C1B37;font-size:12px;">Sluggish Flow</span></div>
-                    <div class="stage-sub" style="color:#FF7A40;">Severe manual overhead &amp; late reports</div>
+                <!-- STEP 4 -->
+                <div class="flow-box">
+                  <div class="flow-box-top">
+                    <span class="flow-step-badge">STEP 04</span>
+                    <span class="flow-meta-pill">Live Sync</span>
                   </div>
-                  <div class="leak-pill alert" style="background:rgba(255,67,0,0.2);"><span>⛔</span> Choke Point</div>
+                  <h4 class="flow-box-title">System-of-Record Sync &amp; Reporting</h4>
+                  <p class="flow-box-desc">CRMs, ERPs, and operational dashboards update simultaneously with a complete immutable audit trail.</p>
                 </div>
               </div>
 
-              <div class="funnel-footer">
-                <div class="metric-chip">
-                  <div class="val">60%+</div>
-                  <div class="lbl">Manual Toil</div>
+              <div class="flow-footer">
+                <div class="flow-metric-chip">
+                  <div class="val">&lt; 2 min</div>
+                  <div class="lbl">Handoff Cycle</div>
                 </div>
-                <div class="metric-chip">
-                  <div class="val">24-48h</div>
-                  <div class="lbl">Average Lag</div>
+                <div class="flow-metric-chip">
+                  <div class="val">0%</div>
+                  <div class="lbl">Data Desync</div>
                 </div>
-                <div class="metric-chip">
-                  <div class="val">High</div>
-                  <div class="lbl">Process Leakage</div>
+                <div class="flow-metric-chip">
+                  <div class="val">100%</div>
+                  <div class="lbl">Audit Trail</div>
                 </div>
               </div>
             </div>
