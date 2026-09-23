@@ -12,7 +12,12 @@
   const COOKIE_STORAGE_KEY = 'nodewave_cookie_consent';
 
   function initCookieBanner() {
-    const savedConsent = localStorage.getItem(COOKIE_STORAGE_KEY);
+    let savedConsent = null;
+    try {
+      savedConsent = localStorage.getItem(COOKIE_STORAGE_KEY);
+    } catch (e) {
+      // Storage unavailable (e.g. file:/// or sandboxed mode)
+    }
     if (savedConsent) {
       if (savedConsent === 'all') {
         initAnalyticsEngine();
@@ -51,7 +56,7 @@
 
     if (acceptBtn) {
       acceptBtn.addEventListener('click', () => {
-        localStorage.setItem(COOKIE_STORAGE_KEY, 'all');
+        try { localStorage.setItem(COOKIE_STORAGE_KEY, 'all'); } catch (e) {}
         dismissBanner(banner);
         initAnalyticsEngine();
         window.nodewaveTrack('cookie_consent_given', { type: 'all' });
@@ -60,7 +65,7 @@
 
     if (declineBtn) {
       declineBtn.addEventListener('click', () => {
-        localStorage.setItem(COOKIE_STORAGE_KEY, 'essential');
+        try { localStorage.setItem(COOKIE_STORAGE_KEY, 'essential'); } catch (e) {}
         dismissBanner(banner);
         window.nodewaveTrack('cookie_consent_given', { type: 'essential' });
       });
@@ -199,8 +204,13 @@
 
   // ---------- 4. VALUE CALCULATOR ENGINE ----------
   function initValueCalculator() {
+    if (typeof window.initValueCalculator === 'function') {
+      window.initValueCalculator();
+      return;
+    }
     const calcSection = document.querySelector('.value-calc-section');
-    if (!calcSection) return;
+    if (!calcSection || calcSection.dataset.calcInit) return;
+    calcSection.dataset.calcInit = 'true';
 
     // Controls
     const hourlyInput = calcSection.querySelector('#calc-hourly');

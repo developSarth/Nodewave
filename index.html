@@ -137,7 +137,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px;
       line-height: 1.55;
-      overflow-x: hidden;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       cursor: none;
     }
@@ -549,6 +549,36 @@
       font-weight: 600;
     }
 
+    /* Hero text is visible by default */
+    .hero-inner .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Dark mode styling applies only when the UI explicitly activates dark theme */
+    .dark #hero, [data-theme="dark"] #hero { 
+      background-color: #0E0A08 !important; 
+    }
+    .dark .hero-head .rough, [data-theme="dark"] .hero-head .rough { 
+      color: #F4F2ED !important; 
+    }
+    .dark .hero-head .clean, [data-theme="dark"] .hero-head .clean { 
+      color: #F4F2ED !important; 
+    }
+    .dark .hero-highlight, [data-theme="dark"] .hero-highlight { 
+      color: #FF5A1F !important; 
+      text-shadow: 0 0 28px rgba(255, 90, 31, 0.4) !important; 
+    }
+    .dark .hero-sub, [data-theme="dark"] .hero-sub { 
+      color: rgba(244, 242, 237, 0.82) !important; 
+    }
+    .dark .hero-sub b, [data-theme="dark"] .hero-sub b { 
+      color: #FFFFFF !important; 
+    }
+    .dark .hero-bottom-blur, [data-theme="dark"] .hero-bottom-blur { 
+      background: linear-gradient(to bottom, rgba(14, 10, 8, 0) 0%, rgba(14, 10, 8, 0.75) 50%, #0E0A08 100%) !important; 
+    }
+
     .hero-cta-row {
       display: flex;
       align-items: center;
@@ -628,41 +658,64 @@
 
     .pcard {
       flex: none;
-      width: 340px;
-      padding: 28px;
-      border-radius: var(--radius-md);
-      background: linear-gradient(145deg, rgba(26, 12, 8, 0.98), rgba(14, 6, 4, 0.99));
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-top: 1px solid rgba(255, 122, 64, 0.35);
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 67, 0, 0.08);
+      width: 350px;
+      padding: 32px 30px;
+      border-radius: var(--radius-lg, 24px);
+      background: linear-gradient(145deg, #1C0F0A 0%, #120805 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 122, 64, 0.4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 67, 0, 0.06);
       color: #fff;
-      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-top-color 0.4s;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s;
       cursor: pointer;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      will-change: transform;
     }
 
     .pcard::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(255, 122, 64, 0.9), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
+      background: linear-gradient(90deg, transparent, rgba(255, 122, 64, 0.95), transparent);
+      opacity: 0.6;
+      transition: opacity 0.35s, height 0.35s;
     }
 
     .pcard:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(255, 100, 50, 0.35);
-      border-top-color: rgba(255, 122, 64, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(255, 100, 50, 0.25);
+      border-color: rgba(255, 122, 64, 0.5);
     }
 
     .pcard:hover::before {
       opacity: 1;
+      height: 4px;
+    }
+
+    .pcard .pcard-badge {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #FF7A40;
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pcard .pcard-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--phosphor);
+      box-shadow: 0 0 8px rgba(255, 67, 0, 0.8);
     }
 
     .pcard h4 {
@@ -671,36 +724,43 @@
       font-weight: 500;
       margin: 0 0 12px;
       color: #FFFFFF;
-      line-height: 1.15;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
 
     .pcard p {
       font-family: 'Manrope', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.65);
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.72);
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       flex-grow: 1;
     }
 
     .pcard .read-more {
       font-family: 'Manrope', sans-serif;
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--phosphor);
+      font-weight: 600;
+      font-size: 13.5px;
+      color: #fff;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      opacity: 1;
-      transition: color 0.2s, transform 0.2s;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: fit-content;
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
     }
 
     .pcard:hover .read-more {
-      color: var(--phosphor-2);
+      background: rgba(255, 67, 0, 0.2);
+      color: #FF9E70;
+      border-color: rgba(255, 122, 64, 0.4);
       transform: translateX(4px);
     }
 
@@ -928,17 +988,14 @@
       flex-direction: column;
     }
 
-    .why-row {
+    .why-row,
+    .why-row.reverse {
       display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
       padding: 56px 0;
       border-top: 1px solid var(--panel-line);
       align-items: center;
-    }
-
-    .why-row.reverse {
-      grid-template-columns: 1.15fr 1fr;
     }
 
     .why-row:last-child {
@@ -1148,9 +1205,9 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(12, 8, 6, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 99990;
       display: flex;
       align-items: center;
@@ -1158,21 +1215,23 @@
       padding: 20px;
       opacity: 0;
       visibility: hidden;
+      will-change: opacity;
     }
 
     .modal-content {
-      background: linear-gradient(135deg, rgba(38, 26, 21, 0.95), rgba(20, 12, 10, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-top: 1px solid rgba(255, 122, 64, 0.5);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      max-width: 740px;
+      background: linear-gradient(135deg, rgba(34, 20, 16, 0.98), rgba(18, 10, 8, 0.99));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 122, 64, 0.6);
+      border-radius: var(--radius-lg, 24px);
+      padding: 44px 48px;
+      max-width: 700px;
       width: 100%;
       position: relative;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 100, 50, 0.15);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 100, 50, 0.15);
       color: #fff;
-      transform: scale(0.96) translateY(10px);
+      transform: scale(0.96) translateY(10px) translateZ(0);
       opacity: 0;
+      will-change: transform, opacity;
     }
 
     .modal-close {
@@ -1910,7 +1969,7 @@
   <header>
     <div class="navbar">
       <a href="#top" class="logo">
-        <img src="/newlogo.svg" alt="Nodewave Logo" style="height: 28px; width: auto; margin-right: 8px;"><b>Nodewave</b>
+        <img src="newlogo.svg" alt="Nodewave Logo" style="height: 28px; width: auto; margin-right: 8px;"><b>Nodewave</b>
       </a>
       <nav class="navlinks">
         <a href="/solutions">Solutions</a>
@@ -1949,29 +2008,34 @@
       <div class="marquee-wrap">
         <div class="marquee-track" id="marquee">
           <div class="pcard" data-index="0">
+            <div class="pcard-badge">01 / WORKFLOW</div>
             <h4>Intake Automation</h4>
             <p>Capture and process incoming information without manual data entry, routing, or qualification. Turn incoming requests into structured, actionable work.</p>
-            <span class="read-more">Know More &rarr;</span>
+            <span class="read-more">Explore workflow &rarr;</span>
           </div>
           <div class="pcard" data-index="1">
+            <div class="pcard-badge">02 / WORKFLOW</div>
             <h4>Follow-Up Automation</h4>
             <p>Automate reminders, notifications, status checks, and next-step communication. Make every follow-up happen on time, every time.</p>
-            <span class="read-more">Know More &rarr;</span>
+            <span class="read-more">Explore workflow &rarr;</span>
           </div>
           <div class="pcard" data-index="2">
+            <div class="pcard-badge">03 / WORKFLOW</div>
             <h4>Reporting Automation</h4>
             <p>Automatically collect operational data and turn it into consistent reports and dashboards. Stop spending hours assembling reports manually.</p>
-            <span class="read-more">Know More &rarr;</span>
+            <span class="read-more">Explore workflow &rarr;</span>
           </div>
           <div class="pcard" data-index="3">
+            <div class="pcard-badge">04 / WORKFLOW</div>
             <h4>Referral Management</h4>
             <p>Track referrals from source to handoff to outcome. Know where every referral goes and what happened to it with zero spreadsheet management.</p>
-            <span class="read-more">Know More &rarr;</span>
+            <span class="read-more">Explore workflow &rarr;</span>
           </div>
           <div class="pcard" data-index="4">
+            <div class="pcard-badge">05 / WORKFLOW</div>
             <h4>Customer Support Workflow</h4>
             <p>Chat assistant and helpdesk to operate all detailed and service-related queries for new or amateur customers. AI-powered resolution at scale.</p>
-            <span class="read-more">Know More &rarr;</span>
+            <span class="read-more">Explore workflow &rarr;</span>
           </div>
         </div>
       </div>
@@ -2058,7 +2122,7 @@
           </div>
 
           <!-- RIGHT: BOLD, DARK, STICKY RESULT PANEL -->
-          <div class="calc-right reveal">
+          <div class="calc-right">
             <div class="calc-result" role="region" aria-label="Calculated annual automation value">
               <div class="calc-result-eyebrow">EXPERT TIME FREED / YEAR</div>
               <div class="calc-hero-num" id="calc-metric-main" aria-live="polite">$98.3k</div>
@@ -2181,7 +2245,7 @@
         </div>
         <div class="why-list">
           <div class="why-row">
-            <div class="why-copy reveal">
+            <div class="why-copy">
               <h3>Fast, Reliable Delivery</h3>
               <p>Modern workflow engineering delivers working automations in days, not quarters.</p>
               <div class="why-list-items">
@@ -2190,7 +2254,7 @@
                 <div>Launch-ready in three weeks, not three quarters</div>
               </div>
             </div>
-            <div class="why-visual reveal">
+            <div class="why-visual">
 <div class="stopwatch">
                 <div class="face"></div>
                 <div class="needle" id="watch-needle"></div>
@@ -2201,7 +2265,7 @@
           </div>
 
           <div class="why-row reverse">
-            <div class="why-visual reveal">
+            <div class="why-visual">
               <div class="transform-box">
                 <div class="rough-line">"...something that reminds people when invoices go unpaid."</div>
                 <div class="arrow">↓ compiled to</div>
@@ -2211,7 +2275,7 @@
                     class="s">'#finance'</span>);<br>}</div>
               </div>
             </div>
-            <div class="why-copy reveal">
+            <div class="why-copy">
               <h3>Your vision, our implementation</h3>
               <p>You bring the problem and the rough shape of a solution. You don't need to spec it like an engineer.
               </p>
@@ -2224,7 +2288,7 @@
           </div>
 
           <div class="why-row">
-            <div class="why-copy reveal">
+            <div class="why-copy">
               <h3>Connect All Your Software</h3>
               <p>Your team shouldn't spend hours copying data from one screen to another. We connect the tools you already use into one reliable process.</p>
               <div class="why-list-items">
@@ -2233,7 +2297,7 @@
                 <div>Automatic syncing, instant alerts, and zero manual data entry</div>
               </div>
             </div>
-            <div class="why-visual reveal">
+            <div class="why-visual">
 <div class="api-video-container">
                 <video src="connectgif.mp4" autoplay loop muted playsinline></video>
               </div>
@@ -2358,7 +2422,7 @@
     <div class="wrap">
       <div class="foot-row">
         <div class="foot-brand">
-          <a href="#top" class="logo"><img src="/newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;"><b>Nodewave</b></a>
+          <a href="#top" class="logo"><img src="newlogo.svg" alt="Nodewave Logo" width="28" height="28" style="margin-right: 8px;"><b>Nodewave</b></a>
           <p>Intelligent workflow automation for growing teams. Eliminate repetitive work and connect your operations.</p>
         </div>
         <div class="foot-links">
@@ -2383,12 +2447,12 @@
 
   <div class="modal-overlay" id="automation-modal">
     <div class="modal-content">
-      <button class="modal-close" id="modal-close">×</button>
+      <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
       <div class="modal-inner">
         <h3 id="modal-title">Title</h3>
         <div id="modal-body">Content</div>
         <div style="display:flex; justify-content:flex-end; margin-top:36px;">
-          <button id="modal-book-btn" class="magnetic" style="background: linear-gradient(135deg, rgba(255, 67, 0, 0.8), rgba(255, 122, 64, 0.9)); color: #fff; padding: 10px 20px; font-size: 14px; border-radius: 10px; font-weight: 600; font-family: 'Manrope', sans-serif; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 6px 14px rgba(255, 67, 0, 0.25); cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;">Book a call <span style="font-size: 1.2em;">→</span></button>
+          <a id="modal-book-btn" href="https://nodewave.co/contact/" class="magnetic" style="background: linear-gradient(135deg, rgba(255, 67, 0, 0.9), rgba(255, 122, 64, 0.95)); color: #fff; padding: 12px 24px; font-size: 14.5px; border-radius: 999px; font-weight: 600; font-family: 'Manrope', sans-serif; border: 1px solid rgba(255,255,255,0.25); box-shadow: 0 6px 18px rgba(255, 67, 0, 0.35); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;">Book a call <span style="font-size: 1.2em;">&rarr;</span></a>
         </div>
       </div>
     </div>
@@ -2434,11 +2498,11 @@
             modalTitle.textContent = data.title;
             modalBody.innerHTML = data.desc;
             
-            gsap.set(modalOverlay, { visibility: 'visible' });
-            gsap.to(modalOverlay, { opacity: 1, duration: 0.25, ease: 'power2.out' });
+            modalOverlay.style.visibility = 'visible';
+            gsap.to(modalOverlay, { opacity: 1, duration: 0.2, ease: 'power2.out' });
             gsap.fromTo('.modal-content', 
               { scale: 0.96, y: 15, opacity: 0 },
-              { scale: 1, y: 0, opacity: 1, duration: 0.25, ease: 'power3.out' }
+              { scale: 1, y: 0, opacity: 1, duration: 0.2, ease: 'power2.out' }
             );
             
             if(window.mqTween) window.mqTween.pause();
@@ -2447,9 +2511,9 @@
       });
 
       const closeModal = () => {
-        gsap.to('.modal-content', { scale: 0.98, opacity: 0, duration: 0.15, ease: 'power2.in' });
-        gsap.to(modalOverlay, { opacity: 0, duration: 0.2, ease: 'power2.in', onComplete: () => {
-          gsap.set(modalOverlay, { visibility: 'hidden' });
+        gsap.to('.modal-content', { scale: 0.97, opacity: 0, duration: 0.15, ease: 'power2.in' });
+        gsap.to(modalOverlay, { opacity: 0, duration: 0.15, ease: 'power2.in', onComplete: () => {
+          modalOverlay.style.visibility = 'hidden';
         }});
         if(window.mqTween) window.mqTween.play();
       };
@@ -2459,12 +2523,9 @@
         if(e.target === modalOverlay || e.target === modalOverlay.querySelector('.modal-inner')) closeModal();
       });
       if(bookBtn) {
-        bookBtn.addEventListener('click', () => {
-          closeModal();
-          setTimeout(() => {
-            const contactSection = document.getElementById('contact');
-            if(contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
-          }, 200);
+        bookBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'https://nodewave.co/contact/';
         });
       }
     });
@@ -2515,7 +2576,10 @@
     /* ---------- HERO INTRO ---------- */
     function playIntro() {
       gsap.to('header', { opacity: 1, duration: 0.8 });
-      gsap.to('.hero-inner .reveal', { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out' });
+      gsap.fromTo('.hero-inner .reveal', 
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out' }
+      );
     }
     gsap.set('header', { opacity: 0 });
 
@@ -2559,12 +2623,28 @@
       const ACTIVE_LINE_WIDTH = 1.5;
       const BASE_NODE_RADIUS = 1.8;
       const ACTIVE_NODE_RADIUS = 3.2;
-
-      // Color scheme: warm light editorial background matching the rest of the website
-      const CANVAS_BG = '#FBFAF7';
-      const BASE_LINE_COLOR = 'rgba(14, 14, 14, 0.08)';
-      const ACTIVE_LINE_RGB = [255, 67, 0]; // Phosphor accent
+      const ACTIVE_LINE_RGB = [255, 67, 0];
       const ACTIVE_NODE_RGB = [255, 67, 0];
+
+      function isDark() {
+        return (
+          document.documentElement.classList.contains('dark') ||
+          document.body.classList.contains('dark') ||
+          document.documentElement.getAttribute('data-theme') === 'dark'
+        );
+      }
+
+      function getColors() {
+        const dark = isDark();
+        return {
+          bg: dark ? '#0E0A08' : '#FBFAF7',
+          baseLine: dark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(14, 14, 14, 0.08)',
+          activeLine: [255, 67, 0],
+          activeNode: [255, 67, 0],
+          dotFill: dark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(14, 14, 14, 0.04)',
+          inactiveNode: dark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(14, 14, 14, 0.16)'
+        };
+      }
 
       let width = 0;
       let height = 0;
@@ -2589,11 +2669,23 @@
         pCanvas.width = DOT_SPACING;
         pCanvas.height = DOT_SPACING;
         const pctx = pCanvas.getContext('2d');
-        pctx.fillStyle = 'rgba(14, 14, 14, 0.04)';
+        const colors = getColors();
+        pctx.fillStyle = colors.dotFill;
         pctx.beginPath();
         pctx.arc(DOT_SPACING / 2, DOT_SPACING / 2, 0.75, 0, Math.PI * 2);
         pctx.fill();
         dotPattern = ctx.createPattern(pCanvas, 'repeat');
+      }
+
+      // Re-create dot pattern when UI theme changes
+      if (typeof MutationObserver !== 'undefined') {
+        const themeObserver = new MutationObserver(() => {
+          createDotPattern();
+        });
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+        if (document.body) {
+          themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+        }
       }
 
       function resize() {
@@ -2678,8 +2770,10 @@
           mouse.currentY += (mouse.targetY - mouse.currentY) * LERP_SPEED;
         }
 
+        const colors = getColors();
+
         // 2. Clear canvas with background color & fine dot texture
-        ctx.fillStyle = CANVAS_BG;
+        ctx.fillStyle = colors.bg;
         ctx.fillRect(0, 0, width, height);
 
         if (dotPattern) {
@@ -2789,7 +2883,7 @@
               ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
             } else {
               ctx.lineWidth = BASE_LINE_WIDTH;
-              ctx.strokeStyle = BASE_LINE_COLOR;
+              ctx.strokeStyle = colors.baseLine;
             }
             ctx.stroke();
           }
@@ -2817,7 +2911,7 @@
               ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
             } else {
               ctx.lineWidth = BASE_LINE_WIDTH;
-              ctx.strokeStyle = BASE_LINE_COLOR;
+              ctx.strokeStyle = colors.baseLine;
             }
             ctx.stroke();
           }
@@ -2852,7 +2946,7 @@
             if (p.activity > 0.05) {
               ctx.fillStyle = `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, ${0.85 + 0.15 * p.activity})`;
             } else {
-              ctx.fillStyle = 'rgba(14, 14, 14, 0.16)';
+              ctx.fillStyle = colors.inactiveNode;
             }
             ctx.fill();
           }
@@ -2884,53 +2978,6 @@
     window.mqTween = gsap.to(track, { x: () => -(track.scrollWidth / 2), duration: 60, ease: 'none', repeat: -1 });
     track.parentElement.addEventListener('mouseenter', () => window.mqTween.timeScale(0.15));
     track.parentElement.addEventListener('mouseleave', () => window.mqTween.timeScale(1));
-
-    /* ---------- DIALS ---------- */
-    gsap.utils.toArray('.dial').forEach((dial, i) => {
-      gsap.fromTo(dial, 
-        { y: 30 }, 
-        {
-          y: -30,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: dial,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        }
-      );
-
-      const arc = dial.querySelector('.dial-arc');
-      const val = dial.parseVal = parseFloat(arc.dataset.val);
-      const counter = dial.querySelector('.val');
-      const target = parseFloat(counter.dataset.count);
-      const suffix = counter.dataset.suffix || '';
-      
-      ScrollTrigger.create({
-        trigger: dial, 
-        start: 'top 85%',
-        onEnter: playAnim,
-        onEnterBack: playAnim,
-        onLeave: resetAnim,
-        onLeaveBack: resetAnim
-      });
-      
-      function playAnim() {
-        gsap.to(arc, { strokeDashoffset: 201 - (201 * val / 100), duration: 1.4, ease: 'power2.out', overwrite: true });
-        let obj = { n: 0 };
-        gsap.to(obj, {
-          n: target, duration: 1.4, ease: 'power2.out', overwrite: true, onUpdate: () => {
-            counter.textContent = Math.round(obj.n) + suffix;
-          }
-        });
-      }
-      function resetAnim() {
-        gsap.set(arc, { strokeDashoffset: 201 });
-        counter.textContent = '0' + suffix;
-      }
-    });
-
 
     /* ---------- STOPWATCH NEEDLE ---------- */
     gsap.to('#watch-needle', { rotation: 360, duration: 6, repeat: -1, ease: 'none', transformOrigin: '50% 100%' });
@@ -2976,28 +3023,225 @@
     });
 
     /* ---------- SCROLL POP-UP FOR WORKFLOW STEPS ---------- */
-    gsap.utils.toArray('.why-row').forEach((row, i) => {
+    gsap.utils.toArray('.why-row').forEach((row) => {
       const copy = row.querySelector('.why-copy');
       const visual = row.querySelector('.why-visual');
-      const isMobile = window.innerWidth <= 860;
-      
       if (copy) {
         gsap.fromTo(copy, 
-          { opacity: 0, x: isMobile ? 0 : (i % 2 === 0 ? -40 : 40), y: isMobile ? 24 : 0 },
-          { opacity: 1, x: 0, y: 0, duration: 0.85, ease: 'power3.out',
-            scrollTrigger: { trigger: row, start: 'top 85%' }
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.75, ease: 'power2.out',
+            scrollTrigger: { trigger: row, start: 'top 88%', once: true }
           }
         );
       }
       if (visual) {
         gsap.fromTo(visual, 
-          { opacity: 0, x: isMobile ? 0 : (i % 2 === 0 ? 40 : -40), y: isMobile ? 24 : 0 },
-          { opacity: 1, x: 0, y: 0, duration: 0.85, ease: 'power3.out', delay: isMobile ? 0.08 : 0.15,
-            scrollTrigger: { trigger: row, start: 'top 85%' }
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.75, delay: 0.1, ease: 'power2.out',
+            scrollTrigger: { trigger: row, start: 'top 88%', once: true }
           }
         );
       }
     });
+
+    /* ---------- VALUE CALCULATOR ENGINE ---------- */
+    function initValueCalculator() {
+      const calcSection = document.getElementById('calculator');
+      if (!calcSection) return;
+      if (calcSection.dataset.calcInit === 'true') return;
+      calcSection.dataset.calcInit = 'true';
+
+      const hourlyInput = document.getElementById('calc-hourly');
+      const timeInput = document.getElementById('calc-time');
+      const freqInput = document.getElementById('calc-freq');
+      const peopleInput = document.getElementById('calc-people');
+      const peopleDecBtn = document.getElementById('calc-people-dec');
+      const peopleIncBtn = document.getElementById('calc-people-inc');
+      const automatedInput = document.getElementById('calc-automated');
+
+      const hourlyDisp = document.getElementById('calc-hourly-disp');
+      const timeDisp = document.getElementById('calc-time-disp');
+      const freqDisp = document.getElementById('calc-freq-disp');
+      const peopleDisp = document.getElementById('calc-people-disp');
+      const automatedDisp = document.getElementById('calc-automated-disp');
+
+      const toggleWk = document.getElementById('calc-toggle-wk');
+      const toggleMo = document.getElementById('calc-toggle-mo');
+
+      const metricMain = document.getElementById('calc-metric-main');
+      const metricHours = document.getElementById('calc-metric-hours');
+      const metricMonth = document.getElementById('calc-metric-month');
+
+      if (!hourlyInput || !timeInput || !freqInput || !peopleInput || !automatedInput) return;
+
+      let isWeekly = true;
+      let currentAnimValues = { dollarsYear: 0, hoursYear: 0, dollarsMonth: 0 };
+      let animFrameId = null;
+
+      function formatCurrency(val) {
+        if (val >= 1000000) return '$' + (val / 1000000).toFixed(1) + 'M';
+        if (val >= 1000) return '$' + (val / 1000).toFixed(1) + 'k';
+        return '$' + Math.round(val);
+      }
+
+      function formatHours(val) {
+        if (val >= 1000) return (val / 1000).toFixed(1) + 'k hrs';
+        return Math.round(val) + ' hrs';
+      }
+
+      function updateSliderTrack(slider) {
+        if (!slider) return;
+        const min = parseFloat(slider.min) || 0;
+        const max = parseFloat(slider.max) || 100;
+        const val = parseFloat(slider.value) || 0;
+        const percent = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+        slider.style.setProperty('--pct', percent + '%');
+        slider.style.background = `linear-gradient(to right, #FF4300 0%, #FF4300 ${percent}%, rgba(10, 10, 10, 0.12) ${percent}%, rgba(10, 10, 10, 0.12) 100%)`;
+        slider.setAttribute('aria-valuenow', val);
+      }
+
+      function animateOutputs(targetDollarsYear, targetHoursYear, targetDollarsMonth) {
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+
+        const startDollarsYear = currentAnimValues.dollarsYear || targetDollarsYear;
+        const startHoursYear = currentAnimValues.hoursYear || targetHoursYear;
+        const startDollarsMonth = currentAnimValues.dollarsMonth || targetDollarsMonth;
+
+        const duration = 280;
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const t = Math.min(1, elapsed / duration);
+          const easeOut = 1 - Math.pow(1 - t, 3);
+
+          const currentDollars = startDollarsYear + (targetDollarsYear - startDollarsYear) * easeOut;
+          const currentHours = startHoursYear + (targetHoursYear - startHoursYear) * easeOut;
+          const currentMonth = startDollarsMonth + (targetDollarsMonth - startDollarsMonth) * easeOut;
+
+          currentAnimValues.dollarsYear = currentDollars;
+          currentAnimValues.hoursYear = currentHours;
+          currentAnimValues.dollarsMonth = currentMonth;
+
+          if (metricMain) metricMain.textContent = formatCurrency(currentDollars);
+          if (metricHours) metricHours.textContent = formatHours(currentHours);
+          if (metricMonth) metricMonth.textContent = formatCurrency(currentMonth);
+
+          if (t < 1) {
+            animFrameId = requestAnimationFrame(step);
+          } else {
+            currentAnimValues.dollarsYear = targetDollarsYear;
+            currentAnimValues.hoursYear = targetHoursYear;
+            currentAnimValues.dollarsMonth = targetDollarsMonth;
+            if (metricMain) metricMain.textContent = formatCurrency(targetDollarsYear);
+            if (metricHours) metricHours.textContent = formatHours(targetHoursYear);
+            if (metricMonth) metricMonth.textContent = formatCurrency(targetDollarsMonth);
+          }
+        }
+        animFrameId = requestAnimationFrame(step);
+      }
+
+      function calculate() {
+        const hourly = parseFloat(hourlyInput.value) || 90;
+        const time = parseFloat(timeInput.value) || 2;
+        const freq = parseFloat(freqInput.value) || 5;
+        let people = parseInt(peopleInput.value, 10);
+        if (isNaN(people) || people < 1) people = 1;
+        peopleInput.value = people;
+
+        const automatedPct = parseFloat(automatedInput.value) || 70;
+
+        if (hourlyDisp) hourlyDisp.textContent = '$' + hourly;
+        if (timeDisp) timeDisp.textContent = (time % 1 === 0 ? time.toFixed(0) : time.toFixed(1)) + ' hrs';
+        if (freqDisp) freqDisp.textContent = freq + '×';
+        if (peopleDisp) peopleDisp.textContent = people;
+        if (automatedDisp) automatedDisp.textContent = Math.round(automatedPct) + '%';
+
+        if (peopleDecBtn) {
+          peopleDecBtn.disabled = people <= 1;
+          peopleDecBtn.style.opacity = people <= 1 ? '0.35' : '1';
+          peopleDecBtn.style.cursor = people <= 1 ? 'not-allowed' : 'pointer';
+        }
+
+        updateSliderTrack(hourlyInput);
+        updateSliderTrack(timeInput);
+        updateSliderTrack(freqInput);
+        updateSliderTrack(automatedInput);
+
+        const occurrencesPerYear = isWeekly ? freq * 52 : freq * 12;
+        const totalHoursPerYear = time * occurrencesPerYear * people;
+        const automatedHours = totalHoursPerYear * (automatedPct / 100);
+        const dollarsPerYear = automatedHours * hourly;
+        const dollarsPerMonth = dollarsPerYear / 12;
+
+        animateOutputs(dollarsPerYear, automatedHours, dollarsPerMonth);
+      }
+
+      // Range slider listeners
+      [hourlyInput, timeInput, freqInput, automatedInput].forEach(inp => {
+        inp.addEventListener('input', calculate);
+      });
+
+      // People stepper increment button
+      if (peopleIncBtn) {
+        peopleIncBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let val = parseInt(peopleInput.value, 10) || 1;
+          peopleInput.value = val + 1;
+          calculate();
+        });
+      }
+
+      // People stepper decrement button
+      if (peopleDecBtn) {
+        peopleDecBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let val = parseInt(peopleInput.value, 10) || 1;
+          if (val > 1) {
+            peopleInput.value = val - 1;
+            calculate();
+          }
+        });
+      }
+
+      // People input changes
+      peopleInput.addEventListener('change', () => {
+        let val = parseInt(peopleInput.value, 10);
+        if (isNaN(val) || val < 1) val = 1;
+        peopleInput.value = val;
+        calculate();
+      });
+
+      // Frequency period toggles
+      if (toggleWk && toggleMo) {
+        toggleWk.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isWeekly) return;
+          isWeekly = true;
+          toggleWk.classList.add('active', 'is-active');
+          toggleWk.setAttribute('aria-pressed', 'true');
+          toggleMo.classList.remove('active', 'is-active');
+          toggleMo.setAttribute('aria-pressed', 'false');
+          calculate();
+        });
+
+        toggleMo.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (!isWeekly) return;
+          isWeekly = false;
+          toggleMo.classList.add('active', 'is-active');
+          toggleMo.setAttribute('aria-pressed', 'true');
+          toggleWk.classList.remove('active', 'is-active');
+          toggleWk.setAttribute('aria-pressed', 'false');
+          calculate();
+        });
+      }
+
+      calculate();
+    }
+
+    window.initValueCalculator = initValueCalculator;
+    initValueCalculator();
   </script>
 
 <script id="agy-js">
@@ -3007,6 +3251,7 @@
       if(nav) {
         const btn = document.createElement('button');
         btn.className = 'hamburger';
+        btn.setAttribute('aria-label', 'Toggle navigation menu');
         btn.innerHTML = '<span></span><span></span><span></span>';
         nav.appendChild(btn);
 
