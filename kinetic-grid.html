@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinetic Grid | Interactive Background</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #161618;
+      color: #FBFAF7;
+      overflow-x: hidden;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .kinetic-grid {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-color: #161618;
+    }
+
+    #kinetic-grid-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      user-select: none;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FF7A40;
+      margin-bottom: 20px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 67, 0, 0.08);
+      border: 1px solid rgba(255, 67, 0, 0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #FBFAF7;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 500;
+      color: rgba(251, 250, 247, 0.75);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .description {
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: rgba(251, 250, 247, 0.45);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .interactive-hint {
+      margin-top: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.65);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .interactive-hint:hover {
+      background: rgba(255, 67, 0, 0.08);
+      border-color: rgba(255, 67, 0, 0.35);
+      color: #FBFAF7;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FF4300;
+      box-shadow: 0 0 10px #FF4300;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kinetic-grid">
+    <canvas id="kinetic-grid-canvas"></canvas>
+
+    <div class="content">
+      <div class="tag">Interactive Component</div>
+      <h1>Interactive Background</h1>
+      <p class="subtitle">Move your cursor. Click anywhere.</p>
+      <p class="description">A kinetic grid that warps toward the pointer and ripples on every click.</p>
+      <div class="interactive-hint">
+        <span class="pulse-dot"></span>
+        <span>Canvas pointer events pass through cleanly</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const canvas = document.getElementById('kinetic-grid-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      // Visual Constants (per specification)
+      const CELL_SIZE = 55;
+      const INFLUENCE_RADIUS = 260;
+      const MAX_WARP = 24;
+      const DOT_SPACING = 28;
+      const LERP_SPEED = 0.08;
+
+      const BASE_LINE_WIDTH = 0.8;
+      const ACTIVE_LINE_WIDTH = 1.5;
+      const BASE_NODE_RADIUS = 1.8;
+      const ACTIVE_NODE_RADIUS = 3.2;
+
+      // Color scheme: premium dark with subtle phosphor orange accents
+      const BASE_LINE_COLOR = 'rgba(255, 255, 255, 0.13)';
+      const ACTIVE_LINE_RGB = [255, 100, 40]; // Phosphor accent
+      const ACTIVE_NODE_RGB = [255, 67, 0];
+
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let cols = 0;
+      let rows = 0;
+
+      // Mouse tracking state
+      const mouse = {
+        targetX: -1000,
+        targetY: -1000,
+        currentX: -1000,
+        currentY: -1000,
+        isActive: false
+      };
+
+      // Click ripples array
+      const ripples = [];
+
+      // Pre-rendered subtle dot texture pattern (0.7px white dots @ 5% opacity, 28px spacing)
+      let dotPattern = null;
+
+      function createDotPattern() {
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = DOT_SPACING;
+        pCanvas.height = DOT_SPACING;
+        const pctx = pCanvas.getContext('2d');
+        pctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        pctx.beginPath();
+        pctx.arc(DOT_SPACING / 2, DOT_SPACING / 2, 0.7, 0, Math.PI * 2);
+        pctx.fill();
+        dotPattern = ctx.createPattern(pCanvas, 'repeat');
+      }
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        cols = Math.ceil(width / CELL_SIZE) + 1;
+        rows = Math.ceil(height / CELL_SIZE) + 1;
+
+        createDotPattern();
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+
+      // Mouse / Pointer listeners
+      window.addEventListener('mousemove', (e) => {
+        mouse.targetX = e.clientX;
+        mouse.targetY = e.clientY;
+        if (!mouse.isActive) {
+          mouse.currentX = e.clientX;
+          mouse.currentY = e.clientY;
+          mouse.isActive = true;
+        }
+      }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.targetX = -1000;
+        mouse.targetY = -1000;
+      }, { passive: true });
+
+      window.addEventListener('click', (e) => {
+        ripples.push({
+          x: e.clientX,
+          y: e.clientY,
+          born: performance.now(),
+          duration: 900, // 0.9 second
+          speed: 400     // 400px per second
+        });
+      });
+
+      // Smoothstep interpolation helper: clamp((x - min) / (max - min)) then 3x^2 - 2x^3
+      function smoothstep(min, max, value) {
+        const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+        return x * x * (3 - 2 * x);
+      }
+
+      let animationFrameId = null;
+
+      function render(now) {
+        // 1. Smoothly interpolate current mouse position toward target
+        if (mouse.isActive) {
+          mouse.currentX += (mouse.targetX - mouse.currentX) * LERP_SPEED;
+          mouse.currentY += (mouse.targetY - mouse.currentY) * LERP_SPEED;
+        }
+
+        // 2. Clear canvas with background color
+        ctx.fillStyle = '#161618';
+        ctx.fillRect(0, 0, width, height);
+
+        // Draw fine dot texture in background
+        if (dotPattern) {
+          ctx.fillStyle = dotPattern;
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        // Update & filter active ripples
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const r = ripples[i];
+          const elapsed = (now - r.born) / 1000;
+          r.radius = elapsed * r.speed;
+          r.progress = (now - r.born) / r.duration;
+          if (r.progress >= 1) {
+            ripples.splice(i, 1);
+          }
+        }
+
+        // 3. Calculate warped grid points
+        // 2D array of warped coordinates
+        const warpedPoints = [];
+
+        for (let r = 0; r < rows; r++) {
+          const rowPoints = [];
+          for (let c = 0; c < cols; c++) {
+            const baseX = c * CELL_SIZE;
+            const baseY = r * CELL_SIZE;
+
+            // EDGE PINNING: 0 at outer edges, ramping to 1 in the interior
+            const edgeFactorX = Math.min(c / 2, (cols - 1 - c) / 2, 1);
+            const edgeFactorY = Math.min(r / 2, (rows - 1 - r) / 2, 1);
+            const pinFactor = Math.max(0, Math.min(edgeFactorX, edgeFactorY));
+
+            let warpX = 0;
+            let warpY = 0;
+
+            // A. CURSOR WARP
+            if (mouse.isActive && pinFactor > 0) {
+              const dx = mouse.currentX - baseX;
+              const dy = mouse.currentY - baseY;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < INFLUENCE_RADIUS) {
+                const normDist = dist / INFLUENCE_RADIUS;
+                // Bell-shaped smooth falloff
+                const falloff = Math.pow(Math.cos(normDist * Math.PI * 0.5), 2);
+                const angle = Math.atan2(dy, dx);
+                const displacement = MAX_WARP * falloff * pinFactor;
+
+                warpX += Math.cos(angle) * displacement;
+                warpY += Math.sin(angle) * displacement;
+              }
+            }
+
+            // B. RIPPLE WARP
+            if (pinFactor > 0 && ripples.length > 0) {
+              for (let i = 0; i < ripples.length; i++) {
+                const rip = ripples[i];
+                const rdx = baseX - rip.x;
+                const rdy = baseY - rip.y;
+                const rDist = Math.hypot(rdx, rdy);
+                const diff = Math.abs(rDist - rip.radius);
+                const band = 55; // ripple wave thickness
+
+                if (diff < band) {
+                  const waveFactor = Math.sin((1 - diff / band) * Math.PI) * (1 - rip.progress) * pinFactor;
+                  const rAngle = Math.atan2(rdy, rdx);
+                  warpX += Math.cos(rAngle) * waveFactor * 16;
+                  warpY += Math.sin(rAngle) * waveFactor * 16;
+                }
+              }
+            }
+
+            const finalX = baseX + warpX;
+            const finalY = baseY + warpY;
+
+            // Pre-calculate distance to cursor for nodes and lines
+            const cursorDist = Math.hypot(finalX - mouse.currentX, finalY - mouse.currentY);
+            const activity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, cursorDist) : 0;
+
+            rowPoints.push({
+              x: finalX,
+              y: finalY,
+              activity: activity
+            });
+          }
+          warpedPoints.push(rowPoints);
+        }
+
+        // 4. Draw horizontal and vertical grid lines
+        // Horizontal lines
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols - 1; c++) {
+            const p1 = warpedPoints[r][c];
+            const p2 = warpedPoints[r][c + 1];
+
+            // Segment activity from midpoint
+            const midX = (p1.x + p2.x) * 0.5;
+            const midY = (p1.y + p2.y) * 0.5;
+            const segDist = Math.hypot(midX - mouse.currentX, midY - mouse.currentY);
+            const segActivity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, segDist) : 0;
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+
+            if (segActivity > 0.01) {
+              const widthVal = BASE_LINE_WIDTH + (ACTIVE_LINE_WIDTH - BASE_LINE_WIDTH) * segActivity;
+              const alpha = 0.13 + 0.77 * segActivity;
+              ctx.lineWidth = widthVal;
+              ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
+            } else {
+              ctx.lineWidth = BASE_LINE_WIDTH;
+              ctx.strokeStyle = BASE_LINE_COLOR;
+            }
+            ctx.stroke();
+          }
+        }
+
+        // Vertical lines
+        for (let r = 0; r < rows - 1; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p1 = warpedPoints[r][c];
+            const p2 = warpedPoints[r + 1][c];
+
+            const midX = (p1.x + p2.x) * 0.5;
+            const midY = (p1.y + p2.y) * 0.5;
+            const segDist = Math.hypot(midX - mouse.currentX, midY - mouse.currentY);
+            const segActivity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, segDist) : 0;
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+
+            if (segActivity > 0.01) {
+              const widthVal = BASE_LINE_WIDTH + (ACTIVE_LINE_WIDTH - BASE_LINE_WIDTH) * segActivity;
+              const alpha = 0.13 + 0.77 * segActivity;
+              ctx.lineWidth = widthVal;
+              ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
+            } else {
+              ctx.lineWidth = BASE_LINE_WIDTH;
+              ctx.strokeStyle = BASE_LINE_COLOR;
+            }
+            ctx.stroke();
+          }
+        }
+
+        // 5. Draw active node glows
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p = warpedPoints[r][c];
+            if (p.activity > 0.05) {
+              const glowRadius = 14 * p.activity;
+              const glowGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRadius);
+              glowGrad.addColorStop(0, `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, ${0.45 * p.activity})`);
+              glowGrad.addColorStop(1, `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, 0)`);
+              ctx.fillStyle = glowGrad;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        // 6. Draw circular intersection nodes
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p = warpedPoints[r][c];
+            const radius = BASE_NODE_RADIUS + (ACTIVE_NODE_RADIUS - BASE_NODE_RADIUS) * p.activity;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+
+            if (p.activity > 0.05) {
+              ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + 0.6 * p.activity})`;
+            } else {
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+            }
+            ctx.fill();
+          }
+        }
+
+        // 7. Draw expanding ripple rings
+        for (let i = 0; i < ripples.length; i++) {
+          const rip = ripples[i];
+          const opacity = Math.max(0, 1 - rip.progress);
+          ctx.beginPath();
+          ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${opacity * 0.45})`;
+          ctx.stroke();
+        }
+
+        animationFrameId = requestAnimationFrame(render);
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+
+      // Cleanup hook if needed
+      window.__destroyKineticGrid = function () {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        window.removeEventListener('resize', resize);
+      };
+    })();
+  </script>
+</body>
+</html>

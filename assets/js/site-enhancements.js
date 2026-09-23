@@ -202,97 +202,240 @@
     const calcSection = document.querySelector('.value-calc-section');
     if (!calcSection) return;
 
+    // Controls
     const hourlyInput = calcSection.querySelector('#calc-hourly');
     const timeInput = calcSection.querySelector('#calc-time');
     const freqInput = calcSection.querySelector('#calc-freq');
     const peopleInput = calcSection.querySelector('#calc-people');
+    const peopleDecBtn = calcSection.querySelector('#calc-people-dec');
+    const peopleIncBtn = calcSection.querySelector('#calc-people-inc');
+    const automatedInput = calcSection.querySelector('#calc-automated');
 
+    // Live display echoes
     const hourlyDisp = calcSection.querySelector('#calc-hourly-disp');
     const timeDisp = calcSection.querySelector('#calc-time-disp');
     const freqDisp = calcSection.querySelector('#calc-freq-disp');
     const peopleDisp = calcSection.querySelector('#calc-people-disp');
+    const automatedDisp = calcSection.querySelector('#calc-automated-disp');
 
+    // Toggle buttons
     const toggleWk = calcSection.querySelector('#calc-toggle-wk');
     const toggleMo = calcSection.querySelector('#calc-toggle-mo');
 
+    // Result output elements
     const metricMain = calcSection.querySelector('#calc-metric-main');
     const metricHours = calcSection.querySelector('#calc-metric-hours');
     const metricMonth = calcSection.querySelector('#calc-metric-month');
 
-    if (!hourlyInput || !timeInput || !freqInput || !peopleInput) return;
+    if (!hourlyInput || !timeInput || !freqInput || !peopleInput || !automatedInput) return;
 
     let isWeekly = true;
+    let isInitialized = false;
+
+    // State for smooth 400ms numeric animation
+    let currentAnimValues = {
+      dollarsYear: 0,
+      hoursYear: 0,
+      dollarsMonth: 0
+    };
+    let animFrameId = null;
+
+    const prefersReducedMotion = () => {
+      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    };
 
     function formatCurrency(val) {
+      if (val >= 1000000) {
+        return '$' + (val / 1000000).toFixed(1) + 'M';
+      }
       if (val >= 1000) {
         return '$' + (val / 1000).toFixed(1) + 'k';
       }
-      return '$' + Math.round(val).toLocaleString();
+      return '$' + Math.round(val);
     }
 
     function formatHours(val) {
       if (val >= 1000) {
         return (val / 1000).toFixed(1) + 'k hrs';
       }
-      return Math.round(val).toLocaleString() + ' hrs';
+      return Math.round(val) + ' hrs';
     }
 
     function updateSliderTrack(slider) {
       const min = parseFloat(slider.min) || 0;
       const max = parseFloat(slider.max) || 100;
       const val = parseFloat(slider.value) || 0;
-      const percent = ((val - min) / (max - min)) * 100;
-      slider.style.background = `linear-gradient(to right, #FF4300 0%, #FF4300 ${percent}%, #E5E2DC ${percent}%, #E5E2DC 100%)`;
+      const percent = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+      slider.style.setProperty('--pct', percent + '%');
+      slider.style.background = `linear-gradient(to right, #FF4300 0%, #FF4300 ${percent}%, rgba(10, 10, 10, 0.12) ${percent}%, rgba(10, 10, 10, 0.12) 100%)`;
+      slider.setAttribute('aria-valuenow', val);
+    }
+
+    function animateOutputs(targetDollarsYear, targetHoursYear, targetDollarsMonth) {
+      // If prefers-reduced-motion or initial render, set immediately without animation
+      if (prefersReducedMotion() || !isInitialized) {
+        currentAnimValues.dollarsYear = targetDollarsYear;
+        currentAnimValues.hoursYear = targetHoursYear;
+        currentAnimValues.dollarsMonth = targetDollarsMonth;
+
+        if (metricMain) metricMain.textContent = formatCurrency(targetDollarsYear);
+        if (metricHours) metricHours.textContent = formatHours(targetHoursYear);
+        if (metricMonth) metricMonth.textContent = formatCurrency(targetDollarsMonth);
+        return;
+      }
+
+      if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+      }
+
+      const startDollarsYear = currentAnimValues.dollarsYear;
+      const startHoursYear = currentAnimValues.hoursYear;
+      const startDollarsMonth = currentAnimValues.dollarsMonth;
+
+      const duration = 400; // ~400ms duration
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        // Cubic ease-out curve: 1 - (1 - t)^3
+        const easeOut = 1 - Math.pow(1 - t, 3);
+
+        const currentDollars = startDollarsYear + (targetDollarsYear - startDollarsYear) * easeOut;
+        const currentHours = startHoursYear + (targetHoursYear - startHoursYear) * easeOut;
+        const currentMonth = startDollarsMonth + (targetDollarsMonth - startDollarsMonth) * easeOut;
+
+        currentAnimValues.dollarsYear = currentDollars;
+        currentAnimValues.hoursYear = currentHours;
+        currentAnimValues.dollarsMonth = currentMonth;
+
+        if (metricMain) metricMain.textContent = formatCurrency(currentDollars);
+        if (metricHours) metricHours.textContent = formatHours(currentHours);
+        if (metricMonth) metricMonth.textContent = formatCurrency(currentMonth);
+
+        if (t < 1) {
+          animFrameId = requestAnimationFrame(step);
+        } else {
+          currentAnimValues.dollarsYear = targetDollarsYear;
+          currentAnimValues.hoursYear = targetHoursYear;
+          currentAnimValues.dollarsMonth = targetDollarsMonth;
+          if (metricMain) metricMain.textContent = formatCurrency(targetDollarsYear);
+          if (metricHours) metricHours.textContent = formatHours(targetHoursYear);
+          if (metricMonth) metricMonth.textContent = formatCurrency(targetDollarsMonth);
+        }
+      }
+
+      animFrameId = requestAnimationFrame(step);
     }
 
     function calculate() {
       const hourly = parseFloat(hourlyInput.value) || 90;
       const time = parseFloat(timeInput.value) || 2;
       const freq = parseFloat(freqInput.value) || 5;
-      const people = parseFloat(peopleInput.value) || 3;
+      let people = parseInt(peopleInput.value, 10);
+      if (isNaN(people) || people < 1) people = 1;
+      peopleInput.value = people;
 
+      const automatedPct = parseFloat(automatedInput.value) || 70;
+
+      // Update echoes (matching reference image)
       if (hourlyDisp) hourlyDisp.textContent = '$' + hourly;
-      if (timeDisp) timeDisp.textContent = (time % 1 === 0 ? time : time.toFixed(1)) + ' hrs';
+      if (timeDisp) timeDisp.textContent = (time % 1 === 0 ? time.toFixed(0) : time.toFixed(1)) + ' hrs';
       if (freqDisp) freqDisp.textContent = freq + '×';
       if (peopleDisp) peopleDisp.textContent = people;
+      if (automatedDisp) automatedDisp.textContent = Math.round(automatedPct) + '%';
 
+      // Update stepper button state
+      if (peopleDecBtn) {
+        peopleDecBtn.disabled = people <= 1;
+      }
+
+      // Update tracks
       updateSliderTrack(hourlyInput);
       updateSliderTrack(timeInput);
       updateSliderTrack(freqInput);
-      updateSliderTrack(peopleInput);
+      updateSliderTrack(automatedInput);
 
-      const annualTasks = isWeekly ? freq * 52 : freq * 12;
-      const totalHours = annualTasks * time * people;
-      const hoursFreed = Math.round(totalHours * 0.70);
-      const valueFreed = Math.round(hoursFreed * hourly);
-      const monthlyValue = Math.round(valueFreed / 12);
+      // Core calculation logic:
+      // occurrences/year = frequency * (isWeekly ? 52 : 12)
+      // total hours/year = hours-per-task * occurrences/year * people
+      // automated hours = total-hours * %automated
+      // dollars/year = automated-hours * hourly-cost
+      // dollars/month = dollars/year / 12
+      const occurrencesPerYear = isWeekly ? freq * 52 : freq * 12;
+      const totalHoursPerYear = time * occurrencesPerYear * people;
+      const automatedHours = totalHoursPerYear * (automatedPct / 100);
+      const dollarsPerYear = automatedHours * hourly;
+      const dollarsPerMonth = dollarsPerYear / 12;
 
-      if (metricMain) metricMain.textContent = formatCurrency(valueFreed);
-      if (metricHours) metricHours.textContent = formatHours(hoursFreed);
-      if (metricMonth) metricMonth.textContent = formatCurrency(monthlyValue);
+      // Animate smoothly to new values
+      animateOutputs(dollarsPerYear, automatedHours, dollarsPerMonth);
     }
 
-    [hourlyInput, timeInput, freqInput, peopleInput].forEach((input) => {
+    // Event Listeners for Range Sliders
+    [hourlyInput, timeInput, freqInput, automatedInput].forEach((input) => {
       input.addEventListener('input', calculate);
     });
 
+    // Event Listeners for People Stepper
+    if (peopleDecBtn) {
+      peopleDecBtn.addEventListener('click', () => {
+        let val = parseInt(peopleInput.value, 10) || 1;
+        if (val > 1) {
+          peopleInput.value = val - 1;
+          calculate();
+        }
+      });
+    }
+
+    if (peopleIncBtn) {
+      peopleIncBtn.addEventListener('click', () => {
+        let val = parseInt(peopleInput.value, 10) || 1;
+        peopleInput.value = val + 1;
+        calculate();
+      });
+    }
+
+    peopleInput.addEventListener('change', () => {
+      let val = parseInt(peopleInput.value, 10);
+      if (isNaN(val) || val < 1) val = 1;
+      peopleInput.value = val;
+      calculate();
+    });
+
+    peopleInput.addEventListener('input', () => {
+      let val = parseInt(peopleInput.value, 10);
+      if (!isNaN(val) && val >= 1) {
+        calculate();
+      }
+    });
+
+    // Frequency Toggle Buttons
     if (toggleWk && toggleMo) {
       toggleWk.addEventListener('click', () => {
+        if (isWeekly) return;
         isWeekly = true;
-        toggleWk.classList.add('is-active');
-        toggleMo.classList.remove('is-active');
+        toggleWk.classList.add('active', 'is-active');
+        toggleWk.setAttribute('aria-pressed', 'true');
+        toggleMo.classList.remove('active', 'is-active');
+        toggleMo.setAttribute('aria-pressed', 'false');
         calculate();
       });
 
       toggleMo.addEventListener('click', () => {
+        if (!isWeekly) return;
         isWeekly = false;
-        toggleMo.classList.add('is-active');
-        toggleWk.classList.remove('is-active');
+        toggleMo.classList.add('active', 'is-active');
+        toggleMo.setAttribute('aria-pressed', 'true');
+        toggleWk.classList.remove('active', 'is-active');
+        toggleWk.setAttribute('aria-pressed', 'false');
         calculate();
       });
     }
 
+    // Initial calculation
     calculate();
+    isInitialized = true;
   }
 
   // ---------- INITIALIZE ON DOM READY ----------

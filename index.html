@@ -92,8 +92,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Modular Enhancements -->
-  <link rel="stylesheet" href="/assets/css/site-enhancements.css">
-  <script src="/assets/js/site-enhancements.js" defer></script>
+  <link rel="stylesheet" href="assets/css/site-enhancements.css">
+  <script src="assets/js/site-enhancements.js" defer></script>
 
   <style>
     /* ============ TOKENS ============ */
@@ -437,92 +437,115 @@
 
     /* ============ HERO ============ */
     #hero {
-      min-height: 85vh;
+      background-color: var(--board, #FBFAF7);
+      min-height: 94vh;
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding-top: 150px;
-      padding-bottom: 60px;
+      width: 100%;
+      padding-top: 160px;
+      padding-bottom: 50px;
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
+      border-bottom: none;
     }
 
     @media (max-width:860px) {
       #hero {
-        padding-top: 125px;
-        padding-bottom: 40px;
+        padding-top: 130px;
+        padding-bottom: 35px;
         min-height: auto;
       }
     }
 
     #hero-canvas {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 52%;
-      opacity: .9;
-    }
-
-    .hero-grid {
-      position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(21, 10, 13, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(21, 10, 13, 0.045) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 35%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 35%, transparent 100%);
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 1;
     }
 
+    .hero-bottom-blur {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(to bottom, rgba(251, 250, 247, 0) 0%, rgba(251, 250, 247, 0.65) 45%, var(--board, #FBFAF7) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 70%);
+    }
+
     .hero-inner {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 40px;
       position: relative;
       z-index: 2;
+      box-sizing: border-box;
+    }
+
+    @media (max-width:640px) {
+      .hero-inner {
+        padding: 0 22px;
+      }
     }
 
     .hero-inner .eyebrow {
       font-size: 19px;
+      color: #FF7A40;
     }
 
     .hero-head {
       font-size: clamp(40px, 7.2vw, 92px);
-      line-height: 1.02;
+      line-height: 1.05;
       letter-spacing: -.01em;
-      max-width: 920px;
+      max-width: 960px;
     }
 
     .hero-head .rough {
       font-style: italic;
       font-weight: 400;
-      color: var(--fog);
+      color: var(--fog, #0E0E0E);
       display: block;
     }
 
     .hero-head .clean {
-      font-weight: 700;
+      font-weight: 600;
       display: block;
       margin-top: 8px;
+      color: var(--fog, #0E0E0E);
     }
 
     .hero-highlight {
-      color: var(--phosphor);
-      font-weight: 700;
+      color: var(--phosphor, #FF4300);
+      font-weight: 400;
+      font-size: 1.08em;
       font-style: normal;
-      text-shadow: 0 0 28px rgba(255, 67, 0, 0.28);
+      text-shadow: 0 0 28px rgba(255, 67, 0, 0.22);
       position: relative;
+      letter-spacing: -0.015em;
     }
 
     .hero-sub {
       margin-top: 28px;
-      max-width: 520px;
-      color: var(--fog-dim);
-      font-size: 17px;
+      max-width: 580px;
+      color: var(--fog-dim, #2E2E2C);
+      font-size: 17.5px;
+      line-height: 1.6;
     }
 
     .hero-sub b {
-      color: var(--fog);
+      color: var(--fog, #0E0E0E);
       font-weight: 600;
     }
 
@@ -590,10 +613,11 @@
 
     /* ============ MARQUEE ============ */
     #proof {
-      padding: 80px 0;
+      padding: 48px 0 75px 0;
       overflow: hidden;
-      border-top: 1px solid var(--panel-line);
+      border-top: none;
       border-bottom: 1px solid var(--panel-line);
+      position: relative;
     }
 
     .marquee-track {
@@ -607,12 +631,13 @@
       width: 340px;
       padding: 28px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(38, 26, 21, 0.85), rgba(20, 12, 10, 0.95));
+      background: linear-gradient(145deg, rgba(26, 12, 8, 0.98), rgba(14, 6, 4, 0.99));
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(255, 122, 64, 0.35);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 67, 0, 0.08);
+      color: #fff;
       transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-top-color 0.4s;
       cursor: pointer;
       position: relative;
@@ -774,15 +799,16 @@
     .bcard {
       border-radius: var(--radius-lg);
       padding: 40px 36px;
-      background: linear-gradient(145deg, rgba(42, 28, 22, 0.9), rgba(18, 10, 8, 0.95));
+      background: linear-gradient(145deg, rgba(26, 12, 8, 0.98), rgba(14, 6, 4, 0.99));
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(255, 122, 64, 0.35);
       position: relative;
       overflow: hidden;
       transition: transform .45s var(--ease-out), border-color .3s, box-shadow .3s;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 67, 0, 0.08);
+      color: #fff;
     }
 
     @media (max-width:860px) {
@@ -1483,6 +1509,391 @@
     .navlinks { display: none !important; }
     .hamburger { display: block; }
   }
+
+    /* ============ VALUE CALCULATOR ============ */
+    #calculator {
+      padding: 75px 0;
+    }
+
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    @media (max-width: 980px) {
+      .calc-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .calc-right {
+      position: relative;
+      height: 100%;
+    }
+
+    /* Left side — inputs */
+    .calc-inputs {
+      min-width: 0;
+    }
+
+    .calc-input-row {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--panel-line);
+    }
+
+    .calc-input-row:first-child {
+      padding-top: 0;
+    }
+
+    .calc-input-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .calc-label-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      gap: 12px;
+    }
+
+    .calc-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--fog);
+      letter-spacing: -.01em;
+    }
+
+    .calc-live-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--phosphor);
+      min-width: 80px;
+      text-align: right;
+      letter-spacing: -.01em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .calc-helper {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      color: var(--fog-dim);
+      margin-bottom: 14px;
+      line-height: 1.55;
+      max-width: 580px;
+    }
+
+    /* Range Slider */
+    .calc-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--panel-line);
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      --pct: 0%;
+      background: linear-gradient(90deg,
+          var(--phosphor) var(--pct),
+          rgba(10, 10, 10, 0.12) var(--pct));
+    }
+
+    .calc-slider:focus {
+      outline: none;
+    }
+
+    .calc-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--phosphor);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 67, 0, 0.45);
+      border: 2px solid #fff;
+      transition: transform .18s var(--ease-out), box-shadow .18s;
+    }
+
+    .calc-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--phosphor);
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 67, 0, 0.45);
+      border: 2px solid #fff;
+      transition: transform .18s var(--ease-out), box-shadow .18s;
+    }
+
+    .calc-slider:hover::-webkit-slider-thumb,
+    .calc-slider:focus::-webkit-slider-thumb {
+      transform: scale(1.15);
+      box-shadow: 0 0 16px rgba(255, 67, 0, 0.65);
+    }
+
+    .calc-slider:hover::-moz-range-thumb,
+    .calc-slider:focus::-moz-range-thumb {
+      transform: scale(1.15);
+      box-shadow: 0 0 16px rgba(255, 67, 0, 0.65);
+    }
+
+    /* Frequency row with period toggle */
+    .calc-freq-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .calc-freq-row .calc-slider {
+      flex: 1;
+    }
+
+    .period-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.05);
+      border: 1px solid var(--panel-line);
+      border-radius: 999px;
+      padding: 3px;
+      flex-shrink: 0;
+      gap: 2px;
+    }
+
+    .period-btn {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      padding: 5px 13px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .period-btn.active,
+    .period-btn.is-active {
+      background: var(--phosphor);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(255, 67, 0, 0.35);
+    }
+
+    .period-btn:focus-visible {
+      outline: 2px solid var(--phosphor);
+      outline-offset: 2px;
+    }
+
+    /* Stepper */
+    .calc-stepper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.05);
+      border: 1px solid var(--panel-line);
+      border-radius: 999px;
+      padding: 3px 6px;
+      gap: 6px;
+    }
+
+    .stepper-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(10, 10, 10, 0.08);
+      background: #fff;
+      color: var(--fog);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .18s ease;
+      line-height: 1;
+      padding: 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .stepper-btn:hover:not(:disabled) {
+      background: var(--phosphor);
+      border-color: var(--phosphor);
+      color: #fff;
+      transform: scale(1.06);
+    }
+
+    .stepper-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .stepper-btn:focus-visible {
+      outline: 2px solid var(--phosphor);
+      outline-offset: 2px;
+    }
+
+    .stepper-count {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--fog);
+      width: 44px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      outline: none;
+      -moz-appearance: textfield;
+    }
+
+    .stepper-count::-webkit-outer-spin-button,
+    .stepper-count::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Right side — result panel */
+    .calc-result {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      border-radius: var(--radius-lg, 24px);
+      background: linear-gradient(145deg, rgba(26, 12, 8, 0.98), rgba(14, 6, 4, 0.99));
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(255, 122, 64, 0.35);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 67, 0, 0.08);
+      padding: 38px 32px 34px;
+      color: #fff;
+    }
+
+    @media (max-width: 980px) {
+      .calc-result {
+        position: static;
+      }
+    }
+
+    .calc-result-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #FF7A40;
+      margin-bottom: 12px;
+    }
+
+    .calc-hero-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(50px, 5.5vw, 68px);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .calc-hero-ctx {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.68);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .calc-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .calc-stat-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .calc-stat {
+      flex: 1;
+    }
+
+    .calc-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.01em;
+      line-height: 1.1;
+    }
+
+    .calc-stat-lbl {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.48);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .calc-disclaimer {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.38);
+      margin-bottom: 22px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .calc-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 15px 22px;
+      border-radius: 999px;
+      background: #FF4300 !important;
+      color: #fff !important;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 14.5px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 67, 0, 0.38);
+      transition: transform .25s var(--ease-out), box-shadow .25s;
+      letter-spacing: .02em;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .calc-cta-btn:hover {
+      background: #FF5A1F !important;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255, 67, 0, 0.48);
+    }
+
+
+
+    @media (prefers-reduced-motion: reduce) {
+      .calc-cta-btn,
+      .stepper-btn,
+      .period-btn,
+      .calc-slider::-webkit-slider-thumb {
+        transition: none;
+      }
+    }
 </style>
 </head>
 
@@ -1514,11 +1925,10 @@
   <main id="top">
 
     <section id="hero">
-      <div class="hero-grid"></div>
       <canvas id="hero-canvas"></canvas>
       <div class="wrap hero-inner">
         <h1 class="hero-head display">
-          <span class="rough reveal">You already know where time is being wasted.</span>
+          <span class="rough reveal">You already know what time is being wasted.</span>
           <span class="clean reveal"><span class="hero-highlight">Let us fix it.</span></span>
         </h1>
         <p class="hero-sub reveal">Nodewave builds reliable operational automations and custom systems for growing teams. We turn messy, repetitive manual tasks into <b>seamless workflows, custom tools, and automated software</b> that save your team hours every day.</p>
@@ -1528,11 +1938,13 @@
         <div class="hero-meta reveal">
         </div>
       </div>
+      <div class="hero-bottom-blur"></div>
     </section>
 
     <section id="proof">
-      <div class="wrap" style="margin-bottom:34px;">
-        <div class="eyebrow reveal">LIVE SYSTEMS, TAILORED FOR YOUR OPERATION</div>
+      <div class="wrap" style="margin-bottom:36px;">
+        <div class="eyebrow reveal">CORE AUTOMATIONS</div>
+        <h2 class="display reveal" style="font-size: clamp(32px, 4.4vw, 48px); line-height: 1.15; margin-top: 10px; letter-spacing: -0.01em; color: var(--fog, #0E0E0E);">Systems we automate and run.</h2>
       </div>
       <div class="marquee-wrap">
         <div class="marquee-track" id="marquee">
@@ -1561,62 +1973,118 @@
             <p>Chat assistant and helpdesk to operate all detailed and service-related queries for new or amateur customers. AI-powered resolution at scale.</p>
             <span class="read-more">Know More &rarr;</span>
           </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="stats">
+    <!-- VALUE CALCULATOR -->
+    <section class="value-calc-section" id="calculator">
       <div class="wrap">
-        <div class="dial-grid">
-          <div class="dial reveal">
-            <div class="dial-circle-wrap">
-              <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
-                <circle class="dial-arc" data-val="80" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
-                  fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
-                  transform="rotate(-90 38 38)" />
-              </svg>
-              <div class="val" data-count="12">0</div>
+        <div class="calc-layout">
+          
+          <!-- LEFT: INTERACTIVE INPUTS -->
+          <div class="calc-inputs reveal">
+            <div style="margin-bottom: 28px;">
+              <div class="eyebrow" style="margin-bottom: 8px;">VALUE CALCULATOR</div>
+              <h2 class="display" style="font-size: clamp(32px, 4.4vw, 48px); line-height: 1.15; color: var(--fog, #0E0E0E); margin-bottom: 12px; letter-spacing: -0.01em;">See what automation is worth to your team.</h2>
+              <p style="font-family: 'Manrope', sans-serif; font-size: 16px; color: var(--fog-dim, rgba(14, 14, 14, 0.72)); line-height: 1.6; max-width: 580px;">Adjust the inputs to estimate the expert time you could reclaim each year — no sign-up required.</p>
             </div>
-            <div class="lbl">Hrs saved / week</div>
-          </div>
-          <div class="dial reveal">
-            <div class="dial-circle-wrap">
-              <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
-                <circle class="dial-arc" data-val="65" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
-                  fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
-                  transform="rotate(-90 38 38)" />
-              </svg>
-              <div class="val" data-count="30">0</div>
+
+            <div role="region" aria-label="Automation value calculator inputs">
+              
+              <!-- INPUT 1: HOURLY COST SLIDER ($40–$300) -->
+              <div class="calc-input-row">
+                <div class="calc-label-row">
+                  <label for="calc-hourly" class="calc-label">Loaded hourly cost</label>
+                  <span class="calc-live-val" id="calc-hourly-disp" aria-live="polite">$90</span>
+                </div>
+                <div class="calc-helper">Divide the annual fully-loaded salary (salary + benefits + tools) by 2,000 working hours to get a rough per-hour cost.</div>
+                <input type="range" class="calc-slider" id="calc-hourly" min="40" max="300" step="5" value="90" aria-label="Loaded hourly cost">
+              </div>
+
+              <!-- INPUT 2: TIME PER TASK SLIDER (0.5–20 hours) -->
+              <div class="calc-input-row">
+                <div class="calc-label-row">
+                  <label for="calc-time" class="calc-label">Time per task</label>
+                  <span class="calc-live-val" id="calc-time-disp" aria-live="polite">2 hrs</span>
+                </div>
+                <div class="calc-helper">Think of one specific recurring task: data entry, report compilation, follow-up emails. How long does it actually take each time?</div>
+                <input type="range" class="calc-slider" id="calc-time" min="0.5" max="20" step="0.5" value="2" aria-label="Time per task">
+              </div>
+
+              <!-- INPUT 3: FREQUENCY SLIDER (1–40) WITH PILL TOGGLE -->
+              <div class="calc-input-row">
+                <div class="calc-label-row">
+                  <label for="calc-freq" class="calc-label">Frequency</label>
+                  <span class="calc-live-val" id="calc-freq-disp" aria-live="polite">5×</span>
+                </div>
+                <div class="calc-helper">How many times does this task occur per week or month across your operation?</div>
+                <div class="calc-freq-row">
+                  <input type="range" class="calc-slider" id="calc-freq" min="1" max="40" step="1" value="5" aria-label="Task frequency">
+                  <div class="period-toggle" role="group" aria-label="Frequency Unit">
+                    <button type="button" class="period-btn active" id="calc-toggle-wk" aria-pressed="true">/ Wk</button>
+                    <button type="button" class="period-btn" id="calc-toggle-mo" aria-pressed="false">/ Mo</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INPUT 4: PEOPLE-COUNT STEPPER (-/+ buttons, 1 upward) -->
+              <div class="calc-input-row">
+                <div class="calc-label-row">
+                  <span class="calc-label" id="calc-people-label">People doing this task</span>
+                  <span class="calc-live-val" id="calc-people-disp" aria-live="polite">3</span>
+                </div>
+                <div class="calc-helper">How many team members perform this task? Multiply the time impact across your whole team.</div>
+                <div style="display: flex; align-items: center;">
+                  <div class="calc-stepper" role="group" aria-labelledby="calc-people-label">
+                    <button type="button" class="stepper-btn" id="calc-people-dec" aria-label="Decrease team members" title="Decrease team members">&minus;</button>
+                    <input type="number" class="stepper-count" id="calc-people" min="1" max="100" step="1" value="3" aria-label="Number of people doing task" readonly>
+                    <button type="button" class="stepper-btn" id="calc-people-inc" aria-label="Increase team members" title="Increase team members">&plus;</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INPUT 5: % AUTOMATED SLIDER (10–100%) -->
+              <div class="calc-input-row">
+                <div class="calc-label-row">
+                  <label for="calc-automated" class="calc-label">Portion automated</label>
+                  <span class="calc-live-val" id="calc-automated-disp" aria-live="polite">70%</span>
+                </div>
+                <div class="calc-helper">Percentage of the task replaced by intelligent automations and integrations (Nodewave clients typically achieve 60%–85%).</div>
+                <input type="range" class="calc-slider" id="calc-automated" min="10" max="100" step="5" value="70" aria-label="Portion automated">
+              </div>
+
             </div>
-            <div class="lbl">Automations shipped</div>
           </div>
-          <div class="dial reveal">
-            <div class="dial-circle-wrap">
-              <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
-                <circle class="dial-arc" data-val="99" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
-                  fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
-                  transform="rotate(-90 38 38)" />
-              </svg>
-              <div class="val" data-count="99" data-suffix="%">0</div>
+
+          <!-- RIGHT: BOLD, DARK, STICKY RESULT PANEL -->
+          <div class="calc-right reveal">
+            <div class="calc-result" role="region" aria-label="Calculated annual automation value">
+              <div class="calc-result-eyebrow">EXPERT TIME FREED / YEAR</div>
+              <div class="calc-hero-num" id="calc-metric-main" aria-live="polite">$98.3k</div>
+              <div class="calc-hero-ctx">in expert time your team could redirect to higher-value work</div>
+
+              <div class="calc-divider"></div>
+
+              <div class="calc-stat-row">
+                <div class="calc-stat">
+                  <div class="calc-stat-num" id="calc-metric-hours" aria-live="polite">1.1k hrs</div>
+                  <div class="calc-stat-lbl">HOURS FREED / YEAR</div>
+                </div>
+                <div class="calc-stat">
+                  <div class="calc-stat-num" id="calc-metric-month" aria-live="polite">$8.2k</div>
+                  <div class="calc-stat-lbl">VALUE FREED / MONTH</div>
+                </div>
+              </div>
+
+              <div class="calc-disclaimer">A rough guide, not a quote — actual savings depend on your specific workflows.</div>
+
+              <a href="/contact" class="btn-primary calc-cta-btn" data-analytics-cta="calc_book_audit">
+                Book a free automation audit &rarr;
+              </a>
             </div>
-            <div class="lbl">Uptime</div>
           </div>
-          <div class="dial reveal">
-            <div class="dial-circle-wrap">
-              <svg width="76" height="76" viewBox="0 0 76 76">
-                <circle cx="38" cy="38" r="32" stroke="rgba(255, 255, 255, 0.06)" stroke-width="5" fill="none" />
-                <circle class="dial-arc" data-val="90" cx="38" cy="38" r="32" stroke="#FF4300" stroke-width="5"
-                  fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
-                  transform="rotate(-90 38 38)" />
-              </svg>
-              <div class="val" data-count="400" data-suffix="+">0</div>
-            </div>
-            <div class="lbl">Integrations ready</div>
-          </div>
+
         </div>
       </div>
     </section>
@@ -1792,102 +2260,6 @@
           <div style="padding:14px 22px;border-radius:12px;background:rgba(210,150,80,0.08);border:1px solid rgba(210,150,80,0.25);color:rgba(255, 255, 255, 0.85);font-family:'Manrope',sans-serif;font-size:14px;font-weight:500;">Customer Support</div>
         </div>
         <a href="/industries/law-firms" class="btn-primary magnetic reveal" style="margin-top:36px;">Explore Law Firm Automation<span>&rarr;</span></a>
-      </div>
-    </section>
-
-    <!-- VALUE CALCULATOR -->
-    <section class="value-calc-section" id="calculator">
-      <div class="wrap">
-        <div class="calc-grid">
-          
-          <!-- LEFT: INTERACTIVE SLIDERS -->
-          <div class="calc-left reveal">
-            <div class="calc-eyebrow">VALUE CALCULATOR</div>
-            <h2 class="calc-title">See what automation is worth to your team.</h2>
-            <p class="calc-sub">Adjust the inputs to estimate the expert time you could reclaim each year — no sign-up required.</p>
-
-            <div class="calc-sliders">
-              <!-- SLIDER 1 -->
-              <div class="calc-row">
-                <div class="calc-row-header">
-                  <span class="calc-label">Loaded hourly cost</span>
-                  <span class="calc-val-display" id="calc-hourly-disp">$90</span>
-                </div>
-                <div class="calc-desc">Divide the annual fully-loaded salary (salary + benefits + tools) by 2,000 working hours to get a rough per-hour cost.</div>
-                <div class="calc-control-wrap">
-                  <input type="range" class="calc-slider" id="calc-hourly" min="20" max="250" step="5" value="90" aria-label="Loaded hourly cost">
-                </div>
-              </div>
-
-              <!-- SLIDER 2 -->
-              <div class="calc-row">
-                <div class="calc-row-header">
-                  <span class="calc-label">Time per task</span>
-                  <span class="calc-val-display" id="calc-time-disp">2 hrs</span>
-                </div>
-                <div class="calc-desc">Think of one specific recurring task: data entry, report compilation, follow-up emails. How long does it actually take each time?</div>
-                <div class="calc-control-wrap">
-                  <input type="range" class="calc-slider" id="calc-time" min="0.5" max="8" step="0.5" value="2" aria-label="Time per task">
-                </div>
-              </div>
-
-              <!-- SLIDER 3 -->
-              <div class="calc-row">
-                <div class="calc-row-header">
-                  <span class="calc-label">Frequency</span>
-                  <span class="calc-val-display" id="calc-freq-disp">5×</span>
-                </div>
-                <div class="calc-desc">How many times does this task occur per week or month across your operation?</div>
-                <div class="calc-control-wrap">
-                  <input type="range" class="calc-slider" id="calc-freq" min="1" max="50" step="1" value="5" aria-label="Task frequency">
-                  <div class="calc-freq-toggle" role="group" aria-label="Frequency Unit">
-                    <button type="button" class="calc-toggle-btn is-active" id="calc-toggle-wk">/ Wk</button>
-                    <button type="button" class="calc-toggle-btn" id="calc-toggle-mo">/ Mo</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SLIDER 4 -->
-              <div class="calc-row">
-                <div class="calc-row-header">
-                  <span class="calc-label">People doing this task</span>
-                  <span class="calc-val-display" id="calc-people-disp">3</span>
-                </div>
-                <div class="calc-desc">How many team members perform this task? Multiply the time impact across your whole team.</div>
-                <div class="calc-control-wrap">
-                  <input type="range" class="calc-slider" id="calc-people" min="1" max="20" step="1" value="3" aria-label="People doing task">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT: FLOATING SUMMARY CARD -->
-          <div class="calc-right reveal">
-            <div class="calc-card">
-              <div class="calc-card-eyebrow">EXPERT TIME FREED / YEAR</div>
-              <div class="calc-card-metric" id="calc-metric-main">$98.3k</div>
-              <div class="calc-card-sub">in expert time your team could redirect to higher-value work</div>
-
-              <div class="calc-card-strip">
-                <div class="calc-strip-col">
-                  <div class="strip-num" id="calc-metric-hours">1.1k hrs</div>
-                  <div class="strip-lbl">HOURS FREED / YEAR</div>
-                </div>
-                <div class="calc-strip-col">
-                  <div class="strip-num" id="calc-metric-month">$8.2k</div>
-                  <div class="strip-lbl">VALUE FREED / MONTH</div>
-                </div>
-              </div>
-
-              <div class="calc-card-note">A rough guide, not a quote — actual savings depend on your specific workflows.</div>
-
-              <a href="/contact" class="btn-primary calc-cta-btn magnetic" data-analytics-cta="calc_book_audit">
-                Book a free automation audit <span>&rarr;</span>
-              </a>
-            </div>
-          </div>
-
-        </div>
       </div>
     </section>
 
@@ -2169,60 +2541,342 @@
       });
     });
 
-    /* ---------- HERO CANVAS WAVEFORM ---------- */
-    const canvas = document.getElementById('hero-canvas');
-    const ctx = canvas.getContext('2d');
-    function fit() { canvas.width = canvas.clientWidth * devicePixelRatio; canvas.height = canvas.clientHeight * devicePixelRatio; }
-    fit(); window.addEventListener('resize', fit);
+    /* ---------- HERO KINETIC GRID ---------- */
+    (function () {
+      const heroSection = document.getElementById('hero');
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas || !heroSection) return;
+      const ctx = canvas.getContext('2d');
 
-    let morphT = { v: 0 };
-    gsap.to(morphT, { v: 1, duration: 2.4, delay: 1.1, ease: 'power2.inOut' });
-    let cursorInfluence = 0.5;
-    document.getElementById('hero').addEventListener('mousemove', e => {
-      const r = e.currentTarget.getBoundingClientRect();
-      cursorInfluence = (e.clientX - r.left) / r.width;
-    });
+      // Visual Constants
+      const CELL_SIZE = 55;
+      const INFLUENCE_RADIUS = 260;
+      const MAX_WARP = 24;
+      const DOT_SPACING = 28;
+      const LERP_SPEED = 0.08;
 
-    let t0 = 0;
-    function drawWave() {
-      const w = canvas.width, h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
-      t0 += 0.012;
-      const mid = h * 0.62;
-      const points = 140;
+      const BASE_LINE_WIDTH = 0.8;
+      const ACTIVE_LINE_WIDTH = 1.5;
+      const BASE_NODE_RADIUS = 1.8;
+      const ACTIVE_NODE_RADIUS = 3.2;
 
-      // rough (jagged, hand-shaped) layer
-      ctx.beginPath();
-      for (let i = 0; i <= points; i++) {
-        const x = (i / points) * w;
-        const roughY = mid + Math.sin(i * 0.9 + t0 * 1.4) * h * 0.05 * Math.sin(i * 0.15) + (Math.sin(i * 7 + t0 * 3) * h * 0.015);
-        const cleanY = mid + Math.sin((i / points) * Math.PI * 10 + t0 * 2) * h * 0.11;
-        const bump = Math.exp(-Math.pow((i / points) - cursorInfluence, 2) * 40) * h * 0.09 * Math.sin(t0 * 4);
-        const y = roughY * (1 - morphT.v) + (cleanY - bump) * morphT.v + bump * (1 - morphT.v) * 0.4;
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      // Color scheme: warm light editorial background matching the rest of the website
+      const CANVAS_BG = '#FBFAF7';
+      const BASE_LINE_COLOR = 'rgba(14, 14, 14, 0.08)';
+      const ACTIVE_LINE_RGB = [255, 67, 0]; // Phosphor accent
+      const ACTIVE_NODE_RGB = [255, 67, 0];
+
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      let cols = 0;
+      let rows = 0;
+
+      // Mouse tracking state (in hero canvas coordinate space)
+      const mouse = {
+        targetX: -1000,
+        targetY: -1000,
+        currentX: -1000,
+        currentY: -1000,
+        isActive: false
+      };
+
+      const ripples = [];
+      let dotPattern = null;
+
+      function createDotPattern() {
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = DOT_SPACING;
+        pCanvas.height = DOT_SPACING;
+        const pctx = pCanvas.getContext('2d');
+        pctx.fillStyle = 'rgba(14, 14, 14, 0.04)';
+        pctx.beginPath();
+        pctx.arc(DOT_SPACING / 2, DOT_SPACING / 2, 0.75, 0, Math.PI * 2);
+        pctx.fill();
+        dotPattern = ctx.createPattern(pCanvas, 'repeat');
       }
-      const grad = ctx.createLinearGradient(0, 0, w, 0);
-      grad.addColorStop(0, 'rgba(122,17,40,0.85)');
-      grad.addColorStop(0.5, 'rgba(255,67,0,0.95)');
-      grad.addColorStop(1, 'rgba(122,17,40,0.85)');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 2 * devicePixelRatio;
-      ctx.shadowColor = 'rgba(255, 67, 0, 0.4)';
-      ctx.shadowBlur = 14 * devicePixelRatio;
-      ctx.stroke();
 
-      // fill fade under wave
-      ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
-      const fillGrad = ctx.createLinearGradient(0, mid - h * 0.15, 0, h);
-      fillGrad.addColorStop(0, 'rgba(255,67,0,0.07)');
-      fillGrad.addColorStop(1, 'rgba(255,67,0,0)');
-      ctx.fillStyle = fillGrad;
-      ctx.shadowBlur = 0;
-      ctx.fill();
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = heroSection.clientWidth;
+        height = heroSection.clientHeight;
 
-      requestAnimationFrame(drawWave);
-    }
-    drawWave();
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+
+        cols = Math.ceil(width / CELL_SIZE) + 1;
+        rows = Math.ceil(height / CELL_SIZE) + 1;
+
+        createDotPattern();
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+
+      // Mouse tracking relative to hero section
+      window.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        // Check if cursor is within or near hero section
+        if (
+          e.clientX >= rect.left - 200 &&
+          e.clientX <= rect.right + 200 &&
+          e.clientY >= rect.top - 200 &&
+          e.clientY <= rect.bottom + 200
+        ) {
+          mouse.targetX = e.clientX - rect.left;
+          mouse.targetY = e.clientY - rect.top;
+          if (!mouse.isActive) {
+            mouse.currentX = mouse.targetX;
+            mouse.currentY = mouse.targetY;
+            mouse.isActive = true;
+          }
+        } else {
+          mouse.targetX = -1000;
+          mouse.targetY = -1000;
+        }
+      }, { passive: true });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.targetX = -1000;
+        mouse.targetY = -1000;
+      }, { passive: true });
+
+      // Click ripple on hero section
+      window.addEventListener('click', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        if (
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+        ) {
+          ripples.push({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+            born: performance.now(),
+            duration: 900,
+            speed: 400
+          });
+        }
+      });
+
+      // Smoothstep interpolation helper
+      function smoothstep(min, max, value) {
+        const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+        return x * x * (3 - 2 * x);
+      }
+
+      function render(now) {
+        // 1. Smoothly interpolate current mouse position toward target
+        if (mouse.isActive) {
+          mouse.currentX += (mouse.targetX - mouse.currentX) * LERP_SPEED;
+          mouse.currentY += (mouse.targetY - mouse.currentY) * LERP_SPEED;
+        }
+
+        // 2. Clear canvas with background color & fine dot texture
+        ctx.fillStyle = CANVAS_BG;
+        ctx.fillRect(0, 0, width, height);
+
+        if (dotPattern) {
+          ctx.fillStyle = dotPattern;
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        // Update active ripples
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const r = ripples[i];
+          const elapsed = Math.max(0, (now - r.born) / 1000);
+          r.radius = Math.max(0, elapsed * r.speed);
+          r.progress = Math.min(1, Math.max(0, (now - r.born) / r.duration));
+          if (r.progress >= 1) {
+            ripples.splice(i, 1);
+          }
+        }
+
+        // 3. Calculate warped grid points
+        const warpedPoints = [];
+
+        for (let r = 0; r < rows; r++) {
+          const rowPoints = [];
+          for (let c = 0; c < cols; c++) {
+            const baseX = c * CELL_SIZE;
+            const baseY = r * CELL_SIZE;
+
+            // EDGE PINNING: keep borders anchored
+            const edgeFactorX = Math.min(c / 2, (cols - 1 - c) / 2, 1);
+            const edgeFactorY = Math.min(r / 2, (rows - 1 - r) / 2, 1);
+            const pinFactor = Math.max(0, Math.min(edgeFactorX, edgeFactorY));
+
+            let warpX = 0;
+            let warpY = 0;
+
+            // A. CURSOR WARP
+            if (mouse.isActive && pinFactor > 0) {
+              const dx = mouse.currentX - baseX;
+              const dy = mouse.currentY - baseY;
+              const dist = Math.hypot(dx, dy);
+
+              if (dist < INFLUENCE_RADIUS) {
+                const normDist = dist / INFLUENCE_RADIUS;
+                const falloff = Math.pow(Math.cos(normDist * Math.PI * 0.5), 2);
+                const angle = Math.atan2(dy, dx);
+                const displacement = MAX_WARP * falloff * pinFactor;
+
+                warpX += Math.cos(angle) * displacement;
+                warpY += Math.sin(angle) * displacement;
+              }
+            }
+
+            // B. RIPPLE WARP
+            if (pinFactor > 0 && ripples.length > 0) {
+              for (let i = 0; i < ripples.length; i++) {
+                const rip = ripples[i];
+                const rdx = baseX - rip.x;
+                const rdy = baseY - rip.y;
+                const rDist = Math.hypot(rdx, rdy);
+                const diff = Math.abs(rDist - rip.radius);
+                const band = 55;
+
+                if (diff < band) {
+                  const waveFactor = Math.sin((1 - diff / band) * Math.PI) * (1 - rip.progress) * pinFactor;
+                  const rAngle = Math.atan2(rdy, rdx);
+                  warpX += Math.cos(rAngle) * waveFactor * 16;
+                  warpY += Math.sin(rAngle) * waveFactor * 16;
+                }
+              }
+            }
+
+            const finalX = baseX + warpX;
+            const finalY = baseY + warpY;
+
+            const cursorDist = Math.hypot(finalX - mouse.currentX, finalY - mouse.currentY);
+            const activity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, cursorDist) : 0;
+
+            rowPoints.push({
+              x: finalX,
+              y: finalY,
+              activity: Math.max(0, activity)
+            });
+          }
+          warpedPoints.push(rowPoints);
+        }
+
+        // 4. Draw grid lines
+        // Horizontal lines
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols - 1; c++) {
+            const p1 = warpedPoints[r][c];
+            const p2 = warpedPoints[r][c + 1];
+
+            const midX = (p1.x + p2.x) * 0.5;
+            const midY = (p1.y + p2.y) * 0.5;
+            const segDist = Math.hypot(midX - mouse.currentX, midY - mouse.currentY);
+            const segActivity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, segDist) : 0;
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+
+            if (segActivity > 0.01) {
+              const widthVal = BASE_LINE_WIDTH + (ACTIVE_LINE_WIDTH - BASE_LINE_WIDTH) * segActivity;
+              const alpha = 0.18 + 0.82 * segActivity;
+              ctx.lineWidth = widthVal;
+              ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
+            } else {
+              ctx.lineWidth = BASE_LINE_WIDTH;
+              ctx.strokeStyle = BASE_LINE_COLOR;
+            }
+            ctx.stroke();
+          }
+        }
+
+        // Vertical lines
+        for (let r = 0; r < rows - 1; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p1 = warpedPoints[r][c];
+            const p2 = warpedPoints[r + 1][c];
+
+            const midX = (p1.x + p2.x) * 0.5;
+            const midY = (p1.y + p2.y) * 0.5;
+            const segDist = Math.hypot(midX - mouse.currentX, midY - mouse.currentY);
+            const segActivity = mouse.isActive ? 1 - smoothstep(0, INFLUENCE_RADIUS, segDist) : 0;
+
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+
+            if (segActivity > 0.01) {
+              const widthVal = BASE_LINE_WIDTH + (ACTIVE_LINE_WIDTH - BASE_LINE_WIDTH) * segActivity;
+              const alpha = 0.18 + 0.82 * segActivity;
+              ctx.lineWidth = widthVal;
+              ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${alpha})`;
+            } else {
+              ctx.lineWidth = BASE_LINE_WIDTH;
+              ctx.strokeStyle = BASE_LINE_COLOR;
+            }
+            ctx.stroke();
+          }
+        }
+
+        // 5. Draw active node glows
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p = warpedPoints[r][c];
+            if (p.activity > 0.05) {
+              const glowRadius = Math.max(0.1, 15 * p.activity);
+              const glowGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRadius);
+              glowGrad.addColorStop(0, `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, ${0.35 * p.activity})`);
+              glowGrad.addColorStop(1, `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, 0)`);
+              ctx.fillStyle = glowGrad;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        // 6. Draw circular intersection nodes
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const p = warpedPoints[r][c];
+            const radius = Math.max(0.1, BASE_NODE_RADIUS + (ACTIVE_NODE_RADIUS - BASE_NODE_RADIUS) * p.activity);
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+
+            if (p.activity > 0.05) {
+              ctx.fillStyle = `rgba(${ACTIVE_NODE_RGB[0]}, ${ACTIVE_NODE_RGB[1]}, ${ACTIVE_NODE_RGB[2]}, ${0.85 + 0.15 * p.activity})`;
+            } else {
+              ctx.fillStyle = 'rgba(14, 14, 14, 0.16)';
+            }
+            ctx.fill();
+          }
+        }
+
+        // 7. Draw expanding ripple rings
+        for (let i = 0; i < ripples.length; i++) {
+          const rip = ripples[i];
+          const ripRadius = Math.max(0.1, rip.radius);
+          const opacity = Math.max(0, 1 - rip.progress);
+          if (opacity > 0 && ripRadius > 0.1) {
+            ctx.beginPath();
+            ctx.arc(rip.x, rip.y, ripRadius, 0, Math.PI * 2);
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = `rgba(${ACTIVE_LINE_RGB[0]}, ${ACTIVE_LINE_RGB[1]}, ${ACTIVE_LINE_RGB[2]}, ${opacity * 0.4})`;
+            ctx.stroke();
+          }
+        }
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    })();
 
     /* ---------- MARQUEE ---------- */
     const track = document.getElementById('marquee');
